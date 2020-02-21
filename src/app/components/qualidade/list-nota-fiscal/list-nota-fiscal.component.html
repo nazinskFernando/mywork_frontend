@@ -1,0 +1,173 @@
+<!-- Main content -->
+<section class="content">
+  <!-- Info boxes -->
+  <!--<div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua"><i class=" fa fa-group"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Cadastro</span>
+          <span class="info-box-number">Visitantes</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div [routerLink]="['/new_nota_fiscal']" class="info-box">
+        <span class="info-box-icon bg-red"><i class="fa fa-truck"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Cadastro</span>
+          <span class="info-box-number">Nota Fiscal/ Material</span>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix visible-sm-block"></div>
+
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-television"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Cadastro</span>
+          <span class="info-box-number">Entrada TI</span>
+        </div>
+      </div>
+    </div>
+  </div>-->
+  <div class="box box-default">
+    <div class="box-header with-border">
+      <button type="button" [routerLink]="['/new_nota_fiscal']"  class="btn btn-success">Nova inspeção</button><br><br>
+      <h3 class="box-title">Notas fiscais</h3>
+
+      <div class="box-tools pull-right">
+        <div class="has-feedback">
+          <input type="text" class="form-control input-sm" placeholder="Procurar...">
+          <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-body notaFiscal " *ngFor="let notaFiscal of notasFiscais">
+      <div class="card mb-3 xs-3">
+        <div class="row no-gutters">
+          <div class="col-md-1 col-xs-4">
+            <span class="info-box-icon bg-red"><i class="fa fa-truck"></i></span>
+          </div>
+          <div class="col-md-11 col-xs-8">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3 col-xs-12">
+                  <strong>Nota Fiscal: </strong>{{notaFiscal.numeroNotaFiscal}}
+                </div>
+                <div class="col-md-3 col-xs-12">
+                  <strong>Data de entrada: </strong>{{notaFiscal.dataEntrada}}
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <strong>Origem: </strong>{{notaFiscal.origem}}
+                </div>
+                <div class="col-md-2 col-xs-12">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-info">Ação</button>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a style="cursor:pointer;" (click)="editarNotaFiscal(notaFiscal.id)">Editar</a></li>
+                      <li><a style="cursor:pointer;" (click)="removerNotaFiscal(notaFiscal.id)">Remover</a></li>
+                      <li><a style="cursor:pointer;">Aprovar</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-3 col-xs-12">
+                  <strong>Setor destino: </strong>{{notaFiscal.emissor}}
+                </div>
+                <div class="col-md-3 col-xs-12">
+                  <i class="fa fa-truck"></i>: {{notaFiscal.transportadora}}
+                </div>               
+                <div class="col-md-3 col-xs-12">
+                  <strong>RT: </strong> {{notaFiscal.rt}}
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-md-12 col-xs-12">
+                  <div *ngFor="let equipamento of notaFiscal.equipamentos">
+                    <a (click)="fazerInspecao(equipamento.id, notaFiscal.id)" *ngIf="equipamento.isInspecionado" style="margin-left: 10px;" data-toggle="modal" data-target="#gerarOrdemModal" class="label label-success col-md-2 col-xs-10">
+                      {{equipamento.descricao}}<br>
+                      {{equipamento.partNumber}}<br>
+                      {{equipamento.serialNumber}}
+                    </a>
+                    <a (click)="fazerInspecao(equipamento.id, notaFiscal.id)"  *ngIf="!equipamento.isInspecionado" style="margin-left: 10px;" data-toggle="modal" data-target="#gerarOrdemModal" class="label label-warning col-md-2 col-xs-10">
+                      {{equipamento.descricao}}<br>
+                      {{equipamento.partNumber}}<br>
+                      {{equipamento.serialNumber}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><br>
+  </div>
+</section>
+
+<!---------------------------------Modal----------------------------------------------->
+<!--
+<div id="gerarOrdemModal" class="modal fade" role="dialog" tabindex="-1" [ngStyle]="{'display': display}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Ordem de serviço</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="box-body">
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>Ordem</label>
+              <input type="text" [(ngModel)]="ordemServico.numeroOrdem" class="form-control" placeholder=" EX. 125482">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Tempo</label>
+              <input type="text" [(ngModel)]="ordemServico.tempoServico" class="form-control" placeholder="EX. 1,00">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Nº Relatório</label>
+              <input type="text" [(ngModel)]="ordemServico.numeroRelatorio" class="form-control" placeholder="1755521">
+            </div>
+          </div>
+            <div class="form-group">
+              <label>WBS</label>
+              <select class="form-control">
+                <option>------Selecione WBS---</option>
+                <option>SS-Q_INSV-00-9-00-01-ANM</option>
+                <option>SS-Q_INSV-00-9-00-01-FRT</option>
+                <option>SS-Q_INSV-00-9-00-01-RSR</option>
+                <option>SS-Q_INSV-00-9-00-01-SCM</option>
+                <option>SS-Q_INSV-00-9-00-01-HDS</option>
+              </select>
+            </div>    
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Descrição</label>
+              <input type="text" [(ngModel)]="ordemServico.descricaoOrdem" class="form-control"
+                placeholder="EX. SKID DE TRANSPORTE">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" (click)="fecharModalEquipamento()">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="salvarOrdem()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>-->

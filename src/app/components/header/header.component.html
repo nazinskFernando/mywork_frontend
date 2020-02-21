@@ -1,0 +1,31 @@
+<header class="main-header">
+
+  <a href="#" class="logo" style="background-color: white;">
+    <span class="logo-mini"><b><img src="../../../assets/img/logoTFMC.png"></b></span>
+    <span class="logo-lg"><img src="../../../assets/img/logoMarcaTFMC.png"></span>
+  </a>
+
+  <nav class="navbar navbar-static-top">
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <span class="sr-only">Toggle navigation</span>
+    </a>
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <!-- Tasks: style can be found in dropdown.less -->
+        <li class="dropdown tasks-menu">
+          <a [routerLink]="['/my-alert']" class="btn btn-link">
+            <i class="fa  fa-bell-o"></i>
+            <span class="label label-danger">9</span>
+          </a>
+        </li>
+        <li>
+          <p style="color:white; padding-top: 10px;">
+            <button class="btn btn-link" (click)="logout()" >
+              <font style="color:white">Sair</font>
+            </button>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

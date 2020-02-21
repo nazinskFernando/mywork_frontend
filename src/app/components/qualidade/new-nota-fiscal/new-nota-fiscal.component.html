@@ -1,0 +1,204 @@
+<div class="box box-default">
+  <div class="box-header with-border" >
+    <h2>Entrada de Nota Fiscal</h2>
+  </div>
+  <div class="box-body">
+    <div class="row">
+      <div class="form-group col-md-2">
+        <label>Nota fiscal</label>
+        <input type="text" [(ngModel)]="notaFiscal.numeroNotaFiscal" #nome="ngModel" name="numeroNotaFiscal"
+          id="numeroNotaFiscal" class="form-control" placeholder="125482">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Emissor</label>
+        <input type="text" class="form-control" [(ngModel)]="notaFiscal.emissor" #nome="ngModel" name="emissor"
+          id="emissor" placeholder="PETROBRÁS">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Origem</label>
+        <input type="text" [(ngModel)]="notaFiscal.origem" #nome="ngModel" name="origem" id="origem"
+          class="form-control" placeholder="ARM-RIO">
+      </div>
+      <div class="form-group col-md-2">
+        <label>RT</label>
+        <input type="text" [(ngModel)]="notaFiscal.rt" #nome="ngModel" name="rt" id="rt" class="form-control"
+          placeholder="31254525">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Data de Entrada</label>
+        <input class="form-control" [(ngModel)]="notaFiscal.dataEntrada" #nome="ngModel" name="dataEntrada"
+          id="dataEntrada" type="date" #date />
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-2">
+        <label>Setor Destino</label>
+        <input type="text" [(ngModel)]="notaFiscal.setorDestino" #nome="ngModel" name="setorDestino" id="setorDestino"
+          class="form-control" placeholder="Logística">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Transportadora</label>
+        <input type="text" [(ngModel)]="notaFiscal.transportadora" #nome="ngModel" name="transportadora"
+          id="transportadora" class="form-control" placeholder="VIX">
+      </div>
+      <div class="form-group col-md-4">
+        <label>Chave NF</label>
+        <input type="text" [(ngModel)]="notaFiscal.chaveNf" #nome="ngModel" name="chaveNf" id="chaveNf"
+          class="form-control" placeholder="3124523425342454525">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Contrato</label>
+        <input type="text" [(ngModel)]="notaFiscal.contrato" #nome="ngModel" name="contrato" id="contrato"
+          class="form-control" placeholder="31254525">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label>Número Ordem</label>
+        <input type="text" [(ngModel)]="notaFiscal.numeroOrdem" #nome="ngModel" name="numeroOrdem" id="numeroOrdem"
+          class="form-control" placeholder="Logística">
+      </div>
+      <div class="form-group col-md-3">
+        <label>WBS</label>
+        <input type="text" [(ngModel)]="notaFiscal.wbs" #nome="ngModel" name="wbs"
+          id="wbs" class="form-control" placeholder="1256-254-25">
+      </div>
+      <div class="form-group col-md-4">
+        <label>Número Relatorio</label>
+        <input type="text" [(ngModel)]="notaFiscal.numeroRelatorio" #nome="ngModel" name="numeroRelatorio" id="numeroRelatorio"
+          class="form-control" placeholder="1745852">
+      </div> 
+      <div class="form-group col-md-2">
+        <label>Tempo Servico</label>
+        <input type="text" [(ngModel)]="notaFiscal.tempoServico" #nome="ngModel" name="tempoServico" id="tempoServico"
+          class="form-control" placeholder="1,5">
+      </div>     
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label>Observação</label>
+        <textarea [(ngModel)]="notaFiscal.observacao" #nome="ngModel" name="observacao" id="observacao"
+          class="form-control" rows="3" placeholder="Observação..."></textarea>
+      </div>
+    </div>
+    <div class="box box-default">
+      <div class="box-header with-border" >
+        <h2>Equipamentos</h2>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div class="input-group-sm col-md-2">
+            <label>Part Number</label>
+            <input type="text" class="form-control" placeholder="" value="P700002154"
+              [(ngModel)]="equipamento.partNumber">
+          </div>
+          <div class="input-group input-group-sm col-md-4">
+            <label>Numero de série</label>
+            <input type="text" class="form-control" placeholder="" value="FC-35" [(ngModel)]="equipamento.serialNumber">
+            <span class="input-group-btn" style="padding-top: 23px;">
+              <button type="button" data-toggle="modal" data-target="#equipamentoModal" class="btn btn-info btn-flat"
+                (click)="buscarEquipamento()">Inserir Item</button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="box-body no-padding">
+          <div class="table-responsive mailbox-messages">
+            <table class="table table-hover table-responsive no-padding table-striped">
+              <tbody>
+                <tr>
+                  <th style="width: 10px"></th>
+                  <th style="width: 10px">Número de série</th>
+                  <th style="width: 10px">Part Number</th>
+                  <th style="width: 40px">Descrição</th>
+                  <th style="width: 20px">Cliente</th>
+                  <th style="width: 10px"></th>
+                </tr>
+                <tr *ngFor="let item of equipamentos; let i = index">
+                  <td><input type="checkbox"></td>
+                  <td class="mailbox-name"><a>{{item.serialNumber}}</a></td>
+                  <td class="mailbox-subject">{{item.partNumber}}</td>
+                  <td class="mailbox-attachment">{{item.descricao}}</td>
+                  <td class="mailbox-attachment">{{item.cliente}}</td>
+                  <td>
+                    <button type="button" (click)="removeEquipamento(i)"
+                      class="btn btn-danger btn-flat">Remover</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+            </div>
+            <!-- /.btn-group -->
+            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+            <div class="pull-right">
+              1-50/200
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+              </div>
+              <!-- /.btn-group -->
+            </div>
+            <!-- /.pull-right -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <button type="button" (click)="salvarNota()" class="btn btn-success btn-block">Salvar</button>
+</div>
+
+<!---------------------------------Modal----------------------------------------------->
+
+<div id="equipamentoModal" class="modal fade" role="dialog" tabindex="-1" [ngStyle]="{'display': display}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">ITEM</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="box-body">
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>NS</label>
+              <input type="text" [(ngModel)]="equipamento.serialNumber" class="form-control" placeholder=" EX. 125482">
+            </div>
+            <div class="form-group col-md-4">
+              <label>NP</label>
+              <input type="text" [(ngModel)]="equipamento.partNumber" class="form-control" placeholder="EX. P700002152">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Cliente</label>
+              <input type="text" [(ngModel)]="equipamento.cliente" class="form-control" placeholder="EX. PETROBRÁS">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Descrição</label>
+              <input type="text" [(ngModel)]="equipamento.descricao" class="form-control"
+                placeholder="EX. SKID DE TRANSPORTE">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" (click)="fecharModalEquipamento()">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="incluirEquipamento()">Incluir</button>
+      </div>
+    </div>
+  </div>
+</div>

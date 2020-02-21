@@ -1,0 +1,66 @@
+<div class="col-md-6" style="margin-left: 0%;">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Registrar</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()">
+            <div [ngClass]="classCss" role="alert" *ngIf="message">
+                <strong>{{ message.text }}</strong>
+            </div>
+            <div class="box-body">
+                <div class="form-group" [ngClass]="getFormGroupClass(nome.invalid, nome.dirty)">
+                    <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+                    <div class="col-sm-10">
+                        <input type="email" [(ngModel)]="newUser.nome" name="nome" class="form-control" id="inputNome"
+                            #nome="ngModel" placeholder="Nome" nome>
+                        <span class="help-block" *ngIf="nome.invalid && nome.dirty">E-mail é inválido</span>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="getFormGroupClass(cpfOuCnpj.invalid, cpfOuCnpj.dirty)">
+                    <label for="inputCpfOuCnpj" class="col-sm-2 control-label">CPF</label>
+                    <div class="col-sm-10">
+                        <input type="cpf" [(ngModel)]="newUser.cpfOuCnpj" name="cpfOuCnpj" class="form-control"
+                            id="inputCpfOuCnpj" #cpfOuCnpj="ngModel" placeholder="CPF" cpfOuCnpj>
+                        <span class="help-block" *ngIf="cpfOuCnpj.invalid && cpfOuCnpj.dirty">CPF inválido</span>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="getFormGroupClass(email.invalid, email.dirty)">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" [(ngModel)]="newUser.email" name="email" class="form-control"
+                            id="inputEmail3" #email="ngModel" placeholder="Email" email>
+                        <span class="help-block" *ngIf="email.invalid && email.dirty">E-mail é inválido</span>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="getFormGroupClass(password.invalid, password.dirty)">
+                    <label for="inputPassword" class="col-sm-2 control-label">Senha</label>
+                    <div class="col-sm-10">
+                        <input type="Password" [(ngModel)]="newUser.senha" class="form-control" name="password"
+                            id="inputPassword" #password="ngModel" placeholder="Password" required>
+                        <span class="help-block" *ngIf="password.invalid && password.dirty">Password é necessário</span>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="getFormGroupClass(tipo.invalid, tipo.dirty)">
+                    <label for="inputTipo" class="col-sm-2 control-label">Tipo usuário</label>
+                    <div class="col-sm-10">
+                        <select [(ngModel)]="newUser.tipo" class="form-control select2" name="tipo" id="inputTipo"
+                            #tipo="ngModel" style="width: 100%" required>
+                            <option value="1">Administrador</option>
+                            <option value="2">Inspetor</option>
+                        </select>
+                        <span class="help-block" *ngIf="tipo.invalid && tipo.dirty">Tipo é necessário</span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button mat-raised-button (click)="cancelFormulario()" class="btn btn-default">Cancel</button>
+                <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Criar</button>
+            </div>
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,247 @@
+<div class="box box-default">
+  <div class="box-header with-border">
+    {{equipamentoNotaFisca.notaFiscal.numeroOrdem}} | {{equipamentoNotaFisca.equipamento.descricao}} |
+    {{equipamentoNotaFisca.equipamento.serialNumber}}
+    <small class="pull-right">
+      <ul class="nav navbar-nav">
+        <li class="dropdown tasks-menu">
+          <a class="btn btn-success ">
+            <i class="fa   fa-print"></i>
+          </a>
+        </li>
+        <li class="dropdown tasks-menu">
+          <a class="btn btn-primary ">
+            <i class="fa  fa-bullhorn"></i>
+          </a>
+        </li>
+        <li class="dropdown tasks-menu">
+          <a class="btn btn-info">
+            <i class="fa fa-save"></i>
+          </a>
+        </li>
+      </ul>
+      
+    </small>
+
+  </div>
+  <div class="box-body">
+    <div class="row">
+      <div class="form-group col-md-2">
+        <label>Nota fiscal</label>
+        <input disabled type="number" [(ngModel)]="equipamentoNotaFisca.notaFiscal.numeroNotaFiscal" #nome="ngModel"
+          name="numeroNotaFiscal" id="numeroNotaFiscal" class="form-control" placeholder="125482">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Emissor</label>
+        <input disabled type="text" class="form-control" [(ngModel)]="equipamentoNotaFisca.notaFiscal.emissor"
+          #nome="ngModel" name="emissor" id="emissor" placeholder="PETROBRÁS">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Origem</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.origem" #nome="ngModel" name="origem"
+          id="origem" class="form-control" placeholder="ARM-RIO">
+      </div>
+      <div class="form-group col-md-2">
+        <label>RT</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.rt" #nome="ngModel" name="rt" id="rt"
+          class="form-control" placeholder="31254525">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Data de Entrada</label>
+        <input disabled class="form-control" [(ngModel)]="equipamentoNotaFisca.notaFiscal.dataEntrada" #nome="ngModel"
+          name="dataEntrada" id="dataEntrada" type="date" #date />
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-2">
+        <label>Part Number</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.setorDestino" #nome="ngModel"
+          name="setorDestino" id="setorDestino" class="form-control" placeholder="Logística">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Serial Number</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.equipamento.serialNumber" #nome="ngModel"
+          name="transportadora" id="transportadora" class="form-control" placeholder="VIX">
+      </div>
+      <div class="form-group col-md-4">
+        <label>Equipamento</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.chaveNf" #nome="ngModel" name="chaveNf"
+          id="chaveNf" class="form-control" placeholder="3124523425342454525">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Contrato</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.contrato" #nome="ngModel"
+          name="contrato" id="contrato" class="form-control" placeholder="31254525">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label>Número Ordem</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.numeroOrdem" #nome="ngModel"
+          name="numeroOrdem" id="numeroOrdem" class="form-control" placeholder="212252">
+      </div>
+      <div class="form-group col-md-3">
+        <label>WBS</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.wbs" #nome="ngModel" name="wbs"
+          id="wbs" class="form-control" placeholder="1256-254-25">
+      </div>
+      <div class="form-group col-md-4">
+        <label>Número Relatorio</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.numeroRelatorio" #nome="ngModel"
+          name="numeroRelatorio" id="numeroRelatorio" class="form-control" placeholder="1745852">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Tempo Servico</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.tempoServico" #nome="ngModel"
+          name="tempoServico" id="tempoServico" class="form-control" placeholder="1,5">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label>Descrição</label>
+        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.equipamento.descricao" #nome="ngModel"
+          name="descricao" id="descricao" class="form-control" placeholder="">
+      </div>
+    </div><br>
+
+    <div class="box box-danger">
+      <div class="box-header with-border" style="text-align: center;">
+        <strong class="box-title">Registros Fotográficos</strong>
+      </div>
+      <div class="box-body">
+
+        <!--<label class="custom-file-upload">
+          <input class="file-path validate" type='file' (change)="onSelectFile($event)" multiple>
+          <a class="btn btn-app">
+            <span class="badge bg-green">{{qtdImagens}}</span>
+            <i class="fa fa-file-image-o"></i> Carregar Imagens
+          </a>
+        </label><br>-->        
+ 
+
+          <div class="form-group col-md-3">
+            <div class="image-upload">
+              <label for="file-input">
+                <img src="../../../../assets/img/equipamento/we1.jpg" height="200" width="250">
+                <label>
+                  <input id="desvio" type="checkbox"
+                    class="minimal">
+                  Desvio?
+                </label><br>
+                <label>
+                  <input id="desvio" type="checkbox" value="true"
+                    class="minimal">
+                  Usar no relatório?
+                </label>
+              </label><input id="file-input" type="file" (change)="editarFoto($event)" />
+              <textarea 
+                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição">Rastreabilidade com desplacamento na pintura</textarea>
+              <button type="button" class="btn btn-danger btn-xs">
+                <span class="glyphicon glyphicon-trash"></span> Remover
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3">
+            <div class="image-upload">
+              <label for="file-input">
+                <img src="../../../../assets/img/equipamento/we2.jpg" height="200" width="250">
+                <label>
+                  <input id="desvio" type="checkbox"
+                    class="minimal">
+                  Desvio?
+                </label><br>
+                <label>
+                  <input id="desvio" type="checkbox" value="true"
+                    class="minimal">
+                  Usar no relatório?
+                </label>
+              </label><input id="file-input" type="file" (change)="editarFoto($event)" />
+              <textarea 
+                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição">Vista panorâmica</textarea>
+              <button type="button" class="btn btn-danger btn-xs">
+                <span class="glyphicon glyphicon-trash"></span> Remover
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3">
+            <div class="image-upload">
+              <label for="file-input">
+                <img src="../../../../assets/img/equipamento/we3.jpg" height="200" width="250">
+                <label>
+                  <input id="desvio" type="checkbox"
+                    class="minimal">
+                  Desvio?
+                </label><br>
+                <label>
+                  <input id="desvio" type="checkbox" value="true"
+                    class="minimal">
+                  Usar no relatório?
+                </label>
+              </label><input id="file-input" type="file" (change)="editarFoto($event)" />
+              <textarea 
+                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição">Ausência de marcação de END</textarea>
+              <button type="button" class="btn btn-danger btn-xs">
+                <span class="glyphicon glyphicon-trash"></span> Remover
+              </button>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <div class="image-upload">
+              <label for="file-input">
+                <img src="../../../../assets/img/equipamento/we4.jpg" height="200" width="250">
+                <label>
+                  <input id="desvio" type="checkbox"
+                    class="minimal">
+                  Desvio?
+                </label><br>
+                <label>
+                  <input id="desvio" type="checkbox" value="true"
+                    class="minimal">
+                  Usar no relatório?
+                </label>
+              </label><input id="file-input" type="file" (change)="editarFoto($event)" />
+              <textarea 
+                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição">Plaqueta de certificação da lingada</textarea>
+              <button type="button" class="btn btn-danger btn-xs">
+                <span class="glyphicon glyphicon-trash"></span> Remover
+              </button>
+            </div>
+          </div>
+        
+
+        <!--<div *ngFor="let item of urls; let i = index">
+          <div class="form-group col-md-3">
+            <div class="image-upload">
+              <label for="file-input">
+                <img [src]="item" height="200" width="280">
+                <label>
+                  <input [(ngModel)]="item.desvio" #nome="ngModel" name="desvio_{{i}}" id="desvio" type="checkbox"
+                    class="minimal">
+                  Desvio?
+                </label>
+              </label><input id="file-input" type="file" (change)="editarFoto($event)" />
+              <textarea [(ngModel)]="item.descricaoLaudo" #nome="ngModel" name="descricaoLaudo_{{i}}"
+                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição"></textarea>
+              <button type="button" class="btn btn-danger btn-xs" (click)="delete(i)">
+                <span class="glyphicon glyphicon-trash"></span> Remover
+              </button>
+            </div>
+          </div>
+        </div>-->
+      </div>
+
+     
+      <button *ngIf="qtdImagens == 0" (click)="criarInspecao()" type="button"
+        class="btn btn-success btn-block">SALVAR</button>
+    </div>
+    <ul class="nav navbar-nav"  *ngIf="isRelatorio">
+      <li class="dropdown tasks-menu">
+        <a style="cursor:pointer;" (click)="abrirRelatorio()">
+          <i class="fa fa-print"></i> Imprimir relatório
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

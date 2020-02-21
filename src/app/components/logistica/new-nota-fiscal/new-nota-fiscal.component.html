@@ -1,0 +1,168 @@
+<div class="box box-default">
+  <div class="box-header with-border" style="text-align: center;">
+    <h2>Entrada de Nota Fiscal</h2>
+  </div>
+  <div class="box-body">
+    <div class="row">
+      <div class="form-group col-md-2">
+        <label>Nota fiscal</label>
+        <input type="text" class="form-control" placeholder="" value="125482">
+      </div>
+      <div class="form-group col-md-5">
+        <label>Descrição</label>
+        <input type="text" class="form-control" placeholder="" value="SKID DE TRANSPORTE">
+      </div>
+      <div class="form-group col-md-3">
+        <label>NP</label>
+        <input type="text" class="form-control" placeholder="" value="P700002152">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Ordem de Serviço</label>
+        <input type="text" class="form-control" placeholder="" value="166541">
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="form-group col-md-2">
+        <label>NS</label>
+        <input type="text" class="form-control" placeholder="" value="FC-452">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Cliente</label>
+        <input type="text" class="form-control" placeholder="" value="PETROBRÁS">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Origem</label>
+        <input type="text" class="form-control" placeholder="" value="ARM-RIO">
+      </div>
+      <div class="form-group col-md-2">
+        <label>RT</label>
+        <input type="text" class="form-control" placeholder="" value="31254525">
+      </div>
+      <div class="form-group col-md-3">
+        <label>S2</label>
+        <input type="text" class="form-control" placeholder="" value="314525">
+      </div>
+    </div>
+    <div class="box box-default">
+      <div class="box-header with-border" style="text-align: center;">
+        <h2>Equipamentos</h2>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div class="input-group-sm col-md-2">
+            <label>Part Number</label>
+            <input type="text" class="form-control" placeholder="" value="P700002154">
+          </div>
+          <div class="input-group input-group-sm col-md-4">
+            <label>Numero de série</label>
+            <input type="text" class="form-control" placeholder="" value="FC-35">
+            <span class="input-group-btn" style="padding-top: 23px;">
+              <button type="button" data-toggle="modal" data-target="#modal-default"
+                class="btn btn-info btn-flat">Inserir Item</button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="box-body no-padding">
+          <div class="table-responsive mailbox-messages">
+            <table class="table table-hover table-responsive no-padding table-striped">
+              <tbody>
+                <tr>
+                  <th style="width: 10px"></th>
+                  <th style="width: 10px">Número de série</th>
+                  <th style="width: 10px">Part Number</th>
+                  <th style="width: 40px">Descrição</th>
+                  <th style="width: 20px">Cliente</th>
+                  <th style="width: 10px"></th>
+                </tr>
+                <tr *ngFor="let item of equipamentos; let i = index">
+                  <td><input type="checkbox"></td>
+                  <td class="mailbox-name"><a>{{item.ns}}</a></td>
+                  <td class="mailbox-subject">{{item.np}}</td>
+                  <td class="mailbox-attachment">{{item.descricao}}</td>
+                  <td class="mailbox-attachment">{{item.cliente}}</td>
+                  <td>
+                    <button type="button" (click)="removeEquipamento(i)" class="btn btn-danger btn-flat">Remover</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table -->
+          </div>
+          <!-- /.mail-box-messages -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer no-padding">
+          <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+            </div>
+            <!-- /.btn-group -->
+            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+            <div class="pull-right">
+              1-50/200
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+              </div>
+              <!-- /.btn-group -->
+            </div>
+            <!-- /.pull-right -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <button type="button" class="btn btn-success btn-block">SALVAR</button>
+</div>
+
+<!---------------------------------Modal----------------------------------------------->
+
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">ITEM</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>NS</label>
+              <input type="text" [(ngModel)]="equipamento.ns" class="form-control" placeholder=" EX. 125482">
+            </div>
+            <div class="form-group col-md-4">
+              <label>NP</label>
+              <input type="text" [(ngModel)]="equipamento.np" class="form-control" placeholder="EX. P700002152">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Cliente</label>
+              <input type="text" [(ngModel)]="equipamento.cliente" class="form-control" placeholder="EX. PETROBRÁS">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Descrição</label>
+              <input type="text" [(ngModel)]="equipamento.descricao" class="form-control"
+                placeholder="EX. SKID DE TRANSPORTE">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">FECHAR</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          (click)="incluirEquipamento()">INCLUIR</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
