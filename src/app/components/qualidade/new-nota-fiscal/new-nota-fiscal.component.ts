@@ -17,7 +17,7 @@ export class NewNotaFiscalComponent implements OnInit {
   @ViewChild("form")
   form: NgForm
 
-  equipamento = new EquipamentoDTO("", "", "", "", "", null);
+  equipamento = new EquipamentoDTO("", "", "", "", null, null);
   equipamentos = [];
   nome: string;
   modal = "modal";
@@ -60,7 +60,7 @@ export class NewNotaFiscalComponent implements OnInit {
     if (this.equipamento.descricao != "") {
       this.equipamentos.push(this.equipamento);
       console.log(this.equipamentos[0].id);
-      this.equipamento = new EquipamentoDTO("", "", "", "", "", null);
+      this.equipamento = new EquipamentoDTO("", "", "", "", null, null);
       this.fecharModalEquipamento();
     }
   }

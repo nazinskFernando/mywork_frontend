@@ -120,7 +120,7 @@
                   <td class="mailbox-name"><a>{{item.serialNumber}}</a></td>
                   <td class="mailbox-subject">{{item.partNumber}}</td>
                   <td class="mailbox-attachment">{{item.descricao}}</td>
-                  <td class="mailbox-attachment">{{item.cliente}}</td>
+                  <td class="mailbox-attachment">{{item.cliente.nome}}</td>
                   <td>
                     <button type="button" (click)="removeEquipamento(i)"
                       class="btn btn-danger btn-flat">Remover</button>

@@ -1,10 +1,12 @@
+import { DescricaoLaudoDTO } from "./DescricaoLaudo.DTO";
+
 export class LaudoDTO {
     constructor(
         public id: string,
         public imagem: string,
-        public tipo: string,
-        public desvio: boolean,
-        public descricaoLaudo: string
+        public usarRelatorio: boolean,
+        public comDesvio: boolean,
+        public descricaoLaudo: DescricaoLaudoDTO
         ){}
 }
 

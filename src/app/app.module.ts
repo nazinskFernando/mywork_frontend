@@ -1,3 +1,4 @@
+import { LaudoService } from './services/domain/laudo.service';
 import { InspecaoService } from './services/domain/inspecao.service';
 
 import { EquipamentoService } from './services/domain/equipamento.service';
@@ -68,6 +69,7 @@ import { NotaFiscalService } from './services/domain/nota-fiscal.service';
     EquipamentoService,
     NotaFiscalService,
     InspecaoService,
+    LaudoService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,

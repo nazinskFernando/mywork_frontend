@@ -1,7 +1,7 @@
 <div class="box box-default">
   <div class="box-header with-border">
-    {{equipamentoNotaFisca.notaFiscal.numeroOrdem}} | {{equipamentoNotaFisca.equipamento.descricao}} |
-    {{equipamentoNotaFisca.equipamento.serialNumber}}
+    {{inspecao.notaFiscal.numeroOrdem}} | {{inspecao.equipamento.descricao}} |
+    {{inspecao.equipamento.serialNumber}}
     <small class="pull-right">
       <ul class="nav navbar-nav">
         <li class="dropdown tasks-menu">
@@ -28,78 +28,78 @@
     <div class="row">
       <div class="form-group col-md-2">
         <label>Nota fiscal</label>
-        <input disabled type="number" [(ngModel)]="equipamentoNotaFisca.notaFiscal.numeroNotaFiscal" #nome="ngModel"
+        <input disabled type="number" [(ngModel)]="inspecao.notaFiscal.numeroNotaFiscal" #nome="ngModel"
           name="numeroNotaFiscal" id="numeroNotaFiscal" class="form-control" placeholder="125482">
       </div>
       <div class="form-group col-md-3">
         <label>Emissor</label>
-        <input disabled type="text" class="form-control" [(ngModel)]="equipamentoNotaFisca.notaFiscal.emissor"
+        <input disabled type="text" class="form-control" [(ngModel)]="inspecao.equipamento.cliente.nome"
           #nome="ngModel" name="emissor" id="emissor" placeholder="PETROBRÁS">
       </div>
       <div class="form-group col-md-3">
         <label>Origem</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.origem" #nome="ngModel" name="origem"
+        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.origem" #nome="ngModel" name="origem"
           id="origem" class="form-control" placeholder="ARM-RIO">
       </div>
       <div class="form-group col-md-2">
         <label>RT</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.rt" #nome="ngModel" name="rt" id="rt"
+        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.rt" #nome="ngModel" name="rt" id="rt"
           class="form-control" placeholder="31254525">
       </div>
       <div class="form-group col-md-2">
         <label>Data de Entrada</label>
-        <input disabled class="form-control" [(ngModel)]="equipamentoNotaFisca.notaFiscal.dataEntrada" #nome="ngModel"
-          name="dataEntrada" id="dataEntrada" type="date" #date />
+        <input disabled class="form-control" [(ngModel)]="inspecao.notaFiscal.dataEntrada" #nome="ngModel"
+          name="dataEntrada" id="dataEntrada" type="text" #date />
       </div>
     </div>
     <div class="row">
       <div class="form-group col-md-2">
         <label>Part Number</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.setorDestino" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.setorDestino" #nome="ngModel"
           name="setorDestino" id="setorDestino" class="form-control" placeholder="Logística">
       </div>
       <div class="form-group col-md-3">
         <label>Serial Number</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.equipamento.serialNumber" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.equipamento.serialNumber" #nome="ngModel"
           name="transportadora" id="transportadora" class="form-control" placeholder="VIX">
       </div>
       <div class="form-group col-md-4">
         <label>Equipamento</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.chaveNf" #nome="ngModel" name="chaveNf"
+        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.chaveNf" #nome="ngModel" name="chaveNf"
           id="chaveNf" class="form-control" placeholder="3124523425342454525">
       </div>
       <div class="form-group col-md-3">
         <label>Contrato</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.contrato" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.contrato" #nome="ngModel"
           name="contrato" id="contrato" class="form-control" placeholder="31254525">
       </div>
     </div>
     <div class="row">
       <div class="form-group col-md-3">
         <label>Número Ordem</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.numeroOrdem" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.numeroOrdem" #nome="ngModel"
           name="numeroOrdem" id="numeroOrdem" class="form-control" placeholder="212252">
       </div>
       <div class="form-group col-md-3">
         <label>WBS</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.wbs" #nome="ngModel" name="wbs"
+        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.wbs" #nome="ngModel" name="wbs"
           id="wbs" class="form-control" placeholder="1256-254-25">
       </div>
       <div class="form-group col-md-4">
         <label>Número Relatorio</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.numeroRelatorio" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.numeroRelatorio" #nome="ngModel"
           name="numeroRelatorio" id="numeroRelatorio" class="form-control" placeholder="1745852">
       </div>
       <div class="form-group col-md-2">
         <label>Tempo Servico</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.notaFiscal.tempoServico" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.tempoServico" #nome="ngModel"
           name="tempoServico" id="tempoServico" class="form-control" placeholder="1,5">
       </div>
     </div>
     <div class="row">
       <div class="form-group col-md-12">
         <label>Descrição</label>
-        <input disabled type="text" [(ngModel)]="equipamentoNotaFisca.equipamento.descricao" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.equipamento.descricao" #nome="ngModel"
           name="descricao" id="descricao" class="form-control" placeholder="">
       </div>
     </div><br>
@@ -119,97 +119,28 @@
         </label><br>-->        
  
 
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-3" *ngFor="let laudo of inspecao.laudos">
             <div class="image-upload">
               <label for="file-input">
-                <img src="../../../../assets/img/equipamento/we1.jpg" height="200" width="250">
+                <img [src]="laudo.imagem" height="200" width="250">
                 <label>
-                  <input id="desvio" type="checkbox"
+                  <input id="desvio" type="checkbox" [(ngModel)]="laudo.comDesvio"
                     class="minimal">
                   Desvio?
                 </label><br>
                 <label>
-                  <input id="desvio" type="checkbox" value="true"
-                    class="minimal">
+                  <input id="desvio" type="checkbox" 
+                    class="minimal" [(ngModel)]="laudo.usarRelatorio">
                   Usar no relatório?
                 </label>
               </label><input id="file-input" type="file" (change)="editarFoto($event)" />
-              <textarea 
-                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição">Rastreabilidade com desplacamento na pintura</textarea>
-              <button type="button" class="btn btn-danger btn-xs">
+              <textarea disabled
+                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição" [(ngModel)]="laudo.descricaoLaudo.descricao"></textarea>
+              <button type="button" class="btn btn-danger btn-xs" (click)="delete(laudo.id)">
                 <span class="glyphicon glyphicon-trash"></span> Remover
               </button>
             </div>
-          </div>
-
-          <div class="form-group col-md-3">
-            <div class="image-upload">
-              <label for="file-input">
-                <img src="../../../../assets/img/equipamento/we2.jpg" height="200" width="250">
-                <label>
-                  <input id="desvio" type="checkbox"
-                    class="minimal">
-                  Desvio?
-                </label><br>
-                <label>
-                  <input id="desvio" type="checkbox" value="true"
-                    class="minimal">
-                  Usar no relatório?
-                </label>
-              </label><input id="file-input" type="file" (change)="editarFoto($event)" />
-              <textarea 
-                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição">Vista panorâmica</textarea>
-              <button type="button" class="btn btn-danger btn-xs">
-                <span class="glyphicon glyphicon-trash"></span> Remover
-              </button>
-            </div>
-          </div>
-
-          <div class="form-group col-md-3">
-            <div class="image-upload">
-              <label for="file-input">
-                <img src="../../../../assets/img/equipamento/we3.jpg" height="200" width="250">
-                <label>
-                  <input id="desvio" type="checkbox"
-                    class="minimal">
-                  Desvio?
-                </label><br>
-                <label>
-                  <input id="desvio" type="checkbox" value="true"
-                    class="minimal">
-                  Usar no relatório?
-                </label>
-              </label><input id="file-input" type="file" (change)="editarFoto($event)" />
-              <textarea 
-                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição">Ausência de marcação de END</textarea>
-              <button type="button" class="btn btn-danger btn-xs">
-                <span class="glyphicon glyphicon-trash"></span> Remover
-              </button>
-            </div>
-          </div>
-          <div class="form-group col-md-3">
-            <div class="image-upload">
-              <label for="file-input">
-                <img src="../../../../assets/img/equipamento/we4.jpg" height="200" width="250">
-                <label>
-                  <input id="desvio" type="checkbox"
-                    class="minimal">
-                  Desvio?
-                </label><br>
-                <label>
-                  <input id="desvio" type="checkbox" value="true"
-                    class="minimal">
-                  Usar no relatório?
-                </label>
-              </label><input id="file-input" type="file" (change)="editarFoto($event)" />
-              <textarea 
-                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição">Plaqueta de certificação da lingada</textarea>
-              <button type="button" class="btn btn-danger btn-xs">
-                <span class="glyphicon glyphicon-trash"></span> Remover
-              </button>
-            </div>
-          </div>
-        
+          </div> 
 
         <!--<div *ngFor="let item of urls; let i = index">
           <div class="form-group col-md-3">
@@ -234,7 +165,7 @@
 
      
       <button *ngIf="qtdImagens == 0" (click)="criarInspecao()" type="button"
-        class="btn btn-success btn-block">SALVAR</button>
+        class="btn btn-success btn-block">Finalizar Inspeção</button>
     </div>
     <ul class="nav navbar-nav"  *ngIf="isRelatorio">
       <li class="dropdown tasks-menu">

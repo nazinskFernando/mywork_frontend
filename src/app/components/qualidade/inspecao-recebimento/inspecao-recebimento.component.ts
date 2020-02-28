@@ -1,3 +1,4 @@
+import { LaudoService } from './../../../services/domain/laudo.service';
 import { LaudoDTO } from './../../../model/DTO/Laudo.DTO';
 import { ResponseApi } from './../../../model/response-api';
 import { InspecaoDTO } from './../../../model/DTO/Inspecao.DTO';
@@ -30,45 +31,40 @@ export class InspecaoRecebimentoComponent implements OnInit {
   notaFiscal: NotaFiscalDTO;
   inspecao: InspecaoDTO;
   laudos = new Array<LaudoDTO>();
-  laudo = new LaudoDTO('','','',null,'');
+  laudo = new LaudoDTO('','',null,null,null);
+  equipamentoId: string;
+  notaFiscalId: string;
 
   isRelatorio: Boolean= false;
 
   constructor(
           private route: ActivatedRoute, 
-          private equipamentoService: EquipamentoService,
-          private notaFiscalService: NotaFiscalService,
+          private laudoService :LaudoService,
           private inspecaoService: InspecaoService) {
   }
 
  
   criarInspecao(){
-    this.isRelatorio = true;
-   /* console.log("clicado");
-    this.equipamento = this.equipamentoNotaFisca.equipamento;
-    this.notaFiscal= this.equipamentoNotaFisca.notaFiscal;
-    this.laudo = new LaudoDTO('','xdfv','sfv','sfdvsdf');
-    this.laudos.push(this.laudo);
-    console.log(this.urls);
-    this.inspecao = new InspecaoDTO(null, this.equipamento, this.notaFiscal, null, this.laudos);
-    this.inspecaoService.inserir(this.inspecao).subscribe((responseApi) => {
-      console.log(responseApi);
-    }, error => {});*/
+    // this.laudoService.update(this.inspecao.laudos).subscribe((responseApi) => {
+    //   this.findbyEquipamentoAndNotaFiscalId(this.equipamentoId, this.notaFiscalId);
+    // }, error => { });
   }
 
   abrirRelatorio(){   
    window.open("http://developer.porumclique.com.br/img/pdf/inspecao1.pdf", '_blank');
   }
+
   ngOnInit(): void {
     const ids: Ids = JSON.parse(this.route.snapshot.params['ids']);
-    console.log(ids.idEquipamento);
-    this.findbyEquipamentoId(ids.idEquipamento, ids.idNotaFiscal);
+    this.equipamentoId = ids.idEquipamento;
+    this.notaFiscalId = ids.idNotaFiscal;
+    this.findbyEquipamentoAndNotaFiscalId(ids.idEquipamento, ids.idNotaFiscal);
     //this.findbyNotaFiscalId(ids.idNotaFiscal);
   }
 
-  findbyEquipamentoId(idEquipamento: string, idNotaFiscal: string){
-    this.inspecaoService.findAllById(idEquipamento, idNotaFiscal).subscribe((responseApi: EquipamentoNotaFiscalDTO) => {
-       this.equipamentoNotaFisca = responseApi;      
+  findbyEquipamentoAndNotaFiscalId(idEquipamento: string, idNotaFiscal: string){
+    this.inspecaoService.findByEquipamentoAndNfId(idEquipamento, idNotaFiscal).subscribe((responseApi: InspecaoDTO) => {
+       this.inspecao = responseApi;      
      }, error => { });
    }
 
@@ -96,10 +92,16 @@ export class InspecaoRecebimentoComponent implements OnInit {
     //https://stackblitz.com/edit/angular-multi-file-upload-preview?file=app%2Fapp.component.ts
   }
 
+  // delete(valor) {
+  //   this.urls.splice(valor, 1);
+  //   this.qtdImagens = this.urls.length;
+  // }
+
   delete(valor) {
-    this.urls.splice(valor, 1);
-    this.qtdImagens = this.urls.length;
-  }
+      this.laudoService.delete(valor).subscribe((responseApi) => {
+        this.findbyEquipamentoAndNotaFiscalId(this.equipamentoId, this.notaFiscalId);
+      }, error => { });
+    }
 
   trackArray(index) {
     this.index = index;

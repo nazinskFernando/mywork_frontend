@@ -18,8 +18,8 @@ export class InspecaoService {
     return this.http.get(`${API_CONFIG.baseUrl}/inspecao`);
   }
 
-  findAllById(idEquipamento: string, idNotaFiscal: string){
-    return this.http.get(`${API_CONFIG.baseUrl}/inspecao/findbynotafiscal?idEquipamento=${idEquipamento}&idNotaFiscal=${idNotaFiscal}`);
+  findByEquipamentoAndNfId(idEquipamento: string, idNotaFiscal: string){
+    return this.http.get<InspecaoDTO>(`${API_CONFIG.baseUrl}/inspecao/findbynotafiscal?idEquipamento=${idEquipamento}&idNotaFiscal=${idNotaFiscal}`);
   }
 
   inserir(inspecaoDTO : InspecaoDTO){
