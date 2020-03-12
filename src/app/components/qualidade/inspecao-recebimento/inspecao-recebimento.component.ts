@@ -93,16 +93,29 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text("17770059", 80, 20);
 
     doc.cell(5, 5, 15, 18, " ", 2, "center");
-    doc.cell(5, 5, 30, 18, " ", 2, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("DATA:", 105, 20);
+    
+    doc.cell(5, 5, 35, 18, " ", 2, "center");
+     doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("14/01/2020", 125, 20);
+    
     doc.setDrawColor(0);
     doc.setFillColor(255, 255, 0);
-    doc.rect(60, 5, 90, 9, "FD");
+    doc.rect(60, 5, 92, 9, "FD");
+    doc.setTextColor("0000");
     doc.setFontSize(10);
     doc.text("RELATÓRIO DE INSPEÇÃO DE RECEBIMENTO", 65, 10);
 
-    doc.addImage("examples/images/Octonyan.jpg", "JPEG", 150, 5, 55, 18);
-    doc.cell(5, 5, 90, 18, '', 2, "center");
+    doc.addImage("examples/images/Octonyan.jpg", "JPEG", 152, 5, 55, 18);
     doc.cell(5, 5, 55, 18, " ", 2, "center");
+  
+
   
     doc.save('Relatorio.pdf');
   }
