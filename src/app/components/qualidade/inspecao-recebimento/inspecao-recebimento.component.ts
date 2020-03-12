@@ -76,8 +76,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
    var petrobras = await this.getBase64Image("https://inspecoes.s3-sa-east-1.amazonaws.com/petrobras.png");
    
     var doc = new jsPDF();
-    doc.setFontSize(40);
-    doc.addImage("examples/images/Octonyan.jpg", "JPEG", 5, 5, 55, 18);
+     doc.addImage("examples/images/Octonyan.jpg", "JPEG", 5, 5, 55, 18);
     doc.cell(5, 5, 55, 18, " ", 2, "center");
 
     doc.cell(5, 5, 12, 18, " ", 2, "center");
@@ -100,7 +99,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text("DATA:", 105, 20);
     
     doc.cell(5, 5, 35, 18, " ", 2, "center");
-     doc.setDrawColor(0);
+    doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
     doc.text("14/01/2020", 125, 20);
@@ -114,9 +113,46 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
     doc.addImage("examples/images/Octonyan.jpg", "JPEG", 152, 5, 55, 18);
     doc.cell(5, 5, 55, 18, " ", 2, "center");
-  
+    
+    doc.cell(5, 8, 17, 9, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Cliente:", 6, 30);
+    
+    doc.cell(5, 5, 42, 9, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("PETROBRAS", 30, 30);
+    
+    doc.cell(5, 8, 38, 9, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Contrato Jurídico:", 68, 30);
+    
+    doc.cell(5, 5, 42, 9, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("5125.0107201.18.2", 108, 30);
+    
+    doc.cell(5, 8, 22, 9, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Cont. SAP", 146, 30);
+    
+    doc.cell(5, 5, 41, 9, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("EQUIP - 4600566276", 170, 30);
 
-  
     doc.save('Relatorio.pdf');
   }
  
