@@ -76,8 +76,34 @@ export class InspecaoRecebimentoComponent implements OnInit {
    var petrobras = await this.getBase64Image("https://inspecoes.s3-sa-east-1.amazonaws.com/petrobras.png");
    
     var doc = new jsPDF();
-    doc.addImage(technipFmc, "JPEG", 5, 5, 55, 18);
-    doc.cell(5, 5, 55, 18, " ", 2, "center");  
+    doc.setFontSize(40);
+    doc.addImage("examples/images/Octonyan.jpg", "JPEG", 5, 5, 55, 18);
+    doc.cell(5, 5, 55, 18, " ", 2, "center");
+
+    doc.cell(5, 5, 12, 18, " ", 2, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setFontStyle("bold");
+    doc.text("RIR:", 63, 20);
+
+    doc.cell(5, 5, 30, 18, " ", 2, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("17770059", 80, 20);
+
+    doc.cell(5, 5, 15, 18, " ", 2, "center");
+    doc.cell(5, 5, 30, 18, " ", 2, "center");
+    doc.setDrawColor(0);
+    doc.setFillColor(255, 255, 0);
+    doc.rect(60, 5, 90, 9, "FD");
+    doc.setFontSize(10);
+    doc.text("RELATÓRIO DE INSPEÇÃO DE RECEBIMENTO", 65, 10);
+
+    doc.addImage("examples/images/Octonyan.jpg", "JPEG", 150, 5, 55, 18);
+    doc.cell(5, 5, 90, 18, '', 2, "center");
+    doc.cell(5, 5, 55, 18, " ", 2, "center");
+  
     doc.save('Relatorio.pdf');
   }
  
