@@ -13,7 +13,7 @@ export class LaudoService {
   delete(id: number){
     return this.http.delete(`${API_CONFIG.baseUrl}/laudo/${id}`);
   }
-
+z
   update(LaudoDTO : LaudoDTO){
     return this.http.put(`${API_CONFIG.baseUrl}/laudo`, LaudoDTO);
   }
