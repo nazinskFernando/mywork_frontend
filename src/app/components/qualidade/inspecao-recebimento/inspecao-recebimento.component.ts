@@ -76,8 +76,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
    var petrobras = await this.getBase64Image("https://inspecoes.s3-sa-east-1.amazonaws.com/petrobras.png");
    
     var doc = new jsPDF();
-     doc.addImage("examples/images/Octonyan.jpg", "JPEG", 5, 5, 55, 18);
-    doc.cell(5, 5, 55, 18, " ", 2, "center");
+        doc.cell(5, 5, 55, 18, " ", 2, "center");
 
     doc.cell(5, 5, 12, 18, " ", 2, "center");
     doc.setDrawColor(0);
@@ -89,7 +88,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("17770059", 80, 20);
+    doc.text("17770059", 85, 20, null, null, "center");
 
     doc.cell(5, 5, 15, 18, " ", 2, "center");
     doc.setDrawColor(0);
@@ -125,7 +124,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("PETROBRAS", 30, 30);
+    doc.text("PETROBRAS", 42, 30, null, null, "center");
     
     doc.cell(5, 8, 38, 9, " ", 3, "center");
     doc.setDrawColor(0);
@@ -138,7 +137,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("5125.0107201.18.2", 108, 30);
+    doc.text("5125.0107201.18.2", 122, 30, null, null, "center");
     
     doc.cell(5, 8, 22, 9, " ", 3, "center");
     doc.setDrawColor(0);
@@ -151,7 +150,29 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("EQUIP - 4600566276", 170, 30);
+    doc.text("EQUIP - 4600566276", 186, 30, null, null, "center");
+    
+    //Terçeira linha
+    
+    doc.cell(5, 7, 27, 7, " ", 4, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Equipamento:", 6, 37);
+    
+    doc.cell(5, 5, 134, 7, " ", 4, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("TRANSPORTATION SKID ASSDDDDDDDDDDDDDY, F/ TREE CA", 100, 37, null, null, "center");
+    
+    doc.cell(5, 7, 12, 7, " ", 4, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("BP:", 175, 37);
 
     doc.save('Relatorio.pdf');
   }
