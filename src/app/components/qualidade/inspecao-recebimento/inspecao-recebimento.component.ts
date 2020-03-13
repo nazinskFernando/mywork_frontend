@@ -91,6 +91,22 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text("17770059", 85, 20, null, null, "center");
 
     doc.cell(5, 5, 15, 18, " ", 2, "center");
+    doc.addImage("examples/images/Octonyan.jpg", "JPEG", 5, 5, 55, 18);
+    doc.cell(5, 5, 55, 18, " ", 2, "center");
+
+    doc.cell(5, 5, 12, 18, " ", 2, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setFontStyle("bold");
+    doc.text("RIR:", 63, 20);
+
+    doc.cell(5, 5, 30, 18, " ", 2, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("17770059", 85, 20, null, null, "center");
+
+    doc.cell(5, 5, 15, 18, " ", 2, "center");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -172,7 +188,12 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("BP:", 175, 37);
+    doc.text("BP:", 169, 37);
+    
+    doc.cell(5, 5, 29, 7, " ", 4, "center");
+    doc.setTextColor("0000FF");
+    doc.setLineWidth(1);
+    doc.line(182, 35, 205, 35);
 
     doc.save('Relatorio.pdf');
   }
