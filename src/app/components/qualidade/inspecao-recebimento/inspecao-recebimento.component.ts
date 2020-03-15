@@ -196,7 +196,7 @@ doc.setLineWidth(1);
 doc.line(182, 35, 205, 35);
 
 //Quarta linha
-doc.setLineWidth(0.5);
+doc.setLineWidth(0,5);
 doc.cell(5, 7, 9, 7, " ", 5, "center");
 doc.setDrawColor(0);
 doc.setFontSize(10);
@@ -250,7 +250,7 @@ doc.line(192, 42, 205, 42);
 
 //Quinta linha
 
-doc.setLineWidth(0.5);
+doc.setLineWidth(0,5);
 doc.cell(5, 7, 9, 7, " ", 6, "center");
 doc.setDrawColor(0);
 doc.setFontSize(10);
@@ -314,26 +314,164 @@ doc.text("LINGADA", 101, 57);
 //Lingada corpo
 
 doc.cell(5, 7, 0, 7, " ", 7, "center");
-doc.cell(5, 7, 20, 7, " ", 8, "center");
+doc.cell(5, 7, 67.3, 7, " ", 8, "center");
 doc.setDrawColor(0);
 doc.setFontSize(10);
 doc.setTextColor("0000");
 doc.setFontStyle("bold");
-doc.text("Origem:", 160, 49);
+doc.text("Oricccccccccccccgem:", 40, 63, null, null, "center");
 
-doc.cell(5, 7, 20, 7, " ", 8, "center");
+doc.cell(5, 7, 67.3, 7, " ", 8, "center");
 doc.setDrawColor(0);
 doc.setFontSize(10);
 doc.setTextColor("0000");
 doc.setFontStyle("bold");
-doc.text("Origem:", 160, 49);
+doc.text("Origem:", 110, 63, null, null, "center");
 
-doc.cell(5, 7, 20, 7, " ", 8, "center");
+doc.cell(5, 7, 67.3, 7, " ", 8, "center");
 doc.setDrawColor(0);
 doc.setFontSize(10);
 doc.setTextColor("0000");
 doc.setFontStyle("bold");
-doc.text("Origem:", 160, 49);
+doc.text("Origem:", 175, 63, null, null, "center");
+
+//Lingada corpo 2º linha
+
+doc.cell(5, 7, 67.3, 7, " ", 9, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("Oricccccccccccccgem:", 40, 70, null, null, "center");
+
+doc.cell(5, 7, 67.3, 7, " ", 9, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("Origem:", 110, 70, null, null, "center");
+
+doc.cell(5, 7, 67.3, 7, " ", 9, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("Origem:", 175, 70, null, null, "center");
+
+// Linha cobrindo as 2 colunas
+
+doc.setLineWidth(1);
+doc.line(5, 58, 207, 72);
+
+// Linha cobrindo a ultima colunas
+
+doc.setLineWidth(1);
+doc.line(5, 65, 207, 72);
+
+//Acessorio titulo
+
+doc.setLineWidth(0.5);
+doc.setDrawColor(0);
+doc.setFillColor(255, 255, 0);
+doc.rect(5, 72, 202, 7, "FD");
+doc.setTextColor("00000");
+doc.text("ACESSÓRIOS E COMPONENTES", 80, 77);
+
+//Acessorio corpo
+
+doc.cell(5, 7, 0, 7, " ", 7, "center");
+doc.cell(5, 7, 112, 7, " ", 10, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("DESCRIÇÃO", 65, 84, null, null, "center");
+
+doc.cell(5, 7, 30, 7, " ", 10, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("PN", 132, 84, null, null, "center");
+
+doc.cell(5, 7, 30, 7, " ", 10, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("NS", 162, 84, null, null, "center");
+
+doc.cell(5, 7, 30, 7, " ", 10, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("Origem", 192, 84, null, null, "center");
+
+//Lingada corpo 1º linha
+
+doc.cell(5, 7, 112, 7, " ", 11, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("DESCRIÇÃO", 65, 84, null, null, "center");
+
+doc.cell(5, 7, 30, 7, " ", 11, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("PN", 132, 84, null, null, "center");
+
+doc.cell(5, 7, 30, 7, " ", 11, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("NS", 162, 84, null, null, "center");
+
+doc.cell(5, 7, 30, 7, " ", 11, "center");
+doc.setDrawColor(0);
+doc.setFontSize(10);
+doc.setTextColor("0000");
+doc.setFontStyle("bold");
+doc.text("Origem", 192, 84, null, null, "center");
+
+// Linha cobrindo as 2 colunas
+
+doc.setLineWidth(1);
+doc.line(5, 79, 207, 92);
+
+// Linha cobrindo a ultima colunas
+
+doc.setLineWidth(1);
+doc.line(5, 86, 207, 92);
+
+//Fotos titulo
+
+doc.setLineWidth(0.5);
+doc.setDrawColor(0);
+doc.setFillColor(255, 255, 0);
+doc.rect(5, 93, 202, 7, "FD");
+doc.setTextColor("00000");
+doc.text("FOTOS", 104, 98);
+
+// Corpo Fotos
+
+doc.setLineWidth(0.5);
+doc.setDrawColor(0);
+doc.setFillColor(255, 255, 0);
+doc.rect(11, 102, 95, 7, "FD");
+doc.setTextColor("00000");
+doc.text("FOTOS 1", 53, 107);
+
+doc.setLineWidth(0.5);
+doc.setDrawColor(0);
+doc.setFillColor(255, 255, 0);
+doc.rect(106, 102, 95, 7, "FD");
+doc.setTextColor("00000");
+doc.text("FOTOS 1", 155, 107);
 
     doc.save('Relatorio.pdf');
   }
