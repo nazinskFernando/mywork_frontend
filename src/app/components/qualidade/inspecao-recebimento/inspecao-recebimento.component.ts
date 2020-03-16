@@ -80,6 +80,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
 // Use http://dataurl.net/#dataurlmaker
 var doc = new jsPDF();
 
+
 doc.cell(5, 5, 55, 18, " ", 2, "center");
 
 doc.cell(5, 5, 12, 18, " ", 2, "center");
@@ -611,6 +612,11 @@ doc.rect(136, 284, 71, 7);
 doc.setFontSize(10);
 doc.setFontStyle("bold");
 doc.text("14/01/2020", 170, 290, null, null, "center");
+
+doc.rect(5, 284, 202, 11);
+doc.setFontSize(7);
+doc.setFontStyle("bold");
+doc.text("p. 1/3", 105, 294, null, null, "center");
 // ULTIMA LINHA
     doc.save('Relatorio.pdf');
   }
