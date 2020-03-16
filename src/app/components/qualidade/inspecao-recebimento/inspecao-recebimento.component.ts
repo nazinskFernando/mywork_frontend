@@ -80,7 +80,6 @@ export class InspecaoRecebimentoComponent implements OnInit {
 // Use http://dataurl.net/#dataurlmaker
 var doc = new jsPDF();
 
-
 doc.cell(5, 5, 55, 18, " ", 2, "center");
 
 doc.cell(5, 5, 12, 18, " ", 2, "center");
@@ -586,6 +585,27 @@ doc.setTextColor("00000");
 doc.text("ASSINATURA PETROBRAS", 138, 267);
 doc.rect(106, 269, 101, 15);
 
+// ULTIMA LINHA
+
+doc.rect(5, 284, 30, 7);
+doc.setFontSize(10);
+doc.setFontStyle("bold");
+doc.text("DATA:", 12, 290, null, null, "center");
+
+doc.rect(35, 284, 71, 7);
+doc.setFontSize(10);
+doc.setFontStyle("bold");
+doc.text("14/01/2020", 70, 290, null, null, "center");
+
+doc.rect(106, 284, 30, 7);
+doc.setFontSize(10);
+doc.setFontStyle("bold");
+doc.text("DATA:", 113, 290, null, null, "center");
+
+doc.rect(136, 284, 71, 7);
+doc.setFontSize(10);
+doc.setFontStyle("bold");
+doc.text("14/01/2020", 170, 290, null, null, "center");
 // ULTIMA LINHA
     doc.save('Relatorio.pdf');
   }
