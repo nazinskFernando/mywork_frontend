@@ -80,6 +80,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
 // Use http://dataurl.net/#dataurlmaker
 var doc = new jsPDF();
 
+
 doc.cell(5, 5, 55, 18, " ", 2, "center");
 
 doc.cell(5, 5, 12, 18, " ", 2, "center");
@@ -571,6 +572,21 @@ doc.text("FOTOS 4", 145, 193);
 
 doc.rect(106, 195, 95, 65);
 
+doc.setDrawColor(0);
+doc.setFillColor(255, 255, 0);
+doc.rect(5, 262, 101, 7, "FD");
+doc.setTextColor("00000");
+doc.text("ASSINATURA CONTRATADA", 36, 267);
+doc.rect(5, 269, 101, 15);
+
+doc.setDrawColor(0);
+doc.setFillColor(255, 255, 0);
+doc.rect(106, 262, 101, 7, "FD");
+doc.setTextColor("00000");
+doc.text("ASSINATURA PETROBRAS", 138, 267);
+doc.rect(106, 269, 101, 15);
+
+// ULTIMA LINHA
     doc.save('Relatorio.pdf');
   }
  
