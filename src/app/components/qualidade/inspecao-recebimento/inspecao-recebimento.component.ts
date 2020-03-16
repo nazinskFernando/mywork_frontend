@@ -536,6 +536,7 @@ doc.text("FOTOS 1", 53, 121);
 // quadrante de foto
 
 doc.rect(11, 123, 95, 65);
+doc.addImage("examples/images/Octonyan.jpg", "JPEG", 11, 123, 95, 65);
 
 doc.setLineWidth(0.5);
 doc.setDrawColor(0);
@@ -547,6 +548,7 @@ doc.text("FOTOS 2", 145, 121);
 // quadrante de foto
 
 doc.rect(106, 123, 95, 65);
+doc.addImage("examples/images/Octonyan.jpg", "JPEG", 106, 123, 95, 65);
 
 // Corpo Fotos
 
@@ -559,6 +561,7 @@ doc.text("FOTOS 3", 53, 193);
 // quadrante de foto
 
 doc.rect(11, 195, 95, 65);
+doc.addImage("examples/images/Octonyan.jpg", "JPEG", 11, 195, 95, 65);
 
 doc.setLineWidth(0.5);
 doc.setDrawColor(0);
@@ -570,6 +573,7 @@ doc.text("FOTOS 4", 145, 193);
 // quadrante de foto
 
 doc.rect(106, 195, 95, 65);
+doc.addImage("examples/images/Octonyan.jpg", "JPEG", 106, 195, 95, 65);
 
 doc.setDrawColor(0);
 doc.setFillColor(255, 255, 0);
@@ -577,6 +581,7 @@ doc.rect(5, 262, 101, 7, "FD");
 doc.setTextColor("00000");
 doc.text("ASSINATURA CONTRATADA", 36, 267);
 doc.rect(5, 269, 101, 15);
+
 
 doc.setDrawColor(0);
 doc.setFillColor(255, 255, 0);
