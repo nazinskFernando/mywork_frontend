@@ -196,7 +196,7 @@ doc.setLineWidth(1);
 doc.line(182, 35, 205, 35);
 
 //Quarta linha
-doc.setLineWidth(0,5);
+doc.setLineWidth(0.5);
 doc.cell(5, 7, 9, 7, " ", 5, "center");
 doc.setDrawColor(0);
 doc.setFontSize(10);
@@ -250,7 +250,7 @@ doc.line(192, 42, 205, 42);
 
 //Quinta linha
 
-doc.setLineWidth(0,5);
+doc.setLineWidth(0.5);
 doc.cell(5, 7, 9, 7, " ", 6, "center");
 doc.setDrawColor(0);
 doc.setFontSize(10);
