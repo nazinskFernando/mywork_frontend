@@ -658,7 +658,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("17770059", 85, 20, null, null, "center");
+    doc.text(" ", 85, 20, null, null, "center");
 
     doc.cell(5, 5, 15, 18, " ", 2, "center");
     doc.setDrawColor(0);
@@ -1182,6 +1182,281 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setFontSize(7);
     doc.setFontStyle("bold");
     doc.text("p. 1/3", 105, 294, null, null, "center");
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // segunda página
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    doc.addPage();
+    
+    doc.setDrawColor(0);
+    doc.setFillColor(255, 255, 255);
+    doc.rect(5, 5, 55, 17, "FD");
+    doc.setTextColor("0000");
+    doc.setFontSize(10);
+    
+    doc.setDrawColor(0);
+    doc.setFillColor(255, 255, 255);
+    doc.rect(60, 13, 13, 9, "FD");
+    doc.setFontSize(10);
+    doc.setFontStyle("bold");
+    doc.text("RIR:", 63, 20);
+
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setFillColor(255, 255, 255);
+    doc.rect(72, 13, 30, 9, "FD");
+    doc.setTextColor("0000FF");
+    doc.text("17770059", 85, 20, null, null, "center");
+
+    doc.addImage(
+      "https://inspecoes.s3-sa-east-1.amazonaws.com/technipfmc.png",
+      "JPEG",
+      6,
+      6,
+      52,
+      15
+    );
+    doc.setFillColor(255, 255, 255);
+    doc.rect(152, 5, 55, 17, "FD");
+
+    
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(102, 13, 15, 9, "FD");
+    doc.setFontStyle("bold");
+    doc.text("DATA:", 105, 20);
+
+    
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setFillColor(255, 255, 255);
+    doc.rect(117, 13, 35, 9, "FD");
+    doc.setTextColor("0000FF");
+    doc.text("14/01/2020", 125, 20);
+
+    doc.setDrawColor(0);
+    doc.setFillColor(255, 255, 0);
+    doc.rect(60, 5, 92, 9, "FD");
+    doc.setTextColor("0000");
+    doc.setFontSize(10);
+    doc.text("RELATÓRIO DE INSPEÇÃO DE RECEBIMENTO", 65, 10);
+
+    doc.addImage(
+      "https://inspecoes.s3-sa-east-1.amazonaws.com/petrobras.png",
+      "JPEG",
+      153,
+      6,
+      52,
+      15
+    );
+    doc.cell(5, 5, 55, 18, " ", 2, "center");
+
+    doc.cell(5, 7, 17, 7, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Cliente:", 6, 28);
+
+    doc.cell(5, 5, 42, 7, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("PETROBRAS", 42, 28, null, null, "center");
+
+    doc.cell(5, 8, 38, 7, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Contrato Jurídico:", 68, 28);
+
+    doc.cell(5, 5, 42, 7, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("5125.0107201.18.2", 122, 28, null, null, "center");
+
+    doc.cell(5, 8, 22, 7, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Cont. SAP", 146, 28);
+
+    doc.cell(5, 5, 41, 7, " ", 3, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("EQUIP - 4600566276", 186, 28, null, null, "center");
+
+    //Terçeira linha
+
+    doc.cell(5, 7, 27, 7, " ", 4, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Equipamento:", 6, 36);
+
+    doc.cell(5, 5, 134, 7, " ", 4, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text(
+      "TRANSPORTATION SKID ASSDDDDDDDDDDDDDY, F/ TREE CA",
+      100,
+      36,
+      null,
+      null,
+      "center"
+    );
+
+    doc.cell(5, 7, 12, 7, " ", 4, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("BP:", 169, 36);
+
+    doc.cell(5, 5, 29, 7, " ", 4, "center");
+    doc.setTextColor("0000FF");
+    doc.setLineWidth(1);
+    doc.line(182, 35, 205, 35);
+
+    //Quarta linha
+    doc.setLineWidth(0.5);
+    doc.cell(5, 7, 9, 7, " ", 5, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("NP:", 6, 43);
+
+    doc.cell(5, 5, 32, 7, " ", 5, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("P7000035827", 29, 43, null, null, "center");
+
+    doc.cell(5, 7, 14, 7, " ", 5, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("NS:", 49, 43);
+
+    doc.cell(5, 5, 42, 7, " ", 5, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("2017-09-0124B", 80, 43, null, null, "center");
+
+    doc.cell(5, 7, 14, 7, " ", 5, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("TAG:", 105, 43);
+
+    doc.cell(5, 5, 50, 7, " ", 5, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("FC-483", 141, 43, null, null, "center");
+
+    doc.cell(5, 7, 25, 7, " ", 5, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Família/Tipo:", 167, 43);
+
+    doc.cell(5, 5, 16, 7, " ", 5, "center");
+    doc.setTextColor("0000FF");
+    doc.setLineWidth(1);
+    doc.line(192, 42, 205, 42);
+
+    //Quinta linha
+
+    doc.setLineWidth(0.5);
+    doc.cell(5, 7, 9, 7, " ", 6, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("NF:", 6, 49);
+
+    doc.cell(5, 5, 27, 7, " ", 6, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("183", 29, 49, null, null, "center");
+
+    doc.cell(5, 7, 10, 7, " ", 6, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("RT:", 43, 49);
+
+    doc.cell(5, 5, 37, 7, " ", 6, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("319226547", 70, 49, null, null, "center");
+
+    doc.cell(5, 7, 28, 7, " ", 6, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Data Entrada:", 89, 49);
+
+    doc.cell(5, 5, 42, 7, " ", 6, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("09/01/2020", 137, 49, null, null, "center");
+
+    doc.cell(5, 7, 20, 7, " ", 6, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000");
+    doc.setFontStyle("bold");
+    doc.text("Origem:", 160, 49);
+
+    doc.cell(5, 5, 29, 7, " ", 6, "center");
+    doc.setDrawColor(0);
+    doc.setFontSize(10);
+    doc.setTextColor("0000FF");
+    doc.text("09/01/2020", 193, 49, null, null, "center");
+
 
     */
   }
