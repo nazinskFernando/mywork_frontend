@@ -1276,40 +1276,46 @@ export class InspecaoRecebimentoComponent implements OnInit {
     );
     doc.cell(5, 5, 55, 18, " ", 2, "center");
 
-    doc.cell(5, 7, 17, 7, " ", 3, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(5, 22, 17, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
     doc.text("Cliente:", 6, 28);
 
-    doc.cell(5, 5, 42, 7, " ", 3, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(22, 22, 43, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
     doc.text("PETROBRAS", 42, 28, null, null, "center");
 
-    doc.cell(5, 8, 38, 7, " ", 3, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(65, 22, 37, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
     doc.text("Contrato Jurídico:", 68, 28);
 
-    doc.cell(5, 5, 42, 7, " ", 3, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(102, 22, 43, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
     doc.text("5125.0107201.18.2", 122, 28, null, null, "center");
 
-    doc.cell(5, 8, 22, 7, " ", 3, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(145, 22, 20, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
     doc.text("Cont. SAP", 146, 28);
 
-    doc.cell(5, 5, 41, 7, " ", 3, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(165, 22, 42, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
@@ -1317,37 +1323,41 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
     //Terçeira linha
 
-    doc.cell(5, 7, 27, 7, " ", 4, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(5, 29, 27, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("Equipamento:", 6, 36);
+    doc.text("Equipamento:", 6, 34);
 
-    doc.cell(5, 5, 134, 7, " ", 4, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(32, 29, 133, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
     doc.text(
       "TRANSPORTATION SKID ASSDDDDDDDDDDDDDY, F/ TREE CA",
       100,
-      36,
+      34,
       null,
       null,
       "center"
     );
 
-    doc.cell(5, 7, 12, 7, " ", 4, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(165, 29, 13, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("BP:", 169, 36);
+    doc.text("BP:", 169, 34);
 
-    doc.cell(5, 5, 29, 7, " ", 4, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(178, 29, 29, 7, "FD");
     doc.setTextColor("0000FF");
     doc.setLineWidth(1);
-    doc.line(182, 35, 205, 35);
+    doc.line(182, 34, 205, 34);
 
     //Quarta linha
     doc.setLineWidth(0.5);
@@ -1456,6 +1466,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
     doc.text("09/01/2020", 193, 49, null, null, "center");
+
 
 
     */
