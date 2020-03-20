@@ -632,25 +632,25 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.save("Relatorio.pdf");
 
     /*
-    doc.setDrawColor(0);
+doc.setDrawColor(0);
     doc.setFillColor(255, 255, 255);
-    doc.rect(5, 5, 55, 17, "FD");
+    doc.rect(5, 5, 55, 18, "FD");
     doc.setTextColor("0000");
     doc.setFontSize(10);
     
     doc.setDrawColor(0);
     doc.setFillColor(255, 255, 255);
-    doc.rect(60, 13, 13, 9, "FD");
+    doc.rect(60, 11, 13, 9, "FD");
     doc.setFontSize(10);
     doc.setFontStyle("bold");
-    doc.text("RIR:", 63, 20);
+    doc.text("RIR:", 63, 18);
 
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setFillColor(255, 255, 255);
-    doc.rect(72, 13, 30, 9, "FD");
+    doc.rect(73, 11, 30, 9, "FD");
     doc.setTextColor("0000FF");
-    doc.text("17770059", 85, 20, null, null, "center");
+    doc.text("17770059", 85, 18, null, null, "center");
 
     doc.addImage(
       "https://inspecoes.s3-sa-east-1.amazonaws.com/technipfmc.png",
@@ -658,31 +658,30 @@ export class InspecaoRecebimentoComponent implements OnInit {
       6,
       6,
       52,
-      15
+      10
     );
     doc.setFillColor(255, 255, 255);
-    doc.rect(152, 5, 55, 17, "FD");
+    doc.rect(152, 5, 55, 18, "FD");
 
-    
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFillColor(255, 255, 255);
-    doc.rect(102, 13, 15, 9, "FD");
+    doc.rect(103, 11, 15, 9, "FD");
     doc.setFontStyle("bold");
-    doc.text("DATA:", 105, 20);
+    doc.text("DATA:", 105, 18);
 
     
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setFillColor(255, 255, 255);
-    doc.rect(117, 13, 35, 9, "FD");
+    doc.rect(117, 11, 35, 9, "FD");
     doc.setTextColor("0000FF");
-    doc.text("14/01/2020", 125, 20);
+    doc.text("14/01/2020", 125, 18);
 
     doc.setDrawColor(0);
     doc.setFillColor(255, 255, 0);
-    doc.rect(60, 5, 92, 9, "FD");
+    doc.rect(60, 5, 92, 8, "FD");
     doc.setTextColor("0000");
     doc.setFontSize(10);
     doc.text("RELATÓRIO DE INSPEÇÃO DE RECEBIMENTO", 65, 10);
@@ -693,158 +692,158 @@ export class InspecaoRecebimentoComponent implements OnInit {
       153,
       6,
       52,
-      15
+      10
     );
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(5, 22, 17, 7, "FD");
+    doc.rect(5, 19, 17, 9, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("Cliente:", 6, 28);
+    doc.text("Cliente:", 6, 25);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(22, 22, 43, 7, "FD");
+    doc.rect(22, 19, 43, 9, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("PETROBRAS", 42, 28, null, null, "center");
+    doc.text("PETROBRAS", 42, 25, null, null, "center");
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(65, 22, 37, 7, "FD");
+    doc.rect(65, 19, 38, 9, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("Contrato Jurídico:", 68, 28);
+    doc.text("Contrato Jurídico:", 68, 25);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(102, 22, 43, 7, "FD");
+    doc.rect(103, 19, 44, 9, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("5125.0107201.18.2", 122, 28, null, null, "center");
+    doc.text("5125.0107201.18.2", 122, 25, null, null, "center");
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(145, 22, 20, 7, "FD");
+    doc.rect(145, 19, 20, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("Cont. SAP", 146, 28);
+    doc.text("Cont. SAP", 146, 25);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(165, 22, 42, 7, "FD");
+    doc.rect(165, 19, 42, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("EQUIP - 4600566276", 186, 28, null, null, "center");
+    doc.text("EQUIP - 4600566276", 186, 25, null, null, "center");
 
     //Terçeira linha
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(5, 29, 27, 7, "FD");
+    doc.rect(5, 27, 27, 9, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("Equipamento:", 6, 34);
+    doc.text("Equipamento:", 6, 33);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(32, 29, 133, 7, "FD");
+    doc.rect(32, 27, 133, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
     doc.text(
       "TRANSPORTATION SKID ASSDDDDDDDDDDDDDY, F/ TREE CA",
       100,
-      34,
+      33,
       null,
       null,
       "center"
     );
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(165, 29, 13, 7, "FD");
+    doc.rect(165, 27, 13, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("BP:", 169, 34);
+    doc.text("BP:", 169, 33);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(178, 29, 29, 7, "FD");
+    doc.rect(178, 27, 29, 8, "FD");
     doc.setTextColor("0000FF");
     doc.setLineWidth(1);
-    doc.line(182, 34, 205, 34);
+    doc.line(182, 32, 205, 32);
 
     //Quarta linha
     doc.setLineWidth(0.5);
     doc.setFillColor(255, 255, 255);
-    doc.rect(5, 36, 9, 7, "FD");
+    doc.rect(5, 35, 9, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("NP:", 6, 42);
+    doc.text("NP:", 6, 41);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(14, 36, 33, 7, "FD");
+    doc.rect(14, 35, 33, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("P7000035827", 29, 42, null, null, "center");
+    doc.text("P7000035827", 29, 41, null, null, "center");
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(47, 36, 12, 7, "FD");
+    doc.rect(47, 35, 12, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("NS:", 49, 42);
+    doc.text("NS:", 49, 41);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(59, 36, 43, 7, "FD");
+    doc.rect(59, 35, 43, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("2017-09-0124B", 80, 42, null, null, "center");
+    doc.text("2017-09-0124B", 80, 41, null, null, "center");
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(102, 36, 15, 7, "FD");
+    doc.rect(102, 35, 15, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("TAG:", 105, 42);
+    doc.text("TAG:", 105, 41);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(117, 36, 48, 7, "FD");
+    doc.rect(117, 35, 48, 9, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
-    doc.text("FC-483", 141, 42, null, null, "center");
+    doc.text("FC-483", 141, 41, null, null, "center");
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(165, 36, 26, 7, "FD");
+    doc.rect(165, 35, 26, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
-    doc.text("Família/Tipo:", 167, 42);
+    doc.text("Família/Tipo:", 167, 41);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(191, 36, 16, 7, "FD");
+    doc.rect(191, 35, 16, 8, "FD");
     doc.setTextColor("0000FF");
     doc.setLineWidth(1);
-    doc.line(192, 41, 205, 41);
+    doc.line(192, 40, 205, 40);
 
     //Quinta linha
 
     doc.setLineWidth(0.5);
     doc.setFillColor(255, 255, 255);
-    doc.rect(5, 43, 9, 7, "FD");
+    doc.rect(5, 43, 9, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -852,14 +851,14 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text("NF:", 6, 49);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(14, 43, 26, 7, "FD");
+    doc.rect(14, 43, 26, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
     doc.text("183", 29, 49, null, null, "center");
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(40, 43, 11, 7, "FD");
+    doc.rect(40, 43, 11, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -867,14 +866,14 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text("RT:", 43, 49);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(51, 43, 37, 7, "FD");
+    doc.rect(51, 43, 37, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
     doc.text("319226547", 70, 49, null, null, "center");
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(88, 43, 29, 7, "FD");
+    doc.rect(88, 43, 29, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -882,14 +881,14 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text("Data Entrada:", 89, 49);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(117, 43, 42, 7, "FD");
+    doc.rect(117, 43, 42, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
     doc.text("09/01/2020", 137, 49, null, null, "center");
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(159, 43, 20, 7, "FD");
+    doc.rect(159, 43, 20, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -897,7 +896,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text("Origem:", 160, 49);
 
     doc.setFillColor(255, 255, 255);
-    doc.rect(179, 43, 28, 7, "FD");
+    doc.rect(179, 43, 28, 8, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000FF");
@@ -913,22 +912,24 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
     //Lingada corpo
 
-    doc.cell(5, 7, 0, 7, " ", 7, "center");
-    doc.cell(5, 7, 67.3, 7, " ", 8, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(5, 58, 67.3, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
     doc.text("CÓDIGO PETROBRAS", 40, 63, null, null, "center");
 
-    doc.cell(5, 7, 67.3, 7, " ", 8, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(72.3, 58, 67.3, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
     doc.text("Nº DO CERTIFICADO", 110, 63, null, null, "center");
 
-    doc.cell(5, 7, 67.3, 7, " ", 8, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(139.6, 58, 67.3, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -937,7 +938,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
     //Lingada corpo 2º linha
 
-    doc.cell(5, 7, 67.3, 7, " ", 9, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(5, 65, 67.3, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -945,7 +947,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setTextColor("0000FF");
     doc.text("Oricccccccccccccgem:", 40, 70, null, null, "center");
 
-    doc.cell(5, 7, 67.3, 7, " ", 9, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(72.3, 65, 67.3, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -953,7 +956,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setTextColor("0000FF");
     doc.text("Origem:", 110, 70, null, null, "center");
 
-    doc.cell(5, 7, 67.3, 7, " ", 9, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(139.6, 65, 67.3, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -963,7 +967,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
     //Lingada corpo 3º linha
 
-    doc.cell(5, 7, 67.3, 7, " ", 10, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(5, 72, 67.3, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -971,7 +976,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setTextColor("0000FF");
     doc.text("Oricccccccccccccgem:", 40, 77, null, null, "center");
 
-    doc.cell(5, 7, 67.3, 7, " ", 10, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(72.3, 72, 67.3, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -979,7 +985,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setTextColor("0000FF");
     doc.text("Origem:", 110, 77, null, null, "center");
 
-    doc.cell(5, 7, 67.3, 7, " ", 10, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(139.6, 72, 67.3, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -1008,29 +1015,32 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
     //Acessorio corpo titulo
 
-    doc.cell(5, 7, 0, 7, " ", 7, "center");
-    doc.cell(5, 7, 112, 7, " ", 10, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(5, 86, 112, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
     doc.text("DESCRIÇÃO", 65, 91, null, null, "center");
 
-    doc.cell(5, 7, 30, 7, " ", 10, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(117, 86, 30, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
     doc.text("PN", 132, 91, null, null, "center");
 
-    doc.cell(5, 7, 30, 7, " ", 10, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(147, 86, 30, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
     doc.setFontStyle("bold");
     doc.text("NS", 162, 91, null, null, "center");
 
-    doc.cell(5, 7, 30, 7, " ", 10, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(177, 86, 30, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -1039,7 +1049,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
     //Acessorio corpo 1º linha
 
-    doc.cell(5, 7, 112, 7, " ", 11, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(5, 93, 112, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -1047,7 +1058,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setTextColor("0000FF");
     doc.text("DESCRIÇÃO", 65, 99, null, null, "center");
 
-    doc.cell(5, 7, 30, 7, " ", 11, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(117, 93, 30, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -1055,7 +1067,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setTextColor("0000FF");
     doc.text("PN", 132, 99, null, null, "center");
 
-    doc.cell(5, 7, 30, 7, " ", 11, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(147, 93, 30, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -1063,7 +1076,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setTextColor("0000FF");
     doc.text("NS", 162, 99, null, null, "center");
 
-    doc.cell(5, 7, 30, 7, " ", 11, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(177, 93, 30, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -1073,7 +1087,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
     //Acessorio corpo 2º linha
 
-    doc.cell(5, 7, 112, 7, " ", 12, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(5, 100, 112, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -1081,7 +1096,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setTextColor("0000FF");
     doc.text("DESCRIÇÃO", 65, 106, null, null, "center");
 
-    doc.cell(5, 7, 30, 7, " ", 12, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(117, 100, 30, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -1089,7 +1105,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setTextColor("0000FF");
     doc.text("PN", 132, 106, null, null, "center");
 
-    doc.cell(5, 7, 30, 7, " ", 12, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(147, 100, 30, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
@@ -1097,7 +1114,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.setTextColor("0000FF");
     doc.text("NS", 162, 106, null, null, "center");
 
-    doc.cell(5, 7, 30, 7, " ", 12, "center");
+    doc.setFillColor(255, 255, 255);
+    doc.rect(177, 100, 30, 7, "FD");
     doc.setDrawColor(0);
     doc.setFontSize(10);
     doc.setTextColor("0000");
