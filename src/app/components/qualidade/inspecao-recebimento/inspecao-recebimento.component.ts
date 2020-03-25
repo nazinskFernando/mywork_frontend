@@ -44,7 +44,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     private inspecaoService: InspecaoService
   ) {}
 
-  getBase64Image(imgUrl) {
+  getBase64Image(imgUrl: string) {
     return new Promise(function(resolve, reject) {
       var img = new Image();
       img.src = imgUrl;
@@ -65,9 +65,10 @@ export class InspecaoRecebimentoComponent implements OnInit {
     });
   }
 
-  async gerarRelatorio() {
 
-     console.log('tag', this.inspecao);
+
+
+  async gerarRelatorio() {     
     
     var technipFmc = await this.getBase64Image(
       "https://inspecoes.s3-sa-east-1.amazonaws.com/technipfmc.png"
@@ -76,10 +77,11 @@ export class InspecaoRecebimentoComponent implements OnInit {
       "https://inspecoes.s3-sa-east-1.amazonaws.com/petrobras.png"
     );
 
-    // var imagemCliente = await this.getBase64Image(
-    //  this.inspecao.equipamento.cliente.imagem
-    // );
-
+    var img = new Image()
+    img.src = this.inspecao.equipamento.cliente.imagem;
+    
+     
+    console.log('imagem', img);
     var doc = new jsPDF();
 
     doc.setDrawColor(0);
@@ -103,7 +105,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text(this.inspecao.numeroRelatorio, 85, 18, null, null, "center");
 
     doc.addImage(
-      technipFmc,
+      img,
       "PNG",
       6,
       6,
@@ -137,13 +139,17 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text("RELATÓRIO DE INSPEÇÃO DE RECEBIMENTO", 65, 10);
 
     doc.addImage(
-      petrobras,
+      img,
       "PNG",
       153,
       6,
       52,
       10
     );
+
+    
+
+
 
     doc.setFillColor(255, 255, 255);
     doc.rect(5, 19, 17, 9, "FD");
