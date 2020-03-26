@@ -70,18 +70,10 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
   async gerarRelatorio() {     
     
-    var technipFmc = await this.getBase64Image(
-      "https://inspecoes.s3-sa-east-1.amazonaws.com/technipfmc.png"
-    );
-    var petrobras = await this.getBase64Image(
-      "https://inspecoes.s3-sa-east-1.amazonaws.com/petrobras.png"
-    );
-
-    var img = new Image()
-    img.src = this.inspecao.equipamento.cliente.imagem;
+    var technipFmc = await this.getBase64Image("https://inspecoes.s3-sa-east-1.amazonaws.com/technipfmc.png");
+    var cliente = "data:image/jpg;charset=utf-8;base64, " + this.inspecao.equipamento.cliente.imagem;
+   
     
-     
-    console.log('imagem', img);
     var doc = new jsPDF();
 
     doc.setDrawColor(0);
@@ -105,7 +97,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text(this.inspecao.numeroRelatorio, 85, 18, null, null, "center");
 
     doc.addImage(
-      img,
+      technipFmc,
       "PNG",
       6,
       6,
@@ -139,7 +131,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     doc.text("RELATÓRIO DE INSPEÇÃO DE RECEBIMENTO", 65, 10);
 
     doc.addImage(
-      img,
+      cliente,
       "PNG",
       153,
       6,
@@ -609,7 +601,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     // quadrante de foto
 
     doc.rect(11, 123, 95, 65);
-    doc.addImage(petrobras, "PNG", 11, 123, 95, 65);
+    doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[0].imagem, "PNG", 11, 123, 95, 65);
 
     doc.setLineWidth(0.5);
     doc.setDrawColor(0);
@@ -621,7 +613,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     // quadrante de foto
 
     doc.rect(106, 123, 95, 65);
-    doc.addImage(petrobras, "PNG", 106, 123, 95, 65);
+    doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[0].imagem, "PNG", 106, 123, 95, 65);
 
     // Corpo Fotos
 
@@ -634,7 +626,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     // quadrante de foto
 
     doc.rect(11, 195, 95, 65);
-    doc.addImage(petrobras, "PNG", 11, 195, 95, 65);
+    doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[1].imagem, "PNG", 11, 195, 95, 65);
 
     doc.setLineWidth(0.5);
     doc.setDrawColor(0);
@@ -646,7 +638,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     // quadrante de foto
 
     doc.rect(106, 195, 95, 65);
-    doc.addImage(petrobras, "PNG", 106, 195, 95, 65);
+    doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[1].imagem, "PNG", 106, 195, 95, 65);
 
     doc.setDrawColor(0);
     doc.setFillColor(255, 255, 0);

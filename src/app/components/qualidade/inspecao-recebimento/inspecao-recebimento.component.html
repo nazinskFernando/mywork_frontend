@@ -122,7 +122,7 @@
           <div class="form-group col-md-3" *ngFor="let laudo of inspecao.laudos">
             <div class="image-upload">
               <label for="file-input">
-                <img [src]="laudo.imagem" height="200" width="250">
+                <img [src]="'data:image/jpg;base64,' + laudo.imagem" height="200" width="250">
                 <label>
                   <input id="desvio" type="checkbox" [(ngModel)]="laudo.comDesvio"
                     class="minimal">
