@@ -135,7 +135,7 @@
                 </label>
               </label><input id="file-input" type="file" (change)="editarFoto($event)" />
               <textarea disabled
-                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição" [(ngModel)]="laudo.descricaoLaudo.descricao"></textarea>
+                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição" [(ngModel)]="laudo.descricaoLaudo.descricao">{{laudo.descricaoLaudo.descricao}}</textarea>
               <button type="button" class="btn btn-danger btn-xs" (click)="delete(laudo.id)">
                 <span class="glyphicon glyphicon-trash"></span> Remover
               </button>
