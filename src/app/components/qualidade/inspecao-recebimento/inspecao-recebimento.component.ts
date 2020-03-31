@@ -13,6 +13,7 @@ import { Component, OnInit } from "@angular/core";
 import { EquipamentoService } from "../../../services/domain/equipamento.service";
 import { ActivatedRoute } from "@angular/router";
 import * as jsPDF from "jspdf";
+import { toUnicode } from "punycode";
 
 // const URL = '/api/';
 const URL = "https://evening-anchorage-3159.herokuapp.com/api/";
@@ -40,6 +41,12 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
   isRelatorio: Boolean = false;
   laudosFotos = Array<LaudoDTO>();
+  laudosFotosQuantidadeSegundaPagina: number = 5;
+  fimFotos:boolean = false;
+
+  laudosFotosQuantidadeTerceiraPagina: number = 1;
+  novaTerceiraPagina:boolean = false;
+
   doc = new jsPDF();
 
   constructor(
@@ -802,16 +809,22 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontStyle("bold");
     this.doc.text("p. 1/3", 105, 294, null, null, "center");
 
-   if(this.laudosFotos.length > 4){
-    this.segundaPagina(technipFmc, cliente);
-   }
-    
-    
-    
-
+    var valor = 1;
+   if(this.laudosFotos.length >= 4){
+     do{
+      this.segundaPagina(technipFmc, cliente);
+      console.log('pagina', valor++);
+      console.log('laudosFotos', this.laudosFotos.length);
+      console.log('laudosFotosQuantidadeSegundaPagina', this.laudosFotosQuantidadeSegundaPagina);
+     }
+     while(this.laudosFotos.length > this.laudosFotosQuantidadeSegundaPagina);    
+   } 
  
+   do{
     this.ultimaPagina(technipFmc, cliente);
-
+   }
+   while(this.novaTerceiraPagina);
+    
    
 
     this.doc.save("Relatorio.pdf");
@@ -1137,7 +1150,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFillColor(255, 255, 0);
     this.doc.rect(11, 49, 95, 7, "FD");
     this.doc.setTextColor("00000");
-    this.doc.text("FOTOS 5", 53, 54);
+    
     // quadrante de foto
 
     this.doc.rect(11, 56, 95, 65);
@@ -1147,7 +1160,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFillColor(255, 255, 0);
     this.doc.rect(106, 49, 95, 7, "FD");
     this.doc.setTextColor("00000");
-    this.doc.text("FOTOS 6", 145, 54);
+    
 
     // quadrante de foto
 
@@ -1160,7 +1173,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFillColor(255, 255, 0);
     this.doc.rect(11, 121, 95, 7, "FD");
     this.doc.setTextColor("00000");
-    this.doc.text("FOTOS 7", 53, 126);
+   
     // quadrante de foto
 
     this.doc.rect(11, 128, 95, 65);
@@ -1170,7 +1183,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFillColor(255, 255, 0);
     this.doc.rect(106, 121, 95, 7, "FD");
     this.doc.setTextColor("00000");
-    this.doc.text("FOTOS 8", 145, 126);
+    
 
     // quadrante de foto
 
@@ -1184,7 +1197,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFillColor(255, 255, 0);
     this.doc.rect(11, 193, 95, 6, "FD");
     this.doc.setTextColor("00000");
-    this.doc.text("FOTOS 9", 53, 197);
+    
     // quadrante de foto
 
     this.doc.rect(11, 199, 95, 65);
@@ -1194,43 +1207,57 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFillColor(255, 255, 0);
     this.doc.rect(106, 193, 95, 6, "FD");
     this.doc.setTextColor("00000");
-    this.doc.text("FOTOS 10", 145, 197);
+    
 
     // quadrante de foto
 
     this.doc.rect(106, 199, 95, 65);    
 
     var posicaoEsquerdaDireita = "esquerda";
-    var posicaoLinha = 56;
+    var posicaoLinha = 57;
+    var posicaoFotos = 54;
     var rodadas = 1;
-    console.log('laudos', this.laudosFotos);
-    for(var x = 5; this.laudosFotos.length >= x; x++){
-      
-      console.log('laudo atual', this.laudosFotos[x]);
-    // this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[0].imagem, "JPEG", 11, 56, 95, 65);
-    // this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[0].imagem, "JPEG", 106, 56, 95, 65);
-    // this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[0].imagem, "JPEG", 11, 128, 95, 65);
-    // this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[0].imagem, "JPEG", 106, 128, 95, 65);
-    // this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[0].imagem, "JPEG", 11, 199, 95, 65);
-    // this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[0].imagem, "JPEG", 106, 199, 95, 65);
-    if(rodadas <= 6){
-      this.precisaSegundaPagina = false;
-      
-      if(posicaoEsquerdaDireita == "esquerda" ){
-          this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[x].imagem, "JPEG", 11, posicaoLinha, 95, 65);
-          posicaoEsquerdaDireita = "direita";
-        } 
-        else  
-        if(posicaoEsquerdaDireita == "direita"){
-          this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.laudos[x].imagem, "JPEG", 106, posicaoLinha, 95, 65);
-          posicaoLinha = posicaoLinha + 72;
-        }
-
-        rodadas = rodadas + 1;
-    } else {
-      this.precisaSegundaPagina = true;
+    var valorx = 0;
+    var x;
+    
+    for(x = this.laudosFotosQuantidadeSegundaPagina; x <= this.laudosFotos.length ; x++){  
+       
+     if((x + 1) <= this.laudosFotos.length){
+        if(rodadas < 7){
+          if(posicaoEsquerdaDireita == "esquerda" ){
+              this.doc.text("FOTO " + x, 53, posicaoFotos);
+              this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.laudosFotos[x].imagem, "PNG", 12, posicaoLinha, 94, 64);
+              posicaoEsquerdaDireita = "direita";
+            } 
+            else  
+            if(posicaoEsquerdaDireita == "direita"){
+              this.doc.text("FOTO " + x, 145, posicaoFotos);
+             this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.laudosFotos[x].imagem, "PNG", 107, posicaoLinha, 94, 64);
+              posicaoLinha = posicaoLinha + 72;
+              posicaoFotos += 72;
+              posicaoEsquerdaDireita = "esquerda";
+            } 
+            this.fimFotos = false;
+            console.log("rodadas", rodadas);
+            console.log("valor do x", x);
+            console.log('imagem', this.laudosFotos[x]);
+            
+          } 
+        if(rodadas == 6){
+       
+          valorx = x;
+        }  
+      }         
+      rodadas ++;
     }
-  }
+    
+    if(valorx != 0){
+      this.laudosFotosQuantidadeSegundaPagina = valorx +1;
+    } else {
+      this.laudosFotosQuantidadeSegundaPagina = x;
+    }
+    
+    console.log("valor do x implementavel",this.laudosFotosQuantidadeSegundaPagina );
 
 // Assinatura
     this.doc.setDrawColor(0);
@@ -1813,19 +1840,27 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontStyle("bold");
 
     var posicao = 54;
-    for(var x=1; this.laudosFotos.length > x; x++){
+    var posicaoIndicador=1;
+    for(var x=this.laudosFotosQuantidadeTerceiraPagina; this.laudosFotos.length > x; x++){
       
-      if(x < 9){        
-        var foto = "FOTO 0" + x;
-        this.doc.text(foto, 8, posicao);
+      if(posicaoIndicador <= 17){
+        this.novaTerceiraPagina = false;
+        if(x < 9){        
+          var foto = "FOTO 0" + x;
+          this.doc.text(foto, 8, posicao);
+        } else {
+          var foto = "FOTO " + x;
+          this.doc.text(foto, 8, posicao);
+        }    
+        
+        this.doc.text(this.laudosFotos[x].descricaoLaudo.descricao, 28, posicao);
+      
+        posicao += 8;
+        posicaoIndicador += 1;
       } else {
-        var foto = "FOTO " + x;
-        this.doc.text(foto, 8, posicao);
-      }    
-       
-      this.doc.text(this.laudosFotos[x].descricaoLaudo.descricao, 28, posicao);
-     
-      posicao += 8;
+        this.novaTerceiraPagina = true;
+        this.laudosFotosQuantidadeTerceiraPagina = x;
+      }
     }
 
    //COMENTÁRIOS / OBSERVAÇÃO DA INSPEÇÃO
