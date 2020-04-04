@@ -47,6 +47,9 @@ export class InspecaoRecebimentoComponent implements OnInit {
   laudosFotosQuantidadeTerceiraPagina: number = 1;
   novaTerceiraPagina:boolean = false;
 
+  quantidadePaginas:number = 0;
+  paginaCorrente:number = 1;
+
   doc = new jsPDF();
 
   constructor(
@@ -185,7 +188,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     var cliente = "data:image/jpg;charset=utf-8;base64, " + this.inspecao.equipamento.cliente.imagem;
    
     
-
+    this.doc.setLineWidth(0.5);
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(5, 5, 55, 18, "FD");
@@ -766,6 +769,31 @@ export class InspecaoRecebimentoComponent implements OnInit {
       this.posicaoFoto++;
     }
   }
+
+  var pagina2 = 0;
+  var pagina3 = 1;
+
+
+  for(var y=0; y<=x; y++){
+
+    if(y > 4){
+      if(y % 4 == 0){
+        pagina2++;
+      }
+    }
+
+   if(y > 17){
+     if(y % 17 == 0){
+      pagina3++;
+     }
+   }
+    
+  }
+
+  this.quantidadePaginas = 1 + pagina2 + pagina3;
+
+  console.log('paginas', this.quantidadePaginas);
+
   
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 0);
@@ -807,16 +835,13 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.rect(5, 284, 202, 11);
     this.doc.setFontSize(7);
     this.doc.setFontStyle("bold");
-    this.doc.text("p. 1/3", 105, 294, null, null, "center");
+    this.doc.text("p. " + this.paginaCorrente++ + "/" + this.quantidadePaginas, 105, 294, null, null, "center");
 
     var valor = 1;
    if(this.laudosFotos.length >= 4){
      do{
       this.segundaPagina(technipFmc, cliente);
-      console.log('pagina', valor++);
-      console.log('laudosFotos', this.laudosFotos.length);
-      console.log('laudosFotosQuantidadeSegundaPagina', this.laudosFotosQuantidadeSegundaPagina);
-     }
+      }
      while(this.laudosFotos.length > this.laudosFotosQuantidadeSegundaPagina);    
    } 
  
@@ -825,6 +850,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
    }
    while(this.novaTerceiraPagina);
     
+   this.quantidadePaginas = this.paginaCorrente;
    
 
     this.doc.save("Relatorio.pdf");
@@ -858,6 +884,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
   segundaPagina(technipFmc, cliente){
     this.doc.addPage();
     
+    this.doc.setLineWidth(0.5);
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(5, 5, 55, 12, "FD");
@@ -938,7 +965,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.text(this.inspecao.equipamento.cliente.nome, 42, 22, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
-    this.doc.rect(65, 17, 37, 6, "FD");
+    this.doc.rect(65, 17, 38, 6, "FD");
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000");
@@ -946,7 +973,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.text("Contrato Jurídico:", 68, 22);
 
     this.doc.setFillColor(255, 255, 255);
-    this.doc.rect(102, 17, 44, 6, "FD");
+    this.doc.rect(103, 17, 44, 6, "FD");
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
@@ -1139,7 +1166,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setLineWidth(0.5);
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 0);
-    this.doc.rect(5, 41, 202, 7, "FD");
+    this.doc.rect(5, 41, 202, 6, "FD");
     this.doc.setTextColor("00000");
     this.doc.text("FOTOS", 97, 46);
 
@@ -1148,46 +1175,46 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setLineWidth(0.5);
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 0);
-    this.doc.rect(11, 49, 95, 7, "FD");
+    this.doc.rect(11, 49, 95, 6, "FD");
     this.doc.setTextColor("00000");
     
     // quadrante de foto
 
-    this.doc.rect(11, 56, 95, 65);
+    this.doc.rect(11, 55, 95, 65);
     
     this.doc.setLineWidth(0.5);
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 0);
-    this.doc.rect(106, 49, 95, 7, "FD");
+    this.doc.rect(106, 49, 95, 6, "FD");
     this.doc.setTextColor("00000");
     
 
     // quadrante de foto
 
-    this.doc.rect(106, 56, 95, 65);
+    this.doc.rect(106, 55, 95, 65);
     
     // Corpo Fotos
 
     this.doc.setLineWidth(0.5);
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 0);
-    this.doc.rect(11, 121, 95, 7, "FD");
+    this.doc.rect(11, 120, 95, 6, "FD");
     this.doc.setTextColor("00000");
    
     // quadrante de foto
 
-    this.doc.rect(11, 128, 95, 65);
+    this.doc.rect(11, 126, 95, 65);
    
     this.doc.setLineWidth(0.5);
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 0);
-    this.doc.rect(106, 121, 95, 7, "FD");
+    this.doc.rect(106, 120, 95, 6, "FD");
     this.doc.setTextColor("00000");
     
 
     // quadrante de foto
 
-    this.doc.rect(106, 128, 95, 65);
+    this.doc.rect(106, 126, 95, 65);
     
 
 // ultima linha de fotos
@@ -1195,59 +1222,74 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setLineWidth(0.5);
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 0);
-    this.doc.rect(11, 193, 95, 6, "FD");
+    this.doc.rect(11, 191, 95, 6, "FD");
     this.doc.setTextColor("00000");
     
     // quadrante de foto
 
-    this.doc.rect(11, 199, 95, 65);
+    this.doc.rect(11, 197, 95, 65);
     
     this.doc.setLineWidth(0.5);
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 0);
-    this.doc.rect(106, 193, 95, 6, "FD");
+    this.doc.rect(106, 191, 95, 6, "FD");
     this.doc.setTextColor("00000");
     
 
     // quadrante de foto
 
-    this.doc.rect(106, 199, 95, 65);    
+    this.doc.rect(106, 197, 95, 65);    
 
     var posicaoEsquerdaDireita = "esquerda";
-    var posicaoLinha = 57;
+    var posicaoLinha = 55.5;
     var posicaoFotos = 54;
     var rodadas = 1;
     var valorx = 0;
     var x;
     
     for(x = this.laudosFotosQuantidadeSegundaPagina; x <= this.laudosFotos.length ; x++){  
-       
+        
      if((x + 1) <= this.laudosFotos.length){
         if(rodadas < 7){
           if(posicaoEsquerdaDireita == "esquerda" ){
               this.doc.text("FOTO " + x, 53, posicaoFotos);
-              this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.laudosFotos[x].imagem, "PNG", 12, posicaoLinha, 94, 64);
+              this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.laudosFotos[x].imagem, "PNG", 11.5, posicaoLinha, 94, 64);
               posicaoEsquerdaDireita = "direita";
             } 
             else  
             if(posicaoEsquerdaDireita == "direita"){
               this.doc.text("FOTO " + x, 145, posicaoFotos);
-             this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.laudosFotos[x].imagem, "PNG", 107, posicaoLinha, 94, 64);
-              posicaoLinha = posicaoLinha + 72;
-              posicaoFotos += 72;
+             this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.laudosFotos[x].imagem, "PNG", 106.5, posicaoLinha, 94, 64);
+              posicaoLinha = posicaoLinha + 71;
+              posicaoFotos += 71;
               posicaoEsquerdaDireita = "esquerda";
             } 
             this.fimFotos = false;
-            console.log("rodadas", rodadas);
-            console.log("valor do x", x);
-            console.log('imagem', this.laudosFotos[x]);
             
           } 
         if(rodadas == 6){
        
           valorx = x;
         }  
-      }         
+      } else {
+        console.log("valor x", x);
+        for(var y = rodadas; y <= 6; y++){
+          
+            if(posicaoEsquerdaDireita == "esquerda" ){
+              this.doc.text("FOTO " + x, 53, posicaoFotos);
+              posicaoEsquerdaDireita = "direita";
+            } 
+            else  
+            if(posicaoEsquerdaDireita == "direita"){
+              this.doc.text("FOTO " + x, 145, posicaoFotos);
+              posicaoLinha = posicaoLinha + 71;
+              posicaoFotos += 71;
+              posicaoEsquerdaDireita = "esquerda";
+            } 
+            x++;
+        }
+        
+      }      
       rodadas ++;
     }
     
@@ -1257,9 +1299,9 @@ export class InspecaoRecebimentoComponent implements OnInit {
       this.laudosFotosQuantidadeSegundaPagina = x;
     }
     
-    console.log("valor do x implementavel",this.laudosFotosQuantidadeSegundaPagina );
 
 // Assinatura
+    
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 0);
     this.doc.rect(5, 264, 101, 6, "FD");
@@ -1303,12 +1345,13 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontSize(7);
     this.doc.setFontStyle("bold");
     this.doc.setTextColor("0000");
-    this.doc.text("p. 2/3", 105, 294, null, null, "center");
+    this.doc.text("p. " + this.paginaCorrente++ + "/" + this.quantidadePaginas, 105, 294, null, null, "center");
 
   }
 
   ultimaPagina(technipFmc, cliente){
     this.doc.addPage();
+    this.doc.setLineWidth(0.5);
     this.doc.setDrawColor(0);
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(5, 5, 55, 12, "FD");
@@ -1389,7 +1432,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.text(this.inspecao.equipamento.cliente.nome, 42, 22, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
-    this.doc.rect(65, 17, 37, 6, "FD");
+    this.doc.rect(65, 17, 38, 6, "FD");
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000");
@@ -1397,7 +1440,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.text("Contrato Jurídico:", 68, 22);
 
     this.doc.setFillColor(255, 255, 255);
-    this.doc.rect(102, 17, 44, 6, "FD");
+    this.doc.rect(103, 17, 44, 6, "FD");
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
@@ -2015,6 +2058,6 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontSize(7);
     this.doc.setFontStyle("bold");
     this.doc.setTextColor("0000");
-    this.doc.text("p. 3/3", 105, 294, null, null, "center");
+    this.doc.text("p. " + this.paginaCorrente++ + "/" + this.quantidadePaginas, 105, 294, null, null, "center");
   }
 }
