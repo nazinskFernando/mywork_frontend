@@ -1,40 +1,5 @@
-<!-- Main content -->
+
 <section class="content">
-  <!-- Info boxes -->
-  <!--<div class="row">
-    <div class="col-md-4 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua"><i class=" fa fa-group"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Cadastro</span>
-          <span class="info-box-number">Visitantes</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 col-sm-6 col-xs-12">
-      <div [routerLink]="['/new_nota_fiscal']" class="info-box">
-        <span class="info-box-icon bg-red"><i class="fa fa-truck"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Cadastro</span>
-          <span class="info-box-number">Nota Fiscal/ Material</span>
-        </div>
-      </div>
-    </div>
-    <div class="clearfix visible-sm-block"></div>
-
-    <div class="col-md-4 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-green"><i class="fa fa-television"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Cadastro</span>
-          <span class="info-box-number">Entrada TI</span>
-        </div>
-      </div>
-    </div>
-  </div>-->
   <div class="box box-default">
     <div class="box-header with-border">
       <button type="button" [routerLink]="['/new_nota_fiscal']"  class="btn btn-success">Nova inspeção</button><br><br>
@@ -92,18 +57,14 @@
                   <strong>RT: </strong> {{notaFiscal.rt}}
                 </div>
               </div><br>
+              
               <div class="row">
                 <div class="col-md-12 col-xs-12">
-                  <div *ngFor="let equipamento of notaFiscal.equipamentos">
-                    <a (click)="fazerInspecao(equipamento.id, notaFiscal.id)" *ngIf="equipamento.isInspecionado" style="margin-left: 10px;" data-toggle="modal" data-target="#gerarOrdemModal" class="label label-success col-md-2 col-xs-10">
-                      {{equipamento.descricao}}<br>
-                      {{equipamento.partNumber}}<br>
-                      {{equipamento.serialNumber}}
-                    </a>
-                    <a (click)="fazerInspecao(equipamento.id, notaFiscal.id)"  *ngIf="!equipamento.isInspecionado" style="margin-left: 10px;" data-toggle="modal" data-target="#gerarOrdemModal" class="label label-warning col-md-2 col-xs-10">
-                      {{equipamento.descricao}}<br>
-                      {{equipamento.partNumber}}<br>
-                      {{equipamento.serialNumber}}
+                  <div *ngFor="let item of notaFiscal.equipamentos">
+                    <a  style="margin-left: 10px;" data-toggle="modal" data-target="#gerarOrdemModal" class="label label-success col-md-2 col-xs-10">
+                      {{item.descricao}}<br>
+                      {{item.partNumber}}<br>
+                      {{item.serialNumber}}
                     </a>
                   </div>
                 </div>

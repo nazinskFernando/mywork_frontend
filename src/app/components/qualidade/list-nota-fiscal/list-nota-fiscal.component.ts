@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListNotaFiscalComponent implements OnInit {
 
   notasFiscais = new Array<NotaFiscalDTO>();
-  ordemServico = new OrdemServicoDTO(null,'','','','','');
+  ordemServico = new OrdemServicoDTO();
   wbs:string = "WBS";
   ids:Ids;
   
@@ -43,7 +43,7 @@ export class ListNotaFiscalComponent implements OnInit {
   ListNotaFiscal(){
     this.notaFiscalService.findAll().subscribe((responseApi: NotaFiscalDTO[]) => {
       this.notasFiscais = responseApi;
-      console.log(this.notasFiscais);
+     
     }, error => { });
   }
 
@@ -51,14 +51,7 @@ export class ListNotaFiscalComponent implements OnInit {
     this.router.navigate(['/new_nota_fiscal',id]);
   }
 
-  fazerInspecao(idEquipamento: string, idNotaFiscal: string){
-    
-     let ids = new Ids(idEquipamento, idNotaFiscal);
-    console.log(idEquipamento + "," + idNotaFiscal);
-    //this.router.navigate(['/inspecao_recebimento',idEquipamento, idNotaFiscal]);
-    this.router.navigate(['/inspecao_recebimento', JSON.stringify(ids)]);
-   
-  }
+ 
 
   removerNotaFiscal(id: number){
     this.notaFiscalService.delete(id).subscribe((responseApi: NotaFiscalDTO[]) => {

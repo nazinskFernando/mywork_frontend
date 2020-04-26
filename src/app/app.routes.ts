@@ -23,7 +23,7 @@ export const ROUTES: Routes = [
     { path : 'inspecao-list', component: InspecaoListComponent, canActivate: [AuthGuard]},
     { path : 'gerar-inspecao', component: GerarInspecaoComponent, canActivate: [AuthGuard]},
     { path : 'my-alert', component: MyAlertComponent, canActivate: [AuthGuard]},
-    { path : 'inspecao_recebimento/:ids', component: InspecaoRecebimentoComponent, canActivate: [AuthGuard]},
+    { path : 'inspecao_recebimento/:id', component: InspecaoRecebimentoComponent, canActivate: [AuthGuard]},
     { path : 'new_nota_fiscal', component: NewNotaFiscalComponent, canActivate: [AuthGuard]},
     { path : 'new_nota_fiscal/:id', component: NewNotaFiscalComponent, canActivate: [AuthGuard]},
     { path : 'list_nota_fiscal', component: ListNotaFiscalComponent, canActivate: [AuthGuard]},

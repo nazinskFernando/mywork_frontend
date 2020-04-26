@@ -1,0 +1,15 @@
+.color-pendente{
+    border-left: 5px solid #eeeeee;
+}
+
+.color-analise{
+    border-left: 5px solid #605ca8;
+}
+
+.color-finalizado{
+    border-left: 5px solid #486925;
+}
+
+.color-interrompido{
+    border-left: 5px solid #d1182b;
+}

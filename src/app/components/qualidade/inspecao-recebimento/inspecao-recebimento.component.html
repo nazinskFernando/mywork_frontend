@@ -48,8 +48,8 @@
       </div>
       <div class="form-group col-md-2">
         <label>Data de Entrada</label>
-        <input disabled class="form-control" [(ngModel)]="inspecao.notaFiscal.dataEntrada" #nome="ngModel"
-          name="dataEntrada" id="dataEntrada" type="text" #date />
+          <input disabled type="date" class="form-control" [ngModel]="inspecao.notaFiscal.dataEntrada | date:'yyyy-MM-dd'" 
+                 (ngModelChange)="inspecao.notaFiscal.dataEntrada = $event">
       </div>
     </div>
     <div class="row">
@@ -125,12 +125,12 @@
                 <img [src]="'data:image/jpg;base64,' + laudo.imagem" height="200" width="250">
                 <label>
                   <input id="desvio" type="checkbox" [(ngModel)]="laudo.comDesvio"
-                    class="minimal">
+                    class="minimal" (ngModelChange)="updateLaudo(laudo)">
                   Desvio?
                 </label><br>
                 <label>
                   <input id="desvio" type="checkbox" 
-                    class="minimal" [(ngModel)]="laudo.usarRelatorio">
+                    class="minimal" [(ngModel)]="laudo.usarRelatorio" (ngModelChange)="updateLaudo(laudo)">
                   Usar no relatório?
                 </label>
               </label><input id="file-input" type="file" (change)="editarFoto($event)" />

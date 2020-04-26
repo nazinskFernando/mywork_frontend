@@ -17,6 +17,10 @@ export class NotaFiscalService {
     return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/${notaFiscal}`);
   }
 
+  findByNumero(notaFiscal: string) {
+    return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/numero_nota/${notaFiscal}`);
+  }
+
   findAll() {
     return this.http.get(`${API_CONFIG.baseUrl}/notafiscal`);
   }

@@ -1,10 +1,12 @@
-import { ResponseApi } from '../../../model/response-api';
+
+import { EquipamentoDTO } from './../../../model/DTO/Equipamento.DTO';
+import { ClienteDTO } from './../../../model/DTO/Cliente.DTO';
+import { ClienteService } from './../../../services/domain/cliente.service';
 import { ActivatedRoute } from '@angular/router';
 import { NotaFiscalDTO } from '../../../model/DTO/NotaFiscal.DTO';
 import { NotaFiscalService } from '../../../services/domain/nota-fiscal.service';
 import { EquipamentoService } from '../../../services/domain/equipamento.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EquipamentoDTO } from "../../../model/DTO/Equipamento.DTO";
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -17,50 +19,70 @@ export class NewNotaFiscalComponent implements OnInit {
   @ViewChild("form")
   form: NgForm
 
-  equipamento = new EquipamentoDTO("", "", "", "", null, null);
-  equipamentos = [];
+  notaFiscalId: string;
+
+  equipamento = new EquipamentoDTO();
+  equipamentos = new Array<EquipamentoDTO>();
+  equipamentosRemovido = new Array<EquipamentoDTO>();
+  equipamentosNovos = new Array<EquipamentoDTO>();
+  dataEntrada: Date;
+
   nome: string;
   modal = "modal";
   IsmodelShow: boolean = false;
   display = 'none';
-  notaFiscal = new NotaFiscalDTO('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', [],'', '', '', '', '');
+  notaFiscal = new NotaFiscalDTO();
+  clientes = new Array<ClienteDTO>();
+
 
   constructor(
     private equipamentoService: EquipamentoService, 
     private notaFiscalService: NotaFiscalService,
+    private clienteService: ClienteService,
     private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    let id: string = this.route.snapshot.params['id'];
-    if(id != undefined){
-      this.findById(id);
+    this.notaFiscalId = this.route.snapshot.params['id'];
+    if(this.notaFiscalId != undefined){
+      this.findById(this.notaFiscalId);
     }
+    this.findAllCliente();
+  }
+
+  findAllCliente(){
+    this.clienteService.findAll().subscribe((responseApi: ClienteDTO[]) => {
+      this.clientes = responseApi;       
+    }, err => { });
   }
 
   findById(id: string) {
     this.notaFiscalService.findById(id).subscribe((responseApi: NotaFiscalDTO) => {
-      this.notaFiscal = responseApi;
-      this.equipamentos = this.notaFiscal.equipamentos;          
+      this.notaFiscal = responseApi;           
+      // this.dataEntrada = new Date(this.notaFiscal.dataEntrada);
+      // console.log('data entrada ', this.dataEntrada);
     }, err => { });
   }
 
   fecharModalEquipamento() {
     this.display = 'none';
-    console.log("fecha modal");
   }
 
   abrirModalEquipamento() {
     this.display = 'block';
-    console.log("abre  modal");
   }
 
   incluirEquipamento() {
 
     if (this.equipamento.descricao != "") {
-      this.equipamentos.push(this.equipamento);
-      console.log(this.equipamentos[0].id);
-      this.equipamento = new EquipamentoDTO("", "", "", "", null, null);
+      for(var x=0; x < this.clientes.length; x++){
+        if(this.equipamento.cliente.id == this.clientes[x].id){
+          this.equipamento.cliente = this.clientes[x];
+        }
+      }   
+      this.notaFiscal.equipamentos.push(this.equipamento);     
+
+      this.equipamento = new EquipamentoDTO();
       this.fecharModalEquipamento();
     }
   }
@@ -72,21 +94,27 @@ export class NewNotaFiscalComponent implements OnInit {
     }, error => { });
   }
 
-  removeEquipamento(id: number) {
-    this.equipamentos.splice(id, 1);
+  removeEquipamento(index: number, id: string) {
+  
+    this.equipamentos.splice(index, 1);
   }
 
   salvarNota() {
-    this.notaFiscal.equipamentos = this.equipamentos;
-    console.log("Equipamentos: " + this.equipamentos + "Nota: " + this.notaFiscal);
-    if(this.notaFiscal.id != ""){
+        
+    // this.notaFiscal.dataEntrada  = this.dataEntrada.toString();
+    console.log('notaFiscal ', this.notaFiscal);
+    if(this.notaFiscal.id != undefined){
+      
       this.notaFiscalService.update(this.notaFiscal).subscribe((responseApi) => {
+        
+      }, error => { });
+    } else {
+      
+      
+      this.notaFiscalService.inserir(this.notaFiscal).subscribe((responseApi) => {
         console.log(responseApi);
       }, error => { });
-    }
-    this.notaFiscalService.inserir(this.notaFiscal).subscribe((responseApi) => {
-      console.log(responseApi);
-    }, error => { });
+    }   
 
   }
 

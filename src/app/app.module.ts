@@ -1,3 +1,4 @@
+import { ClienteService } from './services/domain/cliente.service';
 import { LaudoService } from './services/domain/laudo.service';
 import { InspecaoService } from './services/domain/inspecao.service';
 
@@ -50,7 +51,7 @@ import { NotaFiscalService } from './services/domain/nota-fiscal.service';
     InspecaoListComponent,
     GerarInspecaoComponent,
     MyAlertComponent,
-    InspecaoRecebimentoComponent,  
+    InspecaoRecebimentoComponent,
     FileSelectDirective, NewNotaFiscalComponent, ListNotaFiscalComponent  
   ],
   imports: [
@@ -70,6 +71,7 @@ import { NotaFiscalService } from './services/domain/nota-fiscal.service';
     NotaFiscalService,
     InspecaoService,
     LaudoService,
+    ClienteService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,

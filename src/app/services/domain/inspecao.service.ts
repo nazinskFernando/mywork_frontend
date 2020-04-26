@@ -40,7 +40,7 @@ export class InspecaoService {
   }
 
   findAll() {
-    return this.http.get(`${API_CONFIG.baseUrl}/inspecao`);
+    return this.http.get<InspecaoDTO[]>(`${API_CONFIG.baseUrl}/inspecao`);
   }
 
   findByEquipamentoAndNfId(idEquipamento: string, idNotaFiscal: string){
