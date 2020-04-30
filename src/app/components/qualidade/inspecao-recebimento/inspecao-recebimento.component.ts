@@ -95,15 +95,13 @@ export class InspecaoRecebimentoComponent implements OnInit {
   }
 
   updateLaudo(laudo: LaudoDTO){
-    // console.log('laudo update', laudo);
     
     this.laudoService.update(laudo)
     .subscribe(
       (responseApi: LaudoDTO) => {
       },
       error => {}
-    );
-   
+    );   
   }
 
   convertData(data: string){

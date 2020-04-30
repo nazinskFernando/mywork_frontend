@@ -66,7 +66,8 @@ export class InspecaoListComponent implements OnInit {
   }
 
   incluirInspecao(){
-    this.inspecao.notaFiscal = this.notaFiscal;
+    this.inspecao.notaFiscal.id = this.notaFiscal.id;
+    console.log('inspecao', this.inspecao);
     this.insptecaoService.inserir(this.inspecao).subscribe((responseApi: NotaFiscalDTO) => {
     
     }, error => { });
