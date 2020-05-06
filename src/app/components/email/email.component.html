@@ -1,0 +1,89 @@
+<div class="info-box" *ngFor="let item of clientes; let i = index">
+  <div class="info-box">
+    <span class="info-box-icon bg-aqua"
+      ><i class="ion ion-ios-gear-outline"></i
+    ></span>
+
+    <div class="info-box-content">
+      <div class="row justify-content-around">
+        <div class="col-md-8">
+          <span class="info-box-text">{{ item.nome }}</span>
+        </div>
+        <div class="col-md-3">
+          <button
+            (click)="atribuirCliente(item)"
+            type="button"
+            class="btn btn-default"
+            data-toggle="modal"
+            data-target="#modal-default"
+          >
+            Inserir
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span *ngFor="let email of item.emailsClientes" class="badge badge-primary">
+    {{ email.email }}
+    <span
+      ><a class="btn" (click)="delete(email.id)">
+        <i class="fa fa-remove" style="color: white;"></i>
+      </a>
+    </span>
+  </span>
+</div>
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal(); $event.preventDefault()"
+          #closeBtn
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Inserir E-mail</h4>
+      </div>
+      <div class="modal-body">
+        <div class="input-group input-group-sm">
+          <input type="text" [(ngModel)]="email.email" class="form-control" />
+          <span class="input-group-btn">
+            <button
+              type="button"
+              (click)="inserir()"
+              class="btn btn-info btn-flat"
+            >
+              Inserir
+            </button>
+          </span>
+        </div>
+        <span
+          *ngFor="let email of cliente.emailsClientes"
+          class="badge badge-primary"
+        >
+          {{ email.email }}
+          <span
+            ><a class="btn" (click)="deleteComCliente(email.id)">
+              <i class="fa fa-remove" style="color: white;"></i>
+            </a>
+          </span>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          (click)="closeModal(); $event.preventDefault()"
+          class="btn btn-default pull-left"
+        >
+          Fechar
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

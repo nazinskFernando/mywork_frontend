@@ -1,3 +1,4 @@
+import { Usuario } from './../model/DTO/Usuario.DTO';
 import { SharedService } from './shared.service';
 import { User } from './../model/user.model';
 import { StorageService } from './storage.service';
@@ -7,7 +8,6 @@ import { HttpClient } from '@angular/common/http';
 import { API_CONFIG } from '../config/api.config';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
-import { NewUser } from '../model/DTO/newUser.DTO';
 
 @Injectable()
 export class UserService {
@@ -58,7 +58,7 @@ export class UserService {
         this.storage.setLocalUser(null);
     }
 
-    createOrUpdate(user: NewUser) {
+    createOrUpdate(user: Usuario) {
         /*return this.http.post(
             `${API_CONFIG.baseUrl}/usuarios`,
             user);*/
@@ -74,7 +74,7 @@ export class UserService {
     }
 
     findById(id: string) {
-        return this.http.get(`${API_CONFIG.baseUrl}/usuarios/${id}`);
+        return this.http.get<Usuario>(`${API_CONFIG.baseUrl}/usuarios/${id}`);
     }
 
     delete(id: string) {

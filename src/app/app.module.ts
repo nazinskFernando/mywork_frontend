@@ -1,3 +1,4 @@
+
 import { ClienteService } from './services/domain/cliente.service';
 import { LaudoService } from './services/domain/laudo.service';
 import { InspecaoService } from './services/domain/inspecao.service';
@@ -23,7 +24,6 @@ import { routes } from './app.routes';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { UserNewComponent } from './components/security/user-new/user-new.component';
 import { UserListComponent } from './components/security/user-list/user-list.component';
 import { FormDebugComponent } from './form-debug/form-debug.component';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
@@ -35,6 +35,9 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { NewNotaFiscalComponent } from './components/qualidade/new-nota-fiscal/new-nota-fiscal.component';
 import { ListNotaFiscalComponent } from './components/qualidade/list-nota-fiscal/list-nota-fiscal.component';
 import { NotaFiscalService } from './services/domain/nota-fiscal.service';
+import { EmailComponent } from './components/email/email.component';
+import { EmailService } from './services/domain/email.service';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +47,6 @@ import { NotaFiscalService } from './services/domain/nota-fiscal.service';
     FooterComponent,
     LoginComponent,
     HomeComponent,
-    UserNewComponent,
     UserListComponent,
     FormDebugComponent,
     LoadingSpinnerComponent,
@@ -52,7 +54,7 @@ import { NotaFiscalService } from './services/domain/nota-fiscal.service';
     GerarInspecaoComponent,
     MyAlertComponent,
     InspecaoRecebimentoComponent,
-    FileSelectDirective, NewNotaFiscalComponent, ListNotaFiscalComponent  
+    FileSelectDirective, NewNotaFiscalComponent, ListNotaFiscalComponent, EmailComponent  
   ],
   imports: [
     BrowserModule,
@@ -72,6 +74,7 @@ import { NotaFiscalService } from './services/domain/nota-fiscal.service';
     InspecaoService,
     LaudoService,
     ClienteService,
+    EmailService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,

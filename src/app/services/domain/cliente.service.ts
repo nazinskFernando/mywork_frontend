@@ -12,4 +12,8 @@ export class ClienteService {
   findAll(){
     return this.http.get<ClienteDTO[]>(`${API_CONFIG.baseUrl}/cliente`);
   } 
+
+  findById(id: string){
+    return this.http.get<ClienteDTO>(`${API_CONFIG.baseUrl}/cliente/${id}`);
+  } 
 }

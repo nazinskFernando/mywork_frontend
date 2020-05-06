@@ -47,7 +47,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     handle403() {
-        this.storage.setLocalUser(null);
+        //this.storage.setLocalUser(null);
         alert("Transação não autorizada");
     }
 
