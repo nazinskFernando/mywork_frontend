@@ -1,5 +1,7 @@
 
-<section class="content">
+<app-loading *ngIf="!loading"></app-loading>
+
+<section *ngIf="loading" class="content">
   <div class="box box-default">
     <div class="box-header with-border">
       <button type="button" [routerLink]="['/new_nota_fiscal']"  class="btn btn-success">Nova inspeção</button><br><br>

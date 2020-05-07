@@ -1,197 +1,382 @@
-<div class="row">
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Usuarios</h3>
-                <div class="box-tools">
-                    <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+<app-loading *ngIf="!loading"></app-loading>
+<section *ngIf="loading" class="content">
+  
+    <div class="box box-default">
+      <div class="box-header">
+        <h3 class="box-title">Usuarios</h3>
+      </div>
 
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-novo">
-                    Criar novo usuário
-                 </button>
-                 <div [ngClass]="classCss" role="alert" *ngIf="message">
-                    <strong>{{ message.text }}</strong>
-                </div>
-                <table class="table table-hover">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th style="width: 10px">&nbsp;</th>
-                        <th style="width: 10px">&nbsp;</th>
-                    </tr>
-                    <tr *ngFor="let item of usuarios">
-                        <td>{{item.id}}</td>
-                        <td>{{item.nome}}</td>
-                        <td>{{item.email}}</td>
-                        <td>
-                            <button 
-                                type="button" 
-                                class="btn btn-block btn-info btn-sm" 
-                                data-toggle="modal" 
-                                data-target="#modal-editar"
-                                    (click)="findById(item.id)">
-                                    Editar
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-block btn-danger btn-sm"
-                                (click)="delete(item.id)">Apagar</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="" (click)="setPreviousPage($event)">&laquo;</a></li>
-                    <li *ngFor="let p of pages; let i=index">
-                        <a [ngClass]="{'pagination-focus':i==page}" href="" (click)="setPage(i,$event)">{{i+1}}</a>
-                    </li>
-                    <li><a href="" (click)="setNextPage($event)">&raquo;</a></li>
-                </ul>
-            </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#modal-novo"
+        >
+          Criar novo usuário
+        </button>
+        <div [ngClass]="classCss" role="alert" *ngIf="message">
+          <strong>{{ message.text }}</strong>
         </div>
+        <table class="table table-hover">
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th style="width: 10px;">&nbsp;</th>
+            <th style="width: 10px;">&nbsp;</th>
+          </tr>
+          <tr *ngFor="let item of usuarios">
+            <td>{{ item.id }}</td>
+            <td>{{ item.nome }}</td>
+            <td>{{ item.email }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-block btn-info btn-sm"
+                data-toggle="modal"
+                data-target="#modal-editar"
+                (click)="findById(item.id)"
+              >
+                Editar
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-block btn-danger btn-sm"
+                (click)="delete(item.id)"
+              >
+                Apagar
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+          <li><a href="" (click)="setPreviousPage($event)">&laquo;</a></li>
+          <li *ngFor="let p of pages; let i = index">
+            <a
+              [ngClass]="{ 'pagination-focus': i == page }"
+              href=""
+              (click)="setPage(i, $event)"
+              >{{ i + 1 }}</a
+            >
+          </li>
+          <li><a href="" (click)="setNextPage($event)">&raquo;</a></li>
+        </ul>
+      </div>
     </div>
-</div>
+</section>
 <!--------------------------------------novo usuario--------------------------->
 <div class="modal fade" id="modal-novo">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" (click)="closeModal(); $event.preventDefault()"  #closeBtn aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Usuário</h4>
-        </div>
-        <div class="modal-body">
-            <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()">
-                
-                <div class="box-body">
-                    <div class="form-group" [ngClass]="getFormGroupClass(nome.invalid, nome.dirty)">
-                        <label for="inputNome" class="col-sm-2 control-label">Nome</label>
-                        <div class="col-sm-10">
-                            <input type="email" [(ngModel)]="usuario.nome" name="nome" class="form-control" id="inputNome"
-                                #nome="ngModel" placeholder="Nome" nome>
-                            <span class="help-block" *ngIf="nome.invalid && nome.dirty">E-mail é inválido</span>
-                        </div>
-                    </div>
-                    <div class="form-group" [ngClass]="getFormGroupClass(cpfOuCnpj.invalid, cpfOuCnpj.dirty)">
-                        <label for="inputCpfOuCnpj" class="col-sm-2 control-label">CPF</label>
-                        <div class="col-sm-10">
-                            <input type="cpf" [(ngModel)]="usuario.cpfOuCnpj" name="cpfOuCnpj" class="form-control"
-                                id="inputCpfOuCnpj" #cpfOuCnpj="ngModel" placeholder="CPF" cpfOuCnpj>
-                            <span class="help-block" *ngIf="cpfOuCnpj.invalid && cpfOuCnpj.dirty">CPF inválido</span>
-                        </div>
-                    </div>
-                    <div class="form-group" [ngClass]="getFormGroupClass(email.invalid, email.dirty)">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" [(ngModel)]="usuario.email" name="email" class="form-control"
-                                id="inputEmail3" #email="ngModel" placeholder="Email" email>
-                            <span class="help-block" *ngIf="email.invalid && email.dirty">E-mail é inválido</span>
-                        </div>
-                    </div>
-                    <div [hidden]="usuario.id != null" class="form-group" [ngClass]="getFormGroupClass(password.invalid, password.dirty)">
-                        <label for="inputPassword" class="col-sm-2 control-label">Senha</label>
-                        <div class="col-sm-10">
-                            <input type="Password" [(ngModel)]="usuario.senha" class="form-control" name="password"
-                                id="inputPassword" #password="ngModel" placeholder="Password" required>
-                            <span class="help-block" *ngIf="password.invalid && password.dirty">Password é necessário</span>
-                        </div>
-                    </div>
-                    <div class="form-group" [ngClass]="getFormGroupClass(tipo.invalid, tipo.dirty)">
-                        <label for="inputTipo" class="col-sm-2 control-label">Tipo usuário</label>
-                        <div class="col-sm-10">
-                            <select [(ngModel)]="usuario.tipo" class="form-control select2" name="tipo" id="inputTipo"
-                                #tipo="ngModel" style="width: 100%" required>
-                                <option [selected]="usuario.tipo == '1'" value="1">Administrador</option>
-                                <option [selected]="usuario.tipo == '2'" value="2">Inspetor</option>
-                            </select>
-                            <span class="help-block" *ngIf="tipo.invalid && tipo.dirty">Tipo é necessário</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-                <div class="modal-footer">
-                    <button (click)="closeModal(); $event.preventDefault()" class="btn btn-default">Cancelar</button>
-                    <button type="submit"  [disabled]="!form.valid" class="btn btn-info pull-right">Criar</button>
-                </div>
-            </form>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="closeModal(); $event.preventDefault()"
+          #closeBtn
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Usuário</h4>
       </div>
-      <!-- /.modal-content -->
+      <div class="modal-body">
+        <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()">
+          <div class="box-body">
+            <div
+              class="form-group"
+              [ngClass]="getFormGroupClass(nome.invalid, nome.dirty)"
+            >
+              <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+              <div class="col-sm-10">
+                <input
+                  type="email"
+                  [(ngModel)]="usuario.nome"
+                  name="nome"
+                  class="form-control"
+                  id="inputNome"
+                  #nome="ngModel"
+                  placeholder="Nome"
+                  nome
+                />
+                <span class="help-block" *ngIf="nome.invalid && nome.dirty"
+                  >E-mail é inválido</span
+                >
+              </div>
+            </div>
+            <div
+              class="form-group"
+              [ngClass]="getFormGroupClass(cpfOuCnpj.invalid, cpfOuCnpj.dirty)"
+            >
+              <label for="inputCpfOuCnpj" class="col-sm-2 control-label"
+                >CPF</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="cpf"
+                  [(ngModel)]="usuario.cpfOuCnpj"
+                  name="cpfOuCnpj"
+                  class="form-control"
+                  id="inputCpfOuCnpj"
+                  #cpfOuCnpj="ngModel"
+                  placeholder="CPF"
+                  cpfOuCnpj
+                />
+                <span
+                  class="help-block"
+                  *ngIf="cpfOuCnpj.invalid && cpfOuCnpj.dirty"
+                  >CPF inválido</span
+                >
+              </div>
+            </div>
+            <div
+              class="form-group"
+              [ngClass]="getFormGroupClass(email.invalid, email.dirty)"
+            >
+              <label for="inputEmail3" class="col-sm-2 control-label"
+                >Email</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="email"
+                  [(ngModel)]="usuario.email"
+                  name="email"
+                  class="form-control"
+                  id="inputEmail3"
+                  #email="ngModel"
+                  placeholder="Email"
+                  email
+                />
+                <span class="help-block" *ngIf="email.invalid && email.dirty"
+                  >E-mail é inválido</span
+                >
+              </div>
+            </div>
+            <div
+              [hidden]="usuario.id != null"
+              class="form-group"
+              [ngClass]="getFormGroupClass(password.invalid, password.dirty)"
+            >
+              <label for="inputPassword" class="col-sm-2 control-label"
+                >Senha</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="Password"
+                  [(ngModel)]="usuario.senha"
+                  class="form-control"
+                  name="password"
+                  id="inputPassword"
+                  #password="ngModel"
+                  placeholder="Password"
+                  required
+                />
+                <span
+                  class="help-block"
+                  *ngIf="password.invalid && password.dirty"
+                  >Password é necessário</span
+                >
+              </div>
+            </div>
+            <div
+              class="form-group"
+              [ngClass]="getFormGroupClass(tipo.invalid, tipo.dirty)"
+            >
+              <label for="inputTipo" class="col-sm-2 control-label"
+                >Tipo usuário</label
+              >
+              <div class="col-sm-10">
+                <select
+                  [(ngModel)]="usuario.tipo"
+                  class="form-control select2"
+                  name="tipo"
+                  id="inputTipo"
+                  #tipo="ngModel"
+                  style="width: 100%;"
+                  required
+                >
+                  <option [selected]="usuario.tipo == '1'" value="1"
+                    >Administrador</option
+                  >
+                  <option [selected]="usuario.tipo == '2'" value="2"
+                    >Inspetor</option
+                  >
+                </select>
+                <span class="help-block" *ngIf="tipo.invalid && tipo.dirty"
+                  >Tipo é necessário</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="modal-footer">
+            <button
+              (click)="closeModal(); $event.preventDefault()"
+              class="btn btn-default"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              [disabled]="!form.valid"
+              class="btn btn-info pull-right"
+            >
+              Criar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal-content -->
   </div>
+  <!-- /.modal-dialog -->
+</div>
 
-
-  <!--------------------------------------Editar usuario--------------------------->
+<!--------------------------------------Editar usuario--------------------------->
 <div class="modal fade" id="modal-editar">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" (click)="closeModal(); $event.preventDefault()"  #closeBtn2 aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Usuário</h4>
-        </div>
-        <div class="modal-body">
-            <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()">
-                
-                <div class="box-body">
-                    <div class="form-group" [ngClass]="getFormGroupClass(nome.invalid, nome.dirty)">
-                        <label for="inputNome" class="col-sm-2 control-label">Nome</label>
-                        <div class="col-sm-10">
-                            <input type="email" [(ngModel)]="usuario.nome" name="nome" class="form-control" id="inputNome"
-                                #nome="ngModel" placeholder="Nome" nome>
-                            <span class="help-block" *ngIf="nome.invalid && nome.dirty">E-mail é inválido</span>
-                        </div>
-                    </div>
-                    <div class="form-group" [ngClass]="getFormGroupClass(cpfOuCnpj.invalid, cpfOuCnpj.dirty)">
-                        <label for="inputCpfOuCnpj" class="col-sm-2 control-label">CPF</label>
-                        <div class="col-sm-10">
-                            <input type="cpf" [(ngModel)]="usuario.cpfOuCnpj" name="cpfOuCnpj" class="form-control"
-                                id="inputCpfOuCnpj" #cpfOuCnpj="ngModel" placeholder="CPF" cpfOuCnpj>
-                            <span class="help-block" *ngIf="cpfOuCnpj.invalid && cpfOuCnpj.dirty">CPF inválido</span>
-                        </div>
-                    </div>
-                    <div class="form-group" [ngClass]="getFormGroupClass(email.invalid, email.dirty)">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" [(ngModel)]="usuario.email" name="email" class="form-control"
-                                id="inputEmail3" #email="ngModel" placeholder="Email" email>
-                            <span class="help-block" *ngIf="email.invalid && email.dirty">E-mail é inválido</span>
-                        </div>
-                    </div>
-                    <div class="form-group" [ngClass]="getFormGroupClass(tipo.invalid, tipo.dirty)">
-                        <label for="inputTipo" class="col-sm-2 control-label">Tipo usuário</label>
-                        <div class="col-sm-10">
-                            <select [(ngModel)]="usuario.tipo" class="form-control select2" name="tipo" id="inputTipo"
-                                #tipo="ngModel" style="width: 100%">
-                                <option [selected]="usuario.perfis[0] == 'ADMIN'" value="1">Administrador</option>
-                                <option [selected]="usuario.perfis[0]  == 'INSPETOR'" value="2">Inspetor</option>
-                            </select>
-                            <span class="help-block" *ngIf="tipo.invalid && tipo.dirty">Tipo é necessário</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-                <div class="modal-footer">
-                    <button (click)="closeModal(); $event.preventDefault()" class="btn btn-default">Cancelar</button>
-                    <button type="submit"  [disabled]="!form.valid" class="btn btn-info pull-right">Criar</button>
-                </div>
-            </form>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="closeModal(); $event.preventDefault()"
+          #closeBtn2
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Usuário</h4>
       </div>
-      <!-- /.modal-content -->
+      <div class="modal-body">
+        <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()">
+          <div class="box-body">
+            <div
+              class="form-group"
+              [ngClass]="getFormGroupClass(nome.invalid, nome.dirty)"
+            >
+              <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+              <div class="col-sm-10">
+                <input
+                  type="email"
+                  [(ngModel)]="usuario.nome"
+                  name="nome"
+                  class="form-control"
+                  id="inputNome"
+                  #nome="ngModel"
+                  placeholder="Nome"
+                  nome
+                />
+                <span class="help-block" *ngIf="nome.invalid && nome.dirty"
+                  >E-mail é inválido</span
+                >
+              </div>
+            </div>
+            <div
+              class="form-group"
+              [ngClass]="getFormGroupClass(cpfOuCnpj.invalid, cpfOuCnpj.dirty)"
+            >
+              <label for="inputCpfOuCnpj" class="col-sm-2 control-label"
+                >CPF</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="cpf"
+                  [(ngModel)]="usuario.cpfOuCnpj"
+                  name="cpfOuCnpj"
+                  class="form-control"
+                  id="inputCpfOuCnpj"
+                  #cpfOuCnpj="ngModel"
+                  placeholder="CPF"
+                  cpfOuCnpj
+                />
+                <span
+                  class="help-block"
+                  *ngIf="cpfOuCnpj.invalid && cpfOuCnpj.dirty"
+                  >CPF inválido</span
+                >
+              </div>
+            </div>
+            <div
+              class="form-group"
+              [ngClass]="getFormGroupClass(email.invalid, email.dirty)"
+            >
+              <label for="inputEmail3" class="col-sm-2 control-label"
+                >Email</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="email"
+                  [(ngModel)]="usuario.email"
+                  name="email"
+                  class="form-control"
+                  id="inputEmail3"
+                  #email="ngModel"
+                  placeholder="Email"
+                  email
+                />
+                <span class="help-block" *ngIf="email.invalid && email.dirty"
+                  >E-mail é inválido</span
+                >
+              </div>
+            </div>
+            <div
+              class="form-group"
+              [ngClass]="getFormGroupClass(tipo.invalid, tipo.dirty)"
+            >
+              <label for="inputTipo" class="col-sm-2 control-label"
+                >Tipo usuário</label
+              >
+              <div class="col-sm-10">
+                <select
+                  [(ngModel)]="usuario.tipo"
+                  class="form-control select2"
+                  name="tipo"
+                  id="inputTipo"
+                  #tipo="ngModel"
+                  style="width: 100%;"
+                >
+                  <option [selected]="usuario.perfis[0] == 'ADMIN'" value="1"
+                    >Administrador</option
+                  >
+                  <option [selected]="usuario.perfis[0] == 'INSPETOR'" value="2"
+                    >Inspetor</option
+                  >
+                </select>
+                <span class="help-block" *ngIf="tipo.invalid && tipo.dirty"
+                  >Tipo é necessário</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="modal-footer">
+            <button
+              (click)="closeModal(); $event.preventDefault()"
+              class="btn btn-default"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              [disabled]="!form.valid"
+              class="btn btn-info pull-right"
+            >
+              Criar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal-content -->
   </div>
+  <!-- /.modal-dialog -->
+</div>

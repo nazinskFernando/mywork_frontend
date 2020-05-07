@@ -16,6 +16,7 @@ export class ListNotaFiscalComponent implements OnInit {
   ordemServico = new OrdemServicoDTO();
   wbs:string = "WBS";
   ids:Ids;
+  loading:boolean = false;
   
   constructor(
       public notaFiscalService: NotaFiscalService,
@@ -41,9 +42,10 @@ export class ListNotaFiscalComponent implements OnInit {
   }
 
   ListNotaFiscal(){
+    this.loading = false;
     this.notaFiscalService.findAll().subscribe((responseApi: NotaFiscalDTO[]) => {
       this.notasFiscais = responseApi;
-     
+      this.loading = true;
     }, error => { });
   }
 
@@ -54,6 +56,7 @@ export class ListNotaFiscalComponent implements OnInit {
  
 
   removerNotaFiscal(id: number){
+    this.loading = false;
     this.notaFiscalService.delete(id).subscribe((responseApi: NotaFiscalDTO[]) => {
     this.ListNotaFiscal();
     }, error => { });

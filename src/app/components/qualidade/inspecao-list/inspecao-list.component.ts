@@ -24,15 +24,17 @@ export class InspecaoListComponent implements OnInit {
   notaFiscal = new NotaFiscalDTO();
   equipamento = new EquipamentoDTO();
   idEquipamento: string;
+  loading:boolean = false;
 
   ngOnInit() {
     this.ListInspecao();
   }
 
   ListInspecao(){
+    this.loading = false;
     this.insptecaoService.findAll().subscribe((responseApi: InspecaoDTO[]) => {
       this.inspecoes = responseApi;
-     
+      this.loading = true;
     }, error => { });
   }
 
@@ -55,21 +57,25 @@ export class InspecaoListComponent implements OnInit {
   }
 
   pesquisarPorNota(){
+    this.loading = false; 
     this.notaFiscalService.findByNumero(this.numeroNotaFiscal).subscribe((responseApi: NotaFiscalDTO) => {
-      this.notaFiscal = responseApi;      
+      this.notaFiscal = responseApi;    
+      this.loading = true;  
     }, error => { });
   
   }
+
   onItemChange(equipamento: EquipamentoDTO){
     this.inspecao.equipamento = equipamento;
     
   }
 
-  incluirInspecao(){
+  incluirInspecao(){ 
+    this.loading = false; 
     this.inspecao.notaFiscal.id = this.notaFiscal.id;
     console.log('inspecao', this.inspecao);
-    this.insptecaoService.inserir(this.inspecao).subscribe((responseApi: NotaFiscalDTO) => {
-    
+    this.insptecaoService.inserir(this.inspecao).subscribe((responseApi) => {
+      this.ListInspecao();
     }, error => { });
 
   }

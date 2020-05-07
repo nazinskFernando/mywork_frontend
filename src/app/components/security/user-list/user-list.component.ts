@@ -27,6 +27,7 @@ export class UserListComponent implements OnInit {
   usuarios = new Array<Usuario>();
   usuario = new Usuario();
   showSpinner: boolean = true;
+  loading:boolean = false;
 
   constructor(
     private dialogService: DialogService,
@@ -48,16 +49,19 @@ export class UserListComponent implements OnInit {
   }
 
   findAll(page: number, count: number) {
+    this.loading = false;
     this.userService.findAll(page, count).subscribe(
       (responseApi: ResponseApi) => {
         this.usuarios = responseApi["content"];
         this.pages = new Array(responseApi["totalPages"]);
+        this.loading = true;
       },
       (error) => {}
     );
   }
 
   delete(id: string) {
+    this.loading = false;
     this.dialogService
       .confirm("Deseja realmente excluir?")
       .then((candelete: boolean) => {
@@ -75,6 +79,7 @@ export class UserListComponent implements OnInit {
   }
 
   setNextPage(event: any) {
+    this.loading = false;
     event.preventDefault();
     if (this.page < this.pages.length - 1) {
       this.page = this.page + 1;
@@ -83,6 +88,7 @@ export class UserListComponent implements OnInit {
   }
 
   setPreviousPage(event: any) {
+    this.loading = false;
     event.preventDefault();
     if (this.page > 0) {
       this.page = this.page - 1;
@@ -91,12 +97,14 @@ export class UserListComponent implements OnInit {
   }
 
   setPage(i, event: any) {
+    this.loading = false;
     event.preventDefault();
     this.page = i;
     this.findAll(this.page, this.count);
   }
 
   findById(id: string) {
+    this.loading = false;
     this.userService.findById(id).subscribe(
       (responseApi: Usuario) => {
         this.usuario = responseApi;
@@ -107,6 +115,7 @@ export class UserListComponent implements OnInit {
   }
 
   register() {
+    this.loading = false;
     this.message = null;
     console.log("newUsuario", this.usuario);
     this.userService.createOrUpdate(this.usuario).subscribe(
@@ -118,6 +127,7 @@ export class UserListComponent implements OnInit {
           text: "Registro criado com sucesso!",
         });
         this.usuario = new Usuario();
+        this.findAll(0, 2);
       },
       (error) => {
         this.showMessage({

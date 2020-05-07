@@ -26,7 +26,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserListComponent } from './components/security/user-list/user-list.component';
 import { FormDebugComponent } from './form-debug/form-debug.component';
-import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { InspecaoListComponent } from './components/qualidade/inspecao-list/inspecao-list.component';
 import { GerarInspecaoComponent } from './components/qualidade/gerar-inspecao/gerar-inspecao.component';
 import { MyAlertComponent } from './components/qualidade/my-alert/my-alert.component';
@@ -37,6 +36,7 @@ import { ListNotaFiscalComponent } from './components/qualidade/list-nota-fiscal
 import { NotaFiscalService } from './services/domain/nota-fiscal.service';
 import { EmailComponent } from './components/email/email.component';
 import { EmailService } from './services/domain/email.service';
+import { LoadingComponent } from './components/auxiliar/loading/loading.component';
 
 
 @NgModule({
@@ -49,12 +49,15 @@ import { EmailService } from './services/domain/email.service';
     HomeComponent,
     UserListComponent,
     FormDebugComponent,
-    LoadingSpinnerComponent,
     InspecaoListComponent,
     GerarInspecaoComponent,
     MyAlertComponent,
     InspecaoRecebimentoComponent,
-    FileSelectDirective, NewNotaFiscalComponent, ListNotaFiscalComponent, EmailComponent  
+    FileSelectDirective, 
+    NewNotaFiscalComponent, 
+    ListNotaFiscalComponent, 
+    EmailComponent, 
+    LoadingComponent  
   ],
   imports: [
     BrowserModule,
