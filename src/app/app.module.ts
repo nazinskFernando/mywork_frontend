@@ -30,7 +30,6 @@ import { InspecaoListComponent } from './components/qualidade/inspecao-list/insp
 import { GerarInspecaoComponent } from './components/qualidade/gerar-inspecao/gerar-inspecao.component';
 import { MyAlertComponent } from './components/qualidade/my-alert/my-alert.component';
 import { InspecaoRecebimentoComponent } from './components/qualidade/inspecao-recebimento/inspecao-recebimento.component';
-import { FileSelectDirective } from 'ng2-file-upload';
 import { NewNotaFiscalComponent } from './components/qualidade/new-nota-fiscal/new-nota-fiscal.component';
 import { ListNotaFiscalComponent } from './components/qualidade/list-nota-fiscal/list-nota-fiscal.component';
 import { NotaFiscalService } from './services/domain/nota-fiscal.service';
@@ -53,7 +52,6 @@ import { LoadingComponent } from './components/auxiliar/loading/loading.componen
     GerarInspecaoComponent,
     MyAlertComponent,
     InspecaoRecebimentoComponent,
-    FileSelectDirective, 
     NewNotaFiscalComponent, 
     ListNotaFiscalComponent, 
     EmailComponent, 
