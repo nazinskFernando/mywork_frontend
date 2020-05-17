@@ -44,13 +44,6 @@ export class LoginComponent implements OnInit {
       });    
   }
 
-  cancelLogin(){
-    this.message = '',
-    this.user = new User('', '');
-    window.location.href = '/login';
-    window.location.reload();
-  }
-
   getFormGroupClass(isInvalid:boolean, isDirty): {} {    return {
       'form-group' : true,
       'has-error' : isInvalid && isDirty,
