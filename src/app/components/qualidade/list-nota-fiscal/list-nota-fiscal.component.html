@@ -1,73 +1,140 @@
-
+<h1 class="Titulo">Notas Fiscais</h1>
 <app-loading *ngIf="!loading"></app-loading>
 
+<div class="row filtros" *ngIf="loading">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Transportadora</label>
+      <select [(ngModel)]="filtroTransportadora" class="form-control select2" style="width: 100%;">
+        <option  *ngFor="let item of filtros.transportadoras" [value]="item">{{item}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Setor destino</label>
+      <select [(ngModel)]="filtroSetorDestino" class="form-control select2" style="width: 100%;">
+        <option *ngFor="let item of filtros.setorDestinos; let i = index" [value]="item">{{item}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Cliente</label>
+      <select [(ngModel)]="filtrocliente" class="form-control select2" style="width: 100%;">
+        <option *ngFor="let item of clientes" [value]="item.id">{{item.nome}}</option>
+      </select>
+    </div>
+  </div>
+</div>
 <section *ngIf="loading" class="content">
   <div class="box box-default">
     <div class="box-header with-border">
-      <button type="button" [routerLink]="['/new_nota_fiscal']"  class="btn btn-success">Nova inspeção</button><br><br>
-      <h3 class="box-title">Notas fiscais</h3>
+      <button
+        type="button"
+        [routerLink]="['/new_nota_fiscal']"
+        class="btn btn-success btn-novo"
+      >
+        Nova inspeção</button
+      ><br /><br />
 
       <div class="box-tools pull-right">
         <div class="has-feedback">
-          <input type="text" class="form-control input-sm" placeholder="Procurar...">
+          <input
+            type="text"
+            class="form-control input-sm"
+            placeholder="Procurar..."
+          />
           <span class="glyphicon glyphicon-search form-control-feedback"></span>
         </div>
       </div>
     </div>
 
-    <div class="box-body notaFiscal " *ngFor="let notaFiscal of notasFiscais">
-      <div class="card mb-3 xs-3">
+    <div class="box-body notaFiscal" *ngFor="let notaFiscal of notasFiscais">
+      <div class="card">
         <div class="row no-gutters">
-          <div class="col-md-1 col-xs-4">
-            <span class="info-box-icon bg-red"><i class="fa fa-truck"></i></span>
-          </div>
-          <div class="col-md-11 col-xs-8">
+          <div class="col-md-12 col-xl-12">
             <div class="card-body">
-              <div class="row">
-                <div class="col-md-3 col-xs-12">
-                  <strong>Nota Fiscal: </strong>{{notaFiscal.numeroNotaFiscal}}
+              <div class="row linha-titulo">
+                <div class="col-md-4 col-xl-4 nota-fiscal-descricao">
+                  <p>
+                    <strong>Nota Fiscal: </strong
+                    >{{ notaFiscal.numeroNotaFiscal }}
+                  </p>
                 </div>
-                <div class="col-md-3 col-xs-12">
-                  <strong>Data de entrada: </strong>{{notaFiscal.dataEntrada}}
+
+                <div class="col-md-4 col-xl-4">
+                  <strong>Data de entrada: </strong>{{ notaFiscal.dataEntrada }}
                 </div>
-                <div class="col-md-4 col-xs-12">
-                  <strong>Origem: </strong>{{notaFiscal.origem}}
-                </div>
-                <div class="col-md-2 col-xs-12">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-info">Ação</button>
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+
+                <div class="col-md-4 col-xl-4">
+                  <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-acao">Ação</button>
+                    <button
+                      type="button"
+                      class="btn btn-acao dropdown-toggle"
+                      data-toggle="dropdown"
+                    >
                       <span class="caret"></span>
                       <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a style="cursor:pointer;" (click)="editarNotaFiscal(notaFiscal.id)">Editar</a></li>
-                      <li><a style="cursor:pointer;" (click)="removerNotaFiscal(notaFiscal.id)">Remover</a></li>
-                      <li><a style="cursor:pointer;">Aprovar</a></li>
+                      <li>
+                        <a
+                          style="cursor: pointer;"
+                          (click)="editarNotaFiscal(notaFiscal.id)"
+                          >Editar</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          style="cursor: pointer;"
+                          (click)="removerNotaFiscal(notaFiscal.id)"
+                          >Remover</a
+                        >
+                      </li>
+                      <li><a style="cursor: pointer;">Aprovar</a></li>
                     </ul>
                   </div>
                 </div>
-              </div><br>
-              <div class="row">
-                <div class="col-md-3 col-xs-12">
-                  <strong>Setor destino: </strong>{{notaFiscal.emissor}}
+              </div>
+
+              <div class="row conteudo-texto">
+                <div class="col-md-6 col-lg-6">
+                  <p>
+                    <strong>Setor destino: </strong>{{ notaFiscal.emissor }}
+                  </p>
                 </div>
-                <div class="col-md-3 col-xs-12">
-                  <i class="fa fa-truck"></i>: {{notaFiscal.transportadora}}
-                </div>               
-                <div class="col-md-3 col-xs-12">
-                  <strong>RT: </strong> {{notaFiscal.rt}}
+                <div class="col-md-6 col-lg-6">
+                  <p><strong>Origem: </strong>{{ notaFiscal.origem }}</p>
                 </div>
-              </div><br>
-              
-              <div class="row">
-                <div class="col-md-12 col-xs-12">
-                  <div *ngFor="let item of notaFiscal.equipamentos">
-                    <a  style="margin-left: 10px;" data-toggle="modal" data-target="#gerarOrdemModal" class="label label-success col-md-2 col-xs-10">
-                      {{item.descricao}}<br>
-                      {{item.partNumber}}<br>
-                      {{item.serialNumber}}
-                    </a>
+
+                <div class="col-md-6 col-lg-6">
+                  <p>
+                    <strong>Transportadora: </strong
+                    >{{ notaFiscal.transportadora }}
+                  </p>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                  <p><strong>RT: </strong> {{ notaFiscal.rt }}</p>
+                </div>
+              </div>
+
+              <div class="row equipamentos">
+                <div
+                  *ngFor="let item of notaFiscal.equipamentos"
+                  class="badge badge-primary col-md-4 col-lg-4 col-xl-4"
+                >
+                  <div class="col-md-12 col-lg-12 col-xl-12">
+                    <p><strong>DESCRIÇÃO: </strong>{{ item.descricao }}</p>
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6 col-xl-6">
+                        <p><strong>PN:</strong>{{ item.partNumber }}</p>
+                      </div>
+                      <div class="col-md-6 col-lg-6 col-xl-6">
+                        <p><strong>NS:</strong>{{ item.serialNumber }}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -75,8 +142,16 @@
           </div>
         </div>
       </div>
-
-    </div><br>
+    </div>
+    <div class="box-footer clearfix">
+      <ul class="pagination pagination-sm no-margin pull-right">
+        <li><a href="#">&laquo;</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ul>
+    </div>
   </div>
 </section>
 

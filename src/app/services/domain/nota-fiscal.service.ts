@@ -20,9 +20,12 @@ export class NotaFiscalService {
   findByNumero(notaFiscal: string) {
     return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/numero_nota/${notaFiscal}`);
   }
-
+  
+  getFiltros() {
+    return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/filtroTransportadora`);
+  }
   findAll() {
-    return this.http.get(`${API_CONFIG.baseUrl}/notafiscal`);
+    return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/page`);
   }
 
   inserir(notaFiscal : NotaFiscalDTO){
