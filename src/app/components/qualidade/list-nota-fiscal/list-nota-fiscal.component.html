@@ -5,24 +5,27 @@
   <div class="col-md-4">
     <div class="form-group">
       <label>Transportadora</label>
-      <select [(ngModel)]="filtroTransportadora" class="form-control select2" style="width: 100%;">
-        <option  *ngFor="let item of filtros.transportadoras" [value]="item">{{item}}</option>
+      <select [(ngModel)]="filtroTransportadora" (change)="filtrarTransportadora()" class="form-control select2" style="width: 100%;">
+        
+        <option  *ngFor="let item of filtros.transportadoras" [value]="item.nome">{{item.nome}}</option>
       </select>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>Setor destino</label>
-      <select [(ngModel)]="filtroSetorDestino" class="form-control select2" style="width: 100%;">
-        <option *ngFor="let item of filtros.setorDestinos; let i = index" [value]="item">{{item}}</option>
+      <select [(ngModel)]="filtroSetorDestino" (change)="filtrarSetorDestino()" class="form-control select2" style="width: 100%;">
+        
+        <option *ngFor="let item of filtros.setorDestinos; let i = index" [value]="item.nome">{{item.nome}}</option>
       </select>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>Cliente</label>
-      <select [(ngModel)]="filtrocliente" class="form-control select2" style="width: 100%;">
-        <option *ngFor="let item of clientes" [value]="item.id">{{item.nome}}</option>
+      <select [(ngModel)]="filtrocliente" (change)="filtrarCliente()"  class="form-control select2" style="width: 100%;">
+        
+        <option *ngFor="let item of filtros.clientes" [value]="item.nome">{{item.nome}}</option>
       </select>
     </div>
   </div>
@@ -44,6 +47,8 @@
             type="text"
             class="form-control input-sm"
             placeholder="Procurar..."
+            [(ngModel)]="filtroAll"
+            (change)="listNotaFiscalFiltroString()"
           />
           <span class="glyphicon glyphicon-search form-control-feedback"></span>
         </div>
@@ -64,7 +69,7 @@
                 </div>
 
                 <div class="col-md-4 col-xl-4">
-                  <strong>Data de entrada: </strong>{{ notaFiscal.dataEntrada }}
+                  <strong>Data de entrada: </strong>{{ notaFiscal.dataEntrada | date: 'dd/MM/yyyy' }}
                 </div>
 
                 <div class="col-md-4 col-xl-4">
@@ -102,7 +107,7 @@
               <div class="row conteudo-texto">
                 <div class="col-md-6 col-lg-6">
                   <p>
-                    <strong>Setor destino: </strong>{{ notaFiscal.emissor }}
+                    <strong>Setor destino: </strong>{{ notaFiscal.setorDestino }}
                   </p>
                 </div>
                 <div class="col-md-6 col-lg-6">
@@ -145,12 +150,16 @@
     </div>
     <div class="box-footer clearfix">
       <ul class="pagination pagination-sm no-margin pull-right">
-        <li><a href="#">&laquo;</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">&raquo;</a></li>
+        <li><a href="javascript:void(0)" (click)="paginar('anterior')">&laquo;</a></li>
+        <li><a href="javascript:void(0)" (click)="paginar('proximo')">&raquo;</a></li>
       </ul>
+      <!-- <ul class="pagination pagination-sm no-margin pull-right">
+        <li><a href="javascript:void(0)" (click)="paginar('anterior')">&laquo;</a></li>
+        <li><a href="javascript:void(0)" (click)="paginar(page)">{{page + 1 }}</a></li>
+        <li><a href="javascript:void(0)" (click)="paginar(page + 1)" *ngIf="totalPages >= page + 2" >{{page + 2}}</a></li>
+        <li><a href="javascript:void(0)" (click)="paginar(page + 2)" *ngIf="totalPages >= page + 3" >{{page + 3}}</a></li>
+        <li><a href="javascript:void(0)" (click)="paginar('proximo')">&raquo;</a></li>
+      </ul> -->
     </div>
   </div>
 </section>

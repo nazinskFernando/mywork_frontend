@@ -24,8 +24,17 @@ export class NotaFiscalService {
   getFiltros() {
     return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/filtroTransportadora`);
   }
-  findAll() {
-    return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/page`);
+
+  findAll(page, linesPage, orderBy, direction) {
+    return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/page?page=${page}&linesPage=${linesPage}&orderBy=${orderBy}&direction=${direction}`);
+  }
+
+  findAllFiltroString(page, linesPage, orderBy, direction, valor) {
+    return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/page/filterstring?page=${page}&linesPage=${linesPage}&orderBy=${orderBy}&direction=${direction}&valor=${valor}`);
+  }
+
+  findAllFilter(page, linesPage, orderBy, direction, transportadora, setorDestino, cliente) {
+    return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/page/filter?page=${page}&linesPage=${linesPage}&orderBy=${orderBy}&direction=${direction}&transportadora=${transportadora}&setorDestino=${setorDestino}&cliente=${cliente}`);
   }
 
   inserir(notaFiscal : NotaFiscalDTO){
