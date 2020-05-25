@@ -30,6 +30,7 @@ export class ListNotaFiscalComponent implements OnInit {
   page: number = 0;
   totalPages: number = 0;
   whatList: number = 0;
+  qtdPorPagina: number = 10;
 
   constructor(
     public notaFiscalService: NotaFiscalService,
@@ -48,7 +49,7 @@ export class ListNotaFiscalComponent implements OnInit {
 
   listNotaFiscal() {
     this.loading = false;
-    this.notaFiscalService.findAll(this.page, 1, "id", "ASC").subscribe(
+    this.notaFiscalService.findAll(this.page, this.qtdPorPagina, "id", "ASC").subscribe(
       (responseApi: NotaFiscalDTO[]) => {
         this.notasFiscais = responseApi["content"];
         this.page = responseApi["number"];
@@ -65,12 +66,23 @@ export class ListNotaFiscalComponent implements OnInit {
       this.page = valor;
     } else {
       switch (valor) {
-        case "proximo":
-          this.page++;
+        case "proximo":         
+        
+        console.log('page', this.page); 
+        console.log('totalPages', this.totalPages); 
+          if((this.page +1) >= this.totalPages){
+            this.page = this.totalPages - 1;           
+          } else {
+            this.page++;           
+          }
           break;
 
         case "anterior":
-          this.page--;
+          if(this.page == 0){
+            this.page = 0;
+          } else {
+            this.page--;
+          }          
           break;
       }
     }
@@ -124,7 +136,7 @@ export class ListNotaFiscalComponent implements OnInit {
     this.notaFiscalService
       .findAllFilter(
         this.page,
-        2,
+        this.qtdPorPagina,
         "id",
         "ASC",
         this.filtrosSelecionados.transportadora,
@@ -144,9 +156,12 @@ export class ListNotaFiscalComponent implements OnInit {
   }
 
   listNotaFiscalFiltroString() {
+    if(this.filtroAll == "" || this.filtroAll == null){
+      this.listNotaFiscal();
+    } else {
     this.loading = false;
     this.notaFiscalService
-      .findAllFiltroString(this.page, 2, "id", "ASC", this.filtroAll)
+      .findAllFiltroString(this.page, this.qtdPorPagina, "id", "ASC", this.filtroAll)
       .subscribe(
         (responseApi: NotaFiscalDTO[]) => {
           this.notasFiscais = responseApi["content"];
@@ -157,6 +172,7 @@ export class ListNotaFiscalComponent implements OnInit {
         },
         (error) => {}
       );
+    }
   }
 
   limparAutomatico() {

@@ -1,31 +1,55 @@
-<h1 class="Titulo">Notas Fiscais</h1>
+<div class="card-titulo">
+  <h1 class="Titulo">Notas Fiscais</h1>
+</div>
 <app-loading *ngIf="!loading"></app-loading>
 
 <div class="row filtros" *ngIf="loading">
   <div class="col-md-4">
     <div class="form-group">
       <label>Transportadora</label>
-      <select [(ngModel)]="filtroTransportadora" (change)="filtrarTransportadora()" class="form-control select2" style="width: 100%;">
-        
-        <option  *ngFor="let item of filtros.transportadoras" [value]="item.nome">{{item.nome}}</option>
+      <select
+        [(ngModel)]="filtroTransportadora"
+        (change)="filtrarTransportadora()"
+        class="form-control select2"
+        style="width: 100%;"
+      >
+        <option
+          *ngFor="let item of filtros.transportadoras"
+          [value]="item.nome"
+          >{{ item.nome }}</option
+        >
       </select>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>Setor destino</label>
-      <select [(ngModel)]="filtroSetorDestino" (change)="filtrarSetorDestino()" class="form-control select2" style="width: 100%;">
-        
-        <option *ngFor="let item of filtros.setorDestinos; let i = index" [value]="item.nome">{{item.nome}}</option>
+      <select
+        [(ngModel)]="filtroSetorDestino"
+        (change)="filtrarSetorDestino()"
+        class="form-control select2"
+        style="width: 100%;"
+      >
+        <option
+          *ngFor="let item of filtros.setorDestinos; let i = index"
+          [value]="item.nome"
+          >{{ item.nome }}</option
+        >
       </select>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label>Cliente</label>
-      <select [(ngModel)]="filtrocliente" (change)="filtrarCliente()"  class="form-control select2" style="width: 100%;">
-        
-        <option *ngFor="let item of filtros.clientes" [value]="item.nome">{{item.nome}}</option>
+      <select
+        [(ngModel)]="filtrocliente"
+        (change)="filtrarCliente()"
+        class="form-control select2"
+        style="width: 100%;"
+      >
+        <option *ngFor="let item of filtros.clientes" [value]="item.nome">{{
+          item.nome
+        }}</option>
       </select>
     </div>
   </div>
@@ -39,7 +63,7 @@
         class="btn btn-success btn-novo"
       >
         Nova inspeção</button
-      ><br /><br />
+      >
 
       <div class="box-tools pull-right">
         <div class="has-feedback">
@@ -69,7 +93,8 @@
                 </div>
 
                 <div class="col-md-4 col-xl-4">
-                  <strong>Data de entrada: </strong>{{ notaFiscal.dataEntrada | date: 'dd/MM/yyyy' }}
+                  <strong>Data de entrada: </strong
+                  >{{ notaFiscal.dataEntrada | date: "dd/MM/yyyy" }}
                 </div>
 
                 <div class="col-md-4 col-xl-4">
@@ -107,7 +132,8 @@
               <div class="row conteudo-texto">
                 <div class="col-md-6 col-lg-6">
                   <p>
-                    <strong>Setor destino: </strong>{{ notaFiscal.setorDestino }}
+                    <strong>Setor destino: </strong
+                    >{{ notaFiscal.setorDestino }}
                   </p>
                 </div>
                 <div class="col-md-6 col-lg-6">
@@ -150,8 +176,16 @@
     </div>
     <div class="box-footer clearfix">
       <ul class="pagination pagination-sm no-margin pull-right">
-        <li><a href="javascript:void(0)" (click)="paginar('anterior')">&laquo;</a></li>
-        <li><a href="javascript:void(0)" (click)="paginar('proximo')">&raquo;</a></li>
+        <li>
+          <a href="javascript:void(0)" (click)="paginar('anterior')">&laquo;</a>
+        </li>
+        <li *ngFor="let item of [].constructor(totalPages); let i = index">
+          <a href="javascript:void(0)" (click)="paginar(i)">{{ i + 1 }}</a>
+        </li>
+        <li *ngIf="totalPages > 4"><a>...</a></li>
+        <li>
+          <a href="javascript:void(0)" (click)="paginar('proximo')">&raquo;</a>
+        </li>
       </ul>
       <!-- <ul class="pagination pagination-sm no-margin pull-right">
         <li><a href="javascript:void(0)" (click)="paginar('anterior')">&laquo;</a></li>
