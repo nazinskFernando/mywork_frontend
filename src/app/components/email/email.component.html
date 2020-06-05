@@ -9,11 +9,11 @@
         <div class="col-md-8">
           <span class="info-box-text">{{ item.nome }}</span>
         </div>
-        <div class="col-md-3">
+        <div class="mr-auto">
           <button
             (click)="atribuirCliente(item)"
             type="button"
-            class="btn btn-default"
+            class="btn btn-success"
             data-toggle="modal"
             data-target="#modal-default"
           >
@@ -26,12 +26,16 @@
   <span *ngFor="let email of item.emailsClientes" class="badge badge-primary">
     {{ email.email }}
     <span
-      ><a class="btn" (click)="delete(email.id)">
-        <i class="fa fa-remove" style="color: white;"></i>
-      </a>
+      >
+        <i class="fa fa-remove" (click)="delete(email.id)" style="color: white;"></i>
+     
     </span>
   </span>
 </div>
+
+
+
+<!----------------Modal----------------------------------->
 <div class="modal fade" id="modal-default">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -67,9 +71,8 @@
         >
           {{ email.email }}
           <span
-            ><a class="btn" (click)="deleteComCliente(email.id)">
-              <i class="fa fa-remove" style="color: white;"></i>
-            </a>
+            >          <i class="fa fa-remove" (click)="deleteComCliente(email.id)" style="color: white;"></i>
+           
           </span>
         </span>
       </div>

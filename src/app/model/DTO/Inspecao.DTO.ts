@@ -12,7 +12,7 @@ export class InspecaoDTO {
         public notaFiscal = new NotaFiscalDTO();
         public dataInspecao: string;
         public statusInspecao: string;
-        public usuario: User;
+        public usuario?: User;
         public laudos = new Array<LaudoDTO>();
         public ordemServico = new OrdemServicoDTO();
         public lingadas = new Array<LingadaDTO>();

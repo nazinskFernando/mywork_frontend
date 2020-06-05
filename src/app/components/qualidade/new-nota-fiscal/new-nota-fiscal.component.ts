@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NotaFiscalDTO } from '../../../model/DTO/NotaFiscal.DTO';
 import { NotaFiscalService } from '../../../services/domain/nota-fiscal.service';
 import { EquipamentoService } from '../../../services/domain/equipamento.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -15,7 +15,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./new-nota-fiscal.component.css']
 })
 export class NewNotaFiscalComponent implements OnInit {
-
+  @ViewChild("closeBtn") closeBtn: ElementRef;
   @ViewChild("form")
   form: NgForm
 
@@ -64,14 +64,6 @@ export class NewNotaFiscalComponent implements OnInit {
     }, err => { });
   }
 
-  fecharModalEquipamento() {
-    this.display = 'none';
-  }
-
-  abrirModalEquipamento() {
-    this.display = 'block';
-  }
-
   incluirEquipamento() {
 
     if (this.equipamento.descricao != "") {
@@ -83,7 +75,7 @@ export class NewNotaFiscalComponent implements OnInit {
       this.notaFiscal.equipamentos.push(this.equipamento);     
 
       this.equipamento = new EquipamentoDTO();
-      this.fecharModalEquipamento();
+      this.closeModal();
     }
   }
 
@@ -116,6 +108,9 @@ export class NewNotaFiscalComponent implements OnInit {
       }, error => { });
     }   
 
+  }
+  closeModal(): void {
+    this.closeBtn.nativeElement.click();
   }
 
 }

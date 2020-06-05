@@ -5,3 +5,13 @@
 .modal-body{
     height: 400px;
 }
+.btn{
+    float: right;
+    margin-right: 20px;
+}
+
+.badge{
+    height: 30px;
+    padding-top: 8px;
+    margin-bottom: 10px;
+}

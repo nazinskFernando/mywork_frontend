@@ -1,15 +1,63 @@
-.color-pendente{
-    border-left: 5px solid #eeeeee;
+.inspecionado{
+  font-size: 12px;
+}
+.box-footer{
+  padding: 0;
+}
+.btn-status{
+  width: 150px;
+}
+.div-btn{
+  direction: rtl;
+}
+.card-titulo {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  background-color: white;
+  margin-top: -27px;
+}
+.Titulo {
+  font-weight: 700;
+  background-color: white;
 }
 
-.color-analise{
-    border-left: 5px solid #605ca8;
+.filtros {
+  margin-top: 50px;
+  width: 100%;
 }
 
-.color-finalizado{
-    border-left: 5px solid #486925;
+.box {
+  background: rgba(251, 249, 249, 0.86);
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  box-sizing: border-box;
+  border-radius: 10px;
 }
 
-.color-interrompido{
-    border-left: 5px solid #d1182b;
+.box-header.with-border {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+  height: 60px;
+}
+.container {
+  width: 100%;
+}
+.btn-novo {
+  height: 34px;
+  background: #99cc66;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.13);
+  border-radius: 5px;
+}
+
+.btn-pesquisar{
+  background: #99cc66;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.13);
+}
+
+.inspecoes {
+  background: #fefffd;
+  border: 1px solid rgba(0, 0, 0, 0.11);
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.13);
+  border-radius: 10px;
+  margin: 30px;
+  width: auto;
 }

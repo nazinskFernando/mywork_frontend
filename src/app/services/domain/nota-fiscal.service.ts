@@ -22,7 +22,7 @@ export class NotaFiscalService {
   }
   
   getFiltros() {
-    return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/filtroTransportadora`);
+    return this.http.get(`${API_CONFIG.baseUrl}/notafiscal/filtros`);
   }
 
   findAll(page, linesPage, orderBy, direction) {

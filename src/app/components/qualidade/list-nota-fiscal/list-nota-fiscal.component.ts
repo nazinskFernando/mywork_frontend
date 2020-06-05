@@ -49,7 +49,7 @@ export class ListNotaFiscalComponent implements OnInit {
 
   listNotaFiscal() {
     this.loading = false;
-    this.notaFiscalService.findAll(this.page, this.qtdPorPagina, "id", "ASC").subscribe(
+    this.notaFiscalService.findAll(this.page, this.qtdPorPagina, "id", "DESC").subscribe(
       (responseApi: NotaFiscalDTO[]) => {
         this.notasFiscais = responseApi["content"];
         this.page = responseApi["number"];
@@ -100,7 +100,6 @@ export class ListNotaFiscalComponent implements OnInit {
   }
 
   filtrarTransportadora() {
-    console.log("Transportadora", this.filtroTransportadora);
     if (this.filtroTransportadora == this.filtros.transportadoras[0].nome) {
       this.filtrosSelecionados.transportadora = "";
       this.limparAutomatico();
@@ -111,7 +110,6 @@ export class ListNotaFiscalComponent implements OnInit {
   }
 
   filtrarSetorDestino() {
-    console.log("filtroSetorDestino", this.filtroSetorDestino);
     if (this.filtroSetorDestino == this.filtros.setorDestinos[0].nome) {
       this.filtrosSelecionados.setorDestino = "";
       this.limparAutomatico();
@@ -161,7 +159,7 @@ export class ListNotaFiscalComponent implements OnInit {
     } else {
     this.loading = false;
     this.notaFiscalService
-      .findAllFiltroString(this.page, this.qtdPorPagina, "id", "ASC", this.filtroAll)
+      .findAllFiltroString(this.page, this.qtdPorPagina, "id", "DESC", this.filtroAll)
       .subscribe(
         (responseApi: NotaFiscalDTO[]) => {
           this.notasFiscais = responseApi["content"];
