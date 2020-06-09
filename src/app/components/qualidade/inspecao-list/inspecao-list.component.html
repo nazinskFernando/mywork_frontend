@@ -79,16 +79,17 @@
     <div
       *ngFor="let item of inspecoes"
       [ngStyle]="setStyle(item.statusInspecao)"
-      class="container box-body inspecoes"
+      class="container box-body inspecoes"      
     >
       <div class="card">
         <div class="row">
           <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
-            <p>
+            <a (click)="fazerInspecao(item.id)"
+            href="javascript:void(0)">
               <strong
                 ><p>{{ item.equipamento.descricao }}</p></strong
               >
-            </p>
+            </a>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 div-btn">
             <button

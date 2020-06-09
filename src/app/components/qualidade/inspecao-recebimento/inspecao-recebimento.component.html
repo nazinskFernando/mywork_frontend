@@ -26,6 +26,13 @@
   </div>
   <div class="box-body">
     <div class="row">
+      <div class="form-group col-md-12">
+        <label>Descrição</label>
+        <input disabled type="text" [(ngModel)]="inspecao.equipamento.descricao" #nome="ngModel"
+          name="descricao" id="descricao" class="form-control" placeholder="">
+      </div>
+    </div>
+    <div class="row">
       <div class="form-group col-md-2">
         <label>Nota fiscal</label>
         <input disabled type="number" [(ngModel)]="inspecao.notaFiscal.numeroNotaFiscal" #nome="ngModel"
@@ -55,7 +62,7 @@
     <div class="row">
       <div class="form-group col-md-2">
         <label>Part Number</label>
-        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.setorDestino" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.equipamento.partNumber" #nome="ngModel"
           name="setorDestino" id="setorDestino" class="form-control" placeholder="Logística">
       </div>
       <div class="form-group col-md-3">
@@ -65,19 +72,19 @@
       </div>
       <div class="form-group col-md-4">
         <label>Equipamento</label>
-        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.chaveNf" #nome="ngModel" name="chaveNf"
+        <input disabled type="text" [(ngModel)]="inspecao.equipamento.codEquipamento" #nome="ngModel" name="chaveNf"
           id="chaveNf" class="form-control" placeholder="3124523425342454525">
       </div>
       <div class="form-group col-md-3">
         <label>Contrato</label>
-        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.contrato" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.equipamento.contratoJuridico" #nome="ngModel"
           name="contrato" id="contrato" class="form-control" placeholder="31254525">
       </div>
     </div>
     <div class="row">
       <div class="form-group col-md-3">
         <label>Número Ordem</label>
-        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.numeroOrdem" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.ordemServico.numeroOrdem" #nome="ngModel"
           name="numeroOrdem" id="numeroOrdem" class="form-control" placeholder="212252">
       </div>
       <div class="form-group col-md-3">
@@ -87,22 +94,16 @@
       </div>
       <div class="form-group col-md-4">
         <label>Número Relatorio</label>
-        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.numeroRelatorio" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.ordemServico.numeroRelatorio" #nome="ngModel"
           name="numeroRelatorio" id="numeroRelatorio" class="form-control" placeholder="1745852">
       </div>
       <div class="form-group col-md-2">
         <label>Tempo Servico</label>
-        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.tempoServico" #nome="ngModel"
+        <input disabled type="text" [(ngModel)]="inspecao.ordemServico.tempoServico" #nome="ngModel"
           name="tempoServico" id="tempoServico" class="form-control" placeholder="1,5">
       </div>
     </div>
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label>Descrição</label>
-        <input disabled type="text" [(ngModel)]="inspecao.equipamento.descricao" #nome="ngModel"
-          name="descricao" id="descricao" class="form-control" placeholder="">
-      </div>
-    </div><br>
+    <br>
 
     <div class="box box-danger">
       <div class="box-header with-border" style="text-align: center;">
@@ -121,8 +122,8 @@
 
           <div class="form-group col-md-3" *ngFor="let laudo of inspecao.laudos">
             <div class="image-upload">
-              <label for="file-input">
-                <img [src]="'data:image/jpg;base64,' + laudo.imagem" height="200" width="250">
+              <label for="file-input">                
+                <img [src]="laudo.imagem" height="200" width="250">
                 <label>
                   <input id="desvio" type="checkbox" [(ngModel)]="laudo.comDesvio"
                     class="minimal" (ngModelChange)="updateLaudo(laudo)">
@@ -133,7 +134,7 @@
                     class="minimal" [(ngModel)]="laudo.usarRelatorio" (ngModelChange)="updateLaudo(laudo)">
                   Usar no relatório?
                 </label>
-              </label><input id="file-input" type="file" (change)="editarFoto($event)" />
+              </label>
               <textarea disabled
                 id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição" [(ngModel)]="laudo.descricaoLaudo.descricao">{{laudo.descricaoLaudo.descricao}}</textarea>
               <button type="button" class="btn btn-danger btn-xs" (click)="delete(laudo.id)">

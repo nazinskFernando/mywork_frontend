@@ -14,6 +14,7 @@ import { ActivatedRoute } from "@angular/router";
 import * as jsPDF from "jspdf";
 import { toUnicode } from "punycode";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 // const URL = '/api/';
@@ -35,7 +36,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
   equipamentoId: string;
   notaFiscalId: string;
   posicaoFoto:number = 0;
-  precisaSegundaPagina:boolean = false;
+  precisaSegundaPagina: boolean = false;
+  inspecaoRelatorio = new InspecaoDTO();
 
   isRelatorio: Boolean = false;
   laudosFotos = Array<LaudoDTO>();
@@ -56,7 +58,8 @@ export class InspecaoRecebimentoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private laudoService: LaudoService,
-    private inspecaoService: InspecaoService
+    private inspecaoService: InspecaoService,
+    private _sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -64,8 +67,9 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.inspecaoId= this.route.snapshot.params["id"];   
     console.log("id parametro: ", this.inspecaoId);
     this.findbyInspecao(this.inspecaoId);
-  }
-
+    this.findbyInspecaoRelatorio(this.inspecaoId);
+  }  
+ 
   getBase64Image(imgUrl: string) {
     return new Promise(function(resolve, reject) {
       var img = new Image();
@@ -118,8 +122,24 @@ export class InspecaoRecebimentoComponent implements OnInit {
       .findById(inspecaoId)
       .subscribe(
         (responseApi: InspecaoDTO) => {
-          this.inspecao = responseApi;
-          
+        this.inspecao = responseApi;          
+        this.dataEntrada = this.convertData(this.inspecao.notaFiscal.dataEntrada);
+        this.dataInspecao = this.convertData(this.inspecao.dataInspecao);
+
+        console.log('dataEntrada', this.dataEntrada);
+        console.log('dataInspecao', this.dataInspecao);
+        },
+        error => {}
+      );
+      console.log('inspecao', this.inspecao);
+  }
+
+  findbyInspecaoRelatorio(inspecaoId: string) {
+    this.inspecaoService
+      .findByIdRelatorio(inspecaoId)
+      .subscribe(
+        (responseApi: InspecaoDTO) => {
+        this.inspecaoRelatorio = responseApi;
         this.dataEntrada = this.convertData(this.inspecao.notaFiscal.dataEntrada);
         this.dataInspecao = this.convertData(this.inspecao.dataInspecao);
 
@@ -201,7 +221,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     console.log('inspeção ', this.inspecao);    
     // caso desista de gerar o relatório na segunda vez da erro por conta dessas 2 variáveis
     var technipFmc = await this.getBase64Image("https://inspecoes.s3-sa-east-1.amazonaws.com/technipfmc.png");
-    var cliente = "data:image/jpg;charset=utf-8;base64, " + this.inspecao.equipamento.cliente.imagem;
+    var cliente = "data:image/jpg;charset=utf-8;base64, " + this.inspecaoRelatorio.equipamento.cliente.imagem;
    
     
     this.doc.setLineWidth(0.5);
@@ -223,7 +243,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(73, 11, 30, 9, "FD");
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.ordemServico.numeroRelatorio, 85, 18, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.ordemServico.numeroRelatorio, 85, 18, null, null, "center");
 
     this.doc.addImage(
       technipFmc,
@@ -285,7 +305,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.equipamento.cliente.nome, 42, 25, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.equipamento.cliente.nome, 42, 25, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(65, 19, 38, 9, "FD");
@@ -333,7 +353,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
     this.doc.text(
-      this.inspecao.equipamento.descricao,
+      this.inspecaoRelatorio.equipamento.descricao,
       100,
       33,
       null,
@@ -370,7 +390,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.equipamento.partNumber, 29, 41, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.equipamento.partNumber, 29, 41, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(47, 35, 12, 8, "FD");
@@ -385,7 +405,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.equipamento.serialNumber, 80, 41, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.equipamento.serialNumber, 80, 41, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(102, 35, 15, 8, "FD");
@@ -400,7 +420,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.equipamento.tag, 141, 41, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.equipamento.tag, 141, 41, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(165, 35, 26, 8, "FD");
@@ -432,7 +452,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.notaFiscal.numeroNotaFiscal, 29, 49, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.notaFiscal.numeroNotaFiscal, 29, 49, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(40, 43, 11, 8, "FD");
@@ -447,7 +467,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.notaFiscal.rt, 70, 49, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.notaFiscal.rt, 70, 49, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(88, 43, 29, 8, "FD");
@@ -477,7 +497,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.notaFiscal.origem, 193, 49, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.notaFiscal.origem, 193, 49, null, null, "center");
     
     //Lingada titulo
 
@@ -568,28 +588,28 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontStyle("bold");
     this.doc.setTextColor("0000FF");    
 
-    switch(this.inspecao.lingadas.length){
+    switch(this.inspecaoRelatorio.lingadas.length){
       case 0:
         // Linha cobrindo as 2 colunas
         this.doc.setLineWidth(1);
         this.doc.line(5, 66, 207, 79);
         break
       case 1:
-        this.doc.text(this.inspecao.lingadas[0].codigoPetrobras, 40, 70, null, null, "center");
-        this.doc.text(this.inspecao.lingadas[0].numeroCertificado, 110, 70, null, null, "center");
-        this.doc.text(this.convertData(this.inspecao.lingadas[0].dataCertificacao), 175, 70, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.lingadas[0].codigoPetrobras, 40, 70, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.lingadas[0].numeroCertificado, 110, 70, null, null, "center");
+        this.doc.text(this.convertData(this.inspecaoRelatorio.lingadas[0].dataCertificacao), 175, 70, null, null, "center");
         // Linha cobrindo a ultima colunas
         this.doc.setLineWidth(1);
         this.doc.line(5, 72, 207, 79);
         break
       case 2:
-        this.doc.text(this.inspecao.lingadas[0].codigoPetrobras, 40, 70, null, null, "center");
-        this.doc.text(this.inspecao.lingadas[0].numeroCertificado, 110, 70, null, null, "center");
-        this.doc.text(this.convertData(this.inspecao.lingadas[0].dataCertificacao), 175, 70, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.lingadas[0].codigoPetrobras, 40, 70, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.lingadas[0].numeroCertificado, 110, 70, null, null, "center");
+        this.doc.text(this.convertData(this.inspecaoRelatorio.lingadas[0].dataCertificacao), 175, 70, null, null, "center");
 
-        this.doc.text(this.inspecao.lingadas[1].codigoPetrobras, 40, 77, null, null, "center");
-        this.doc.text(this.inspecao.lingadas[1].numeroCertificado, 110, 77, null, null, "center");    
-        this.doc.text(this.convertData(this.inspecao.lingadas[1].dataCertificacao), 175, 77, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.lingadas[1].codigoPetrobras, 40, 77, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.lingadas[1].numeroCertificado, 110, 77, null, null, "center");    
+        this.doc.text(this.convertData(this.inspecaoRelatorio.lingadas[1].dataCertificacao), 175, 77, null, null, "center");
       break
     }
     
@@ -713,7 +733,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontStyle("bold");
     this.doc.setTextColor("0000FF");
     
-    switch(this.inspecao.acessoriosComponentes.length){
+    switch(this.inspecaoRelatorio.acessoriosComponentes.length){
 
       case 0:
         // Linha cobrindo as 2 colunas
@@ -722,24 +742,24 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
         break
       case 1:
-        this.doc.text(this.inspecao.acessoriosComponentes[0].descricao, 65, 99, null, null, "center");
-        this.doc.text(this.inspecao.acessoriosComponentes[0].pn, 132, 99, null, null, "center");
-        this.doc.text(this.inspecao.acessoriosComponentes[0].ns, 162, 99, null, null, "center");
-        this.doc.text(this.inspecao.acessoriosComponentes[0].bp, 192, 99, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[0].descricao, 65, 99, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[0].pn, 132, 99, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[0].ns, 162, 99, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[0].bp, 192, 99, null, null, "center");
          // Linha cobrindo a ultima colunas
         this.doc.setLineWidth(1);
         this.doc.line(5, 100, 207, 107);
         break
       case 2:
-        this.doc.text(this.inspecao.acessoriosComponentes[0].descricao, 65, 99, null, null, "center");
-        this.doc.text(this.inspecao.acessoriosComponentes[0].pn, 132, 99, null, null, "center");
-        this.doc.text(this.inspecao.acessoriosComponentes[0].ns, 162, 99, null, null, "center");
-        this.doc.text(this.inspecao.acessoriosComponentes[0].bp, 192, 99, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[0].descricao, 65, 99, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[0].pn, 132, 99, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[0].ns, 162, 99, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[0].bp, 192, 99, null, null, "center");
 
-        this.doc.text(this.inspecao.acessoriosComponentes[1].descricao, 65, 106, null, null, "center");
-        this.doc.text(this.inspecao.acessoriosComponentes[1].pn, 132, 106, null, null, "center");
-        this.doc.text(this.inspecao.acessoriosComponentes[1].ns, 162, 106, null, null, "center");
-        this.doc.text(this.inspecao.acessoriosComponentes[1].bp, 192, 106, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[1].descricao, 65, 106, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[1].pn, 132, 106, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[1].ns, 162, 106, null, null, "center");
+        this.doc.text(this.inspecaoRelatorio.acessoriosComponentes[1].bp, 192, 106, null, null, "center");
         break
     }
     
@@ -795,14 +815,14 @@ export class InspecaoRecebimentoComponent implements OnInit {
     // quadrante de foto   
 
  
-  for(var x=0; x < this.inspecao.laudos.length; x++){
-    if(this.inspecao.laudos[x].usarRelatorio == true){
+  for(var x=0; x < this.inspecaoRelatorio.laudos.length; x++){
+    if(this.inspecaoRelatorio.laudos[x].usarRelatorio == true){
       
-      this.laudosFotos.push(this.inspecao.laudos[x]);
+      this.laudosFotos.push(this.inspecaoRelatorio.laudos[x]);
       switch(this.posicaoFoto){        
           
         case 0: 
-        this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.laudosFotos[0].imagem, "PNG", 11, 123, 95, 65);
+        this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.laudosFotos[0].imagem, "JPG", 11, 123, 95, 65);
         break      
         
         case 1:
@@ -859,7 +879,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setTextColor("00000");
     this.doc.text("ASSINATURA PETROBRAS", 138, 267);
     this.doc.rect(106, 269, 101, 15);
-    this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.usuario.assinaturaEletronica, "PNG", 6, 269, 99, 15);
+    this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecaoRelatorio.usuario.assinaturaEletronica, "PNG", 6, 269, 99, 15);
 
     // ULTIMA LINHA
 
@@ -954,7 +974,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(73, 11, 30, 6, "FD");
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.ordemServico.numeroRelatorio, 85, 16, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.ordemServico.numeroRelatorio, 85, 16, null, null, "center");
 
     this.doc.addImage(
       technipFmc,
@@ -1013,7 +1033,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.equipamento.cliente.nome, 42, 22, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.equipamento.cliente.nome, 42, 22, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(65, 17, 38, 6, "FD");
@@ -1061,7 +1081,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
     this.doc.text(
-      this.inspecao.equipamento.descricao,
+      this.inspecaoRelatorio.equipamento.descricao,
       100,
       28,
       null,
@@ -1098,7 +1118,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.equipamento.partNumber, 29, 33, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.equipamento.partNumber, 29, 33, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(47, 29, 12, 6, "FD");
@@ -1113,7 +1133,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.equipamento.serialNumber, 80, 33, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.equipamento.serialNumber, 80, 33, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(102, 29, 15, 6, "FD");
@@ -1160,7 +1180,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.notaFiscal.numeroNotaFiscal, 29, 40, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.notaFiscal.numeroNotaFiscal, 29, 40, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(40, 35, 11, 6, "FD");
@@ -1175,7 +1195,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.notaFiscal.rt, 70, 40, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.notaFiscal.rt, 70, 40, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(88, 35, 29, 6, "FD");
@@ -1205,7 +1225,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.notaFiscal.origem, 193, 40, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.notaFiscal.origem, 193, 40, null, null, "center");
     
     
     
@@ -1359,7 +1379,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setTextColor("00000");
     this.doc.text("ASSINATURA CONTRATADA", 36, 269);
     this.doc.rect(5, 270, 101, 15);
-    this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.usuario.assinaturaEletronica, "PNG", 6, 271, 99, 15);
+    this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecaoRelatorio.usuario.assinaturaEletronica, "PNG", 6, 271, 99, 15);
 
 
     this.doc.setDrawColor(0);
@@ -1421,7 +1441,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(73, 11, 30, 6, "FD");
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.ordemServico.numeroRelatorio, 85, 16, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.ordemServico.numeroRelatorio, 85, 16, null, null, "center");
 
     this.doc.addImage(
       technipFmc,
@@ -1480,7 +1500,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.equipamento.cliente.nome, 42, 22, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.equipamento.cliente.nome, 42, 22, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(65, 17, 38, 6, "FD");
@@ -1528,7 +1548,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
     this.doc.text(
-      this.inspecao.equipamento.descricao,
+      this.inspecaoRelatorio.equipamento.descricao,
       100,
       28,
       null,
@@ -1565,7 +1585,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.equipamento.partNumber, 29, 33, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.equipamento.partNumber, 29, 33, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(47, 29, 12, 6, "FD");
@@ -1580,7 +1600,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.equipamento.serialNumber, 80, 33, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.equipamento.serialNumber, 80, 33, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(102, 29, 15, 6, "FD");
@@ -1627,7 +1647,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.notaFiscal.numeroNotaFiscal, 29, 40, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.notaFiscal.numeroNotaFiscal, 29, 40, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(40, 35, 11, 6, "FD");
@@ -1642,7 +1662,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.notaFiscal.rt, 70, 40, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.notaFiscal.rt, 70, 40, null, null, "center");
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(88, 35, 29, 6, "FD");
@@ -1672,7 +1692,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setDrawColor(0);
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
-    this.doc.text(this.inspecao.notaFiscal.origem, 193, 40, null, null, "center");
+    this.doc.text(this.inspecaoRelatorio.notaFiscal.origem, 193, 40, null, null, "center");
     
     
     
@@ -1981,7 +2001,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
     this.doc.setFontStyle("bold");
-    this.doc.text("EQUIP: " + this.inspecao.equipamento.codEquipamento, 120, 198);
+    this.doc.text("EQUIP: " + this.inspecaoRelatorio.equipamento.codEquipamento, 120, 198);
 
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(151, 192, 27, 8, "FD");
@@ -1989,7 +2009,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
     this.doc.setFontStyle("bold");
-    this.doc.text("S2: " + this.inspecao.ordemServico.s2, 152, 198);
+    this.doc.text("S2: " + this.inspecaoRelatorio.ordemServico.s2, 152, 198);
     
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(178, 192, 29, 8, "FD");
@@ -1997,7 +2017,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setFontSize(10);
     this.doc.setTextColor("0000FF");
     this.doc.setFontStyle("bold");
-    this.doc.text("OS: " + this.inspecao.ordemServico.numeroOrdem, 180, 198);
+    this.doc.text("OS: " + this.inspecaoRelatorio.ordemServico.numeroOrdem, 180, 198);
     
     this.doc.setFillColor(255, 255, 255);
     this.doc.rect(5, 200, 202, 8, "FD");
@@ -2072,7 +2092,7 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.setTextColor("00000");
     this.doc.text("ASSINATURA CONTRATADA", 36, 269);
     this.doc.rect(5, 270, 101, 15);
-    this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecao.usuario.assinaturaEletronica, "PNG", 6, 271, 99, 15);
+    this.doc.addImage("data:image/jpg;charset=utf-8;base64, " + this.inspecaoRelatorio.usuario.assinaturaEletronica, "PNG", 6, 271, 99, 15);
 
 
     this.doc.setDrawColor(0);
@@ -2112,3 +2132,4 @@ export class InspecaoRecebimentoComponent implements OnInit {
     this.doc.text("p. " + this.paginaCorrente++ + "/" + this.quantidadePaginas, 105, 294, null, null, "center");
   }
 }
+

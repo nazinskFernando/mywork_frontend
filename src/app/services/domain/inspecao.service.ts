@@ -40,6 +40,10 @@ export class InspecaoService {
     return this.http.get(`${API_CONFIG.baseUrl}/inspecao/${id}`);
   }
 
+  findByIdRelatorio(id: string) {
+    return this.http.get(`${API_CONFIG.baseUrl}/inspecao/relatorio/${id}`);
+  }
+
   findAll(page, linesPage, orderBy, direction) {
     return this.http.get<InspecaoDTO[]>(`${API_CONFIG.baseUrl}/inspecao/page?page=${page}&linesPage=${linesPage}&orderBy=${orderBy}&direction=${direction}`);
   }
