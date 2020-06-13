@@ -37,7 +37,7 @@ export class InspecaoService {
   
 
   findById(id: string) {
-    return this.http.get(`${API_CONFIG.baseUrl}/inspecao/${id}`);
+    return this.http.get<InspecaoDTO>(`${API_CONFIG.baseUrl}/inspecao/${id}`);
   }
 
   findByIdRelatorio(id: string) {

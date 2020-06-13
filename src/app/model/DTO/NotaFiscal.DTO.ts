@@ -16,11 +16,6 @@ export class NotaFiscalDTO {
        public statusNotaFiscal : string;
        public nfRecusadaPelaLogistica : string;
        public necessarioIntervencaoLogistica : string;
-       public equipamentos = new Array<EquipamentoDTO>();
-       public numeroOrdem : string;
-       public descricaoOrdem : string;
-       public tempoServico : string;
-       public wbs : string;
-       public numeroRelatorio : string;
+       public equipamentos = new Array<EquipamentoDTO>();     
       
 }

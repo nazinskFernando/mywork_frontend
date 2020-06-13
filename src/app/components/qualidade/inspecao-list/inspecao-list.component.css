@@ -7,9 +7,6 @@
 .btn-status{
   width: 150px;
 }
-.div-btn{
-  direction: rtl;
-}
 .card-titulo {
   position: fixed;
   z-index: 999;

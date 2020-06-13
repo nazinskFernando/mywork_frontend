@@ -53,10 +53,18 @@
 <section *ngIf="loading" class="container">
   <div class="box box-default">
     <div class="box-header with-border">
+      <button hidden
+        #openBtn
+        data-toggle="modal"
+        data-target="#inspecaoModal"
+      >
+        
+      </button>
+
       <button
         type="button"
         class="btn btn-success btn-novo"
-        data-toggle="modal" 
+        data-toggle="modal"
         data-target="#inspecaoModal"
       >
         Nova inspeção
@@ -79,27 +87,19 @@
     <div
       *ngFor="let item of inspecoes"
       [ngStyle]="setStyle(item.statusInspecao)"
-      class="container box-body inspecoes"      
+      class="container box-body inspecoes"
     >
       <div class="card">
         <div class="row">
           <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
-            <a (click)="fazerInspecao(item.id)"
-            href="javascript:void(0)">
+            <a (click)="fazerInspecao(item.id)" href="javascript:void(0)">
               <strong
                 ><p>{{ item.equipamento.descricao }}</p></strong
               >
             </a>
           </div>
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 div-btn">
-            <button
-              [ngStyle]="setStyleBtn(item.statusInspecao)"
-              type="button"
-              [routerLink]="['/new_nota_fiscal']"
-              class="btn btn-success btn-status"
-            >
-              {{ item.statusInspecao }}
-            </button>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            <button type="button" (click)="buscarInspecao(item.id)" class="btn btn-primary">Editar</button>
           </div>
         </div>
 
@@ -138,27 +138,36 @@
           </div>
         </div>
         <div class="box-footer clearfix">
-          <p class="inspecionado">
-            <strong>Inspecionado Por: </strong> {{ item.usuario?.nome }}
-          </p>
+          <div class="row">
+            <p
+              class="inspecionado col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10"
+            >
+              <strong>Inspecionado Por: </strong> {{ item.usuario?.nome }}
+            </p>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+              <span
+                [ngStyle]="setStyleBtn(item.statusInspecao)"
+                type="button"
+                class="badge"
+              >
+                {{ item.statusInspecao }}
+              </span>
+            </div>
+          </div>
         </div>
-      </div>      
+      </div>
     </div>
     <div class="box-footer clearfix">
       <ul class="pagination pagination-sm no-margin pull-right">
         <li>
-          <a href="javascript:void(0)" (click)="paginar('anterior')"
-            >&laquo;</a
-          >
+          <a href="javascript:void(0)" (click)="paginar('anterior')">&laquo;</a>
         </li>
         <li *ngFor="let item of [].constructor(totalPages); let i = index">
           <a href="javascript:void(0)" (click)="paginar(i)">{{ i + 1 }}</a>
         </li>
         <li *ngIf="totalPages > 4"><a>...</a></li>
         <li>
-          <a href="javascript:void(0)" (click)="paginar('proximo')"
-            >&raquo;</a
-          >
+          <a href="javascript:void(0)" (click)="paginar('proximo')">&raquo;</a>
         </li>
       </ul>
     </div>
@@ -306,6 +315,7 @@
               <label>
                 <input
                   type="radio"
+                  [checked] = "inspecao.equipamento.id == item.id"
                   (change)="onItemChange(item)"
                   name="optionsRadios"
                   id="item.id"

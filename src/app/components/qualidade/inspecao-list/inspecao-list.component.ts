@@ -14,8 +14,10 @@ import { Router } from "@angular/router";
 })
 export class InspecaoListComponent implements OnInit {
   @ViewChild("closeBtn") closeBtn: ElementRef;
+  @ViewChild("openBtn") openBtn: ElementRef;
+
   constructor(
-    public insptecaoService: InspecaoService,
+    public inspecaoService: InspecaoService,
     public notaFiscalService: NotaFiscalService,
     private router: Router
   ) {}
@@ -43,7 +45,7 @@ export class InspecaoListComponent implements OnInit {
   }
 
   getFiltros() {
-    this.insptecaoService.getFiltros().subscribe(
+    this.inspecaoService.getFiltros().subscribe(
       (responseApi: FiltroInspecaoDTO) => {
         this.filtros = responseApi;
         this.filtroStatus = this.filtros.status[0].id;
@@ -87,10 +89,10 @@ export class InspecaoListComponent implements OnInit {
 
   listInspecaoFiltro() {
     this.loading = false;
-    if(this.filtrosSelecionados.status == null){
+    if (this.filtrosSelecionados.status == null) {
       this.filtrosSelecionados.status == 0;
     }
-    this.insptecaoService
+    this.inspecaoService
       .findAllFiltro(
         this.page,
         this.qtdPorPagina,
@@ -169,8 +171,6 @@ export class InspecaoListComponent implements OnInit {
     } else {
       switch (valor) {
         case "proximo":
-          console.log("page", this.page);
-          console.log("totalPages", this.totalPages);
           if (this.page + 1 >= this.totalPages) {
             this.page = this.totalPages - 1;
           } else {
@@ -190,14 +190,11 @@ export class InspecaoListComponent implements OnInit {
     if (this.whatList == 0) {
       this.ListInspecao();
     }
-    console.log("valor", valor);
-    console.log("page", this.page);
-    console.log("this.whatList", this.whatList);
   }
 
   ListInspecao() {
     this.loading = false;
-    this.insptecaoService
+    this.inspecaoService
       .findAll(this.page, this.qtdPorPagina, "id", "DESC")
       .subscribe(
         (responseApi: InspecaoDTO[]) => {
@@ -246,18 +243,33 @@ export class InspecaoListComponent implements OnInit {
   incluirInspecao() {
     this.loading = false;
     this.inspecao.notaFiscal.id = this.notaFiscal.id;
-    console.log("inspecao", this.inspecao);
-    this.insptecaoService.inserir(this.inspecao).subscribe(
-      (responseApi) => {
-        this.ListInspecao();
-        this.closeModal();
-      },
-      (error) => {}
-    );
+   
+    if (this.inspecao.id == null) {
+      console.log("inisert");
+      this.inspecaoService.inserir(this.inspecao).subscribe(
+        (responseApi) => {
+          this.ListInspecao();
+          this.closeModal();
+        },
+        (error) => {}
+      );
+    } else {
+      console.log("update");
+      let inspecaoAux = new InspecaoDTO();
+      inspecaoAux.id = this.inspecao.id;
+      inspecaoAux.equipamento = this.inspecao.equipamento;
+      inspecaoAux.ordemServico = this.inspecao.ordemServico;
+      this.inspecaoService.update(inspecaoAux).subscribe(
+        (responseApi) => {
+          this.ListInspecao();
+          this.closeModal();
+        },
+        (error) => {}
+      );
+    }
   }
 
   fazerInspecao(inspecaoId: string) {
-    console.log("antes ", inspecaoId);
     this.router.navigate(["/inspecao_recebimento", inspecaoId]);
     //this.router.navigate(['/inspecao_recebimento', JSON.stringify(ids)]);
   }
@@ -266,23 +278,40 @@ export class InspecaoListComponent implements OnInit {
     this.closeBtn.nativeElement.click();
   }
 
-  listInspecaoFiltroString(){
-    if(this.filtroAll == "" || this.filtroAll == null){
+  listInspecaoFiltroString() {
+    if (this.filtroAll == "" || this.filtroAll == null) {
       this.ListInspecao();
     } else {
-    this.loading = false;
-    this.insptecaoService
-      .findAllString(this.page, this.qtdPorPagina, "id", "DESC", this.filtroAll)
-      .subscribe(
-        (responseApi: InspecaoDTO[]) => {
-          this.inspecoes = responseApi["content"];
-          this.page = responseApi["number"];
-          this.totalPages = responseApi["totalPages"];
-          this.whatList = 2;
-          this.loading = true;
-        },
-        (error) => {}
-      );
+      this.loading = false;
+      this.inspecaoService
+        .findAllString(
+          this.page,
+          this.qtdPorPagina,
+          "id",
+          "DESC",
+          this.filtroAll
+        )
+        .subscribe(
+          (responseApi: InspecaoDTO[]) => {
+            this.inspecoes = responseApi["content"];
+            this.page = responseApi["number"];
+            this.totalPages = responseApi["totalPages"];
+            this.whatList = 2;
+            this.loading = true;
+          },
+          (error) => {}
+        );
     }
+  }
+
+  buscarInspecao(id) {
+    this.inspecaoService.findById(id).subscribe(
+      (inspecao: InspecaoDTO) => {
+        this.inspecao = inspecao;
+        this.notaFiscal = this.inspecao.notaFiscal;
+        this.openBtn.nativeElement.click();
+      },
+      (error) => {}
+    );
   }
 }

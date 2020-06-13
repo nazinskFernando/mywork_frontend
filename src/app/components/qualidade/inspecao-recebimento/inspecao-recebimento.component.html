@@ -1,147 +1,290 @@
+<div class="container">
+  <h1><strong>Detalhe da Inspeção</strong></h1>
+</div>
+
 <div class="box box-default">
   <div class="box-header with-border">
-    {{inspecao.notaFiscal.numeroOrdem}} | {{inspecao.equipamento.descricao}} |
-    {{inspecao.equipamento.serialNumber}}
     <small class="pull-right">
       <ul class="nav navbar-nav">
         <li class="dropdown tasks-menu">
-          <a class="btn btn-success ">
-            <i class="fa   fa-print"></i>
-          </a>
-        </li>
-        <li class="dropdown tasks-menu">
-          <a class="btn btn-primary ">
-            <i class="fa  fa-bullhorn"></i>
-          </a>
-        </li>
-        <li class="dropdown tasks-menu">
-          <a class="btn btn-info">
-            <i class="fa fa-save"></i>
+          <a class="btn btn-app btn-success" style="direction: rtl;" *ngIf="inspecao.statusInspecao == 'FINALIZADO'"
+          (click)="criarInspecao()">
+            <i class="fa fa-print"></i>
           </a>
         </li>
       </ul>
-      
     </small>
-
   </div>
   <div class="box-body">
     <div class="row">
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-9">
         <label>Descrição</label>
-        <input disabled type="text" [(ngModel)]="inspecao.equipamento.descricao" #nome="ngModel"
-          name="descricao" id="descricao" class="form-control" placeholder="">
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.equipamento.descricao"
+          #nome="ngModel"
+          name="descricao"
+          id="descricao"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label>Data de Entrada</label>
+        <input
+          disabled
+          type="date"
+          class="form-control"
+          [ngModel]="inspecao.notaFiscal.dataEntrada | date: 'yyyy-MM-dd'"
+          (ngModelChange)="inspecao.notaFiscal.dataEntrada = $event"
+        />
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-3">
         <label>Nota fiscal</label>
-        <input disabled type="number" [(ngModel)]="inspecao.notaFiscal.numeroNotaFiscal" #nome="ngModel"
-          name="numeroNotaFiscal" id="numeroNotaFiscal" class="form-control" placeholder="125482">
+        <input
+          disabled
+          type="number"
+          [(ngModel)]="inspecao.notaFiscal.numeroNotaFiscal"
+          #nome="ngModel"
+          name="numeroNotaFiscal"
+          id="numeroNotaFiscal"
+          class="form-control"
+          placeholder="125482"
+        />
       </div>
       <div class="form-group col-md-3">
         <label>Emissor</label>
-        <input disabled type="text" class="form-control" [(ngModel)]="inspecao.equipamento.cliente.nome"
-          #nome="ngModel" name="emissor" id="emissor" placeholder="PETROBRÁS">
+        <input
+          disabled
+          type="text"
+          class="form-control"
+          [(ngModel)]="inspecao.equipamento.cliente.nome"
+          #nome="ngModel"
+          name="emissor"
+          id="emissor"
+          placeholder="PETROBRÁS"
+        />
       </div>
       <div class="form-group col-md-3">
         <label>Origem</label>
-        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.origem" #nome="ngModel" name="origem"
-          id="origem" class="form-control" placeholder="ARM-RIO">
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.notaFiscal.origem"
+          #nome="ngModel"
+          name="origem"
+          id="origem"
+          class="form-control"
+          placeholder="ARM-RIO"
+        />
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-3">
         <label>RT</label>
-        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.rt" #nome="ngModel" name="rt" id="rt"
-          class="form-control" placeholder="31254525">
-      </div>
-      <div class="form-group col-md-2">
-        <label>Data de Entrada</label>
-          <input disabled type="date" class="form-control" [ngModel]="inspecao.notaFiscal.dataEntrada | date:'yyyy-MM-dd'" 
-                 (ngModelChange)="inspecao.notaFiscal.dataEntrada = $event">
-      </div>
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.notaFiscal.rt"
+          #nome="ngModel"
+          name="rt"
+          id="rt"
+          class="form-control"
+          placeholder="31254525"
+        />
+      </div>     
     </div>
     <div class="row">
       <div class="form-group col-md-2">
         <label>Part Number</label>
-        <input disabled type="text" [(ngModel)]="inspecao.equipamento.partNumber" #nome="ngModel"
-          name="setorDestino" id="setorDestino" class="form-control" placeholder="Logística">
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.equipamento.partNumber"
+          #nome="ngModel"
+          name="setorDestino"
+          id="setorDestino"
+          class="form-control"
+          placeholder="Logística"
+        />
       </div>
       <div class="form-group col-md-3">
         <label>Serial Number</label>
-        <input disabled type="text" [(ngModel)]="inspecao.equipamento.serialNumber" #nome="ngModel"
-          name="transportadora" id="transportadora" class="form-control" placeholder="VIX">
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.equipamento.serialNumber"
+          #nome="ngModel"
+          name="transportadora"
+          id="transportadora"
+          class="form-control"
+          placeholder="VIX"
+        />
       </div>
       <div class="form-group col-md-4">
         <label>Equipamento</label>
-        <input disabled type="text" [(ngModel)]="inspecao.equipamento.codEquipamento" #nome="ngModel" name="chaveNf"
-          id="chaveNf" class="form-control" placeholder="3124523425342454525">
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.equipamento.codEquipamento"
+          #nome="ngModel"
+          name="chaveNf"
+          id="chaveNf"
+          class="form-control"
+          placeholder="3124523425342454525"
+        />
       </div>
       <div class="form-group col-md-3">
         <label>Contrato</label>
-        <input disabled type="text" [(ngModel)]="inspecao.equipamento.contratoJuridico" #nome="ngModel"
-          name="contrato" id="contrato" class="form-control" placeholder="31254525">
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.equipamento.contratoJuridico"
+          #nome="ngModel"
+          name="contrato"
+          id="contrato"
+          class="form-control"
+          placeholder="31254525"
+        />
       </div>
     </div>
     <div class="row">
       <div class="form-group col-md-3">
         <label>Número Ordem</label>
-        <input disabled type="text" [(ngModel)]="inspecao.ordemServico.numeroOrdem" #nome="ngModel"
-          name="numeroOrdem" id="numeroOrdem" class="form-control" placeholder="212252">
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.ordemServico.numeroOrdem"
+          #nome="ngModel"
+          name="numeroOrdem"
+          id="numeroOrdem"
+          class="form-control"
+          placeholder="212252"
+        />
       </div>
       <div class="form-group col-md-3">
         <label>WBS</label>
-        <input disabled type="text" [(ngModel)]="inspecao.notaFiscal.wbs" #nome="ngModel" name="wbs"
-          id="wbs" class="form-control" placeholder="1256-254-25">
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.ordemServico.wbs"
+          #nome="ngModel"
+          name="wbs"
+          id="wbs"
+          class="form-control"
+          placeholder="1256-254-25"
+        />
       </div>
       <div class="form-group col-md-4">
         <label>Número Relatorio</label>
-        <input disabled type="text" [(ngModel)]="inspecao.ordemServico.numeroRelatorio" #nome="ngModel"
-          name="numeroRelatorio" id="numeroRelatorio" class="form-control" placeholder="1745852">
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.ordemServico.numeroRelatorio"
+          #nome="ngModel"
+          name="numeroRelatorio"
+          id="numeroRelatorio"
+          class="form-control"
+          placeholder="1745852"
+        />
       </div>
       <div class="form-group col-md-2">
         <label>Tempo Servico</label>
-        <input disabled type="text" [(ngModel)]="inspecao.ordemServico.tempoServico" #nome="ngModel"
-          name="tempoServico" id="tempoServico" class="form-control" placeholder="1,5">
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="inspecao.ordemServico.tempoServico"
+          #nome="ngModel"
+          name="tempoServico"
+          id="tempoServico"
+          class="form-control"
+          placeholder="1,5"
+        />
       </div>
     </div>
-    <br>
+    <br />
 
     <div class="box box-danger">
       <div class="box-header with-border" style="text-align: center;">
         <strong class="box-title">Registros Fotográficos</strong>
       </div>
       <div class="box-body">
-
         <!--<label class="custom-file-upload">
           <input class="file-path validate" type='file' (change)="onSelectFile($event)" multiple>
           <a class="btn btn-app">
             <span class="badge bg-green">{{qtdImagens}}</span>
             <i class="fa fa-file-image-o"></i> Carregar Imagens
           </a>
-        </label><br>-->        
- 
+        </label><br>-->
 
-          <div class="form-group col-md-3" *ngFor="let laudo of inspecao.laudos">
-            <div class="image-upload">
-              <label for="file-input">                
-                <img [src]="laudo.imagem" height="200" width="250">
-                <label>
-                  <input id="desvio" type="checkbox" [(ngModel)]="laudo.comDesvio"
-                    class="minimal" (ngModelChange)="updateLaudo(laudo)">
-                  Desvio?
-                </label><br>
-                <label>
-                  <input id="desvio" type="checkbox" 
-                    class="minimal" [(ngModel)]="laudo.usarRelatorio" (ngModelChange)="updateLaudo(laudo)">
-                  Usar no relatório?
-                </label>
-              </label>
-              <textarea disabled
-                id="descricaoLaudo" class="form-control" rows="3" placeholder="Descrição" [(ngModel)]="laudo.descricaoLaudo.descricao">{{laudo.descricaoLaudo.descricao}}</textarea>
-              <button type="button" class="btn btn-danger btn-xs" (click)="delete(laudo.id)">
-                <span class="glyphicon glyphicon-trash"></span> Remover
-              </button>
+        <!-- TABLE: LATEST ORDERS -->
+        <div class="row">
+          <div
+            class="form-group col-sd-12 col-md-6 col-lg-4 col-xl-4"
+            *ngFor="let laudo of inspecao.laudos"
+          >
+            <div class="box box-info box-laudo">
+              <div class="box-header with-border">
+                <h3 class="box-title">Laudo</h3>
+                <div class="box-tools pull-right">
+                  <button
+                    type="button"
+                    class="btn btn-box-tool"
+                    (click)="delete(laudo.id)"
+                  >
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <div class="image-upload">
+                  <p class="text-center">
+                    <img class="img-responsive" [src]="laudo.imagem" />
+                  </p>
+                  <br />
+                  <label>
+                    <input
+                      id="desvio"
+                      type="checkbox"
+                      [(ngModel)]="laudo.comDesvio"
+                      class="minimal"
+                      (ngModelChange)="updateLaudo(laudo)"
+                    />
+                    Desvio? </label
+                  ><br />
+                  <label>
+                    <input
+                      id="desvio"
+                      type="checkbox"
+                      class="minimal"
+                      [(ngModel)]="laudo.usarRelatorio"
+                      (ngModelChange)="updateLaudo(laudo)"
+                    />
+                    Usar no relatório?
+                  </label>
+                  <textarea
+                    disabled
+                    id="descricaoLaudo"
+                    class="form-control"
+                    rows="3"
+                    placeholder="Descrição"
+                    [(ngModel)]="laudo.descricaoLaudo.descricao"
+                    >{{ laudo.descricaoLaudo.descricao }}</textarea
+                  >
+                  <!-- <button
+                    type="button"
+                    class="btn btn-danger btn-xs"
+                    (click)="delete(laudo.id)"
+                  >
+                    <span class="glyphicon glyphicon-trash"></span> Remover
+                  </button> -->
+                </div>
+              </div>
             </div>
-          </div> 
+          </div>
+        </div>
 
         <!--<div *ngFor="let item of urls; let i = index">
           <div class="form-group col-md-3">
@@ -162,17 +305,21 @@
             </div>
           </div>
         </div>-->
-      </div>
-     
-      <button *ngIf="qtdImagens == 0" (click)="criarInspecao()" type="button"
-        class="btn btn-success btn-block">Finalizar Inspeção</button>
+      </div>      
+      <!-- <button
+        
+        type="button"
+        class="btn btn-success btn-block"
+      >
+        Finalizar Inspeção
+      </button> -->
     </div>
-    <ul class="nav navbar-nav"  *ngIf="isRelatorio">
+    <!-- <ul class="nav navbar-nav" *ngIf="isRelatorio">
       <li class="dropdown tasks-menu">
-        <a style="cursor:pointer;" (click)="abrirRelatorio()">
+        <a style="cursor: pointer;" (click)="abrirRelatorio()">
           <i class="fa fa-print"></i> Imprimir relatório
         </a>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </div>

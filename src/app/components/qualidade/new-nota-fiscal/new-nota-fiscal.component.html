@@ -3,30 +3,18 @@
     <h2>Entrada de Nota Fiscal</h2>
   </div>
   <div class="box-body">
-    <div class="row">
-
-      
-      <div class="form-group col-md-2">
+    <div class="row">      
+      <div class="form-group col-md-4">
         <label>Nota fiscal</label>
         <input type="text" [(ngModel)]="notaFiscal.numeroNotaFiscal" #nome="ngModel" name="numeroNotaFiscal"
-          id="numeroNotaFiscal" class="form-control" placeholder="125482">
+          id="numeroNotaFiscal" class="form-control" placeholder="Informe o Nº da Nota Fiscal">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label>Emissor</label>
         <input type="text" class="form-control" [(ngModel)]="notaFiscal.emissor" #nome="ngModel" name="emissor"
-          id="emissor" placeholder="PETROBRÁS">
-      </div>
-      <div class="form-group col-md-3">
-        <label>Origem</label>
-        <input type="text" [(ngModel)]="notaFiscal.origem" #nome="ngModel" name="origem" id="origem"
-          class="form-control" placeholder="ARM-RIO">
-      </div>
-      <div class="form-group col-md-2">
-        <label>RT</label>
-        <input type="text" [(ngModel)]="notaFiscal.rt" #nome="ngModel" name="rt" id="rt" class="form-control"
-          placeholder="31254525">
-      </div>
-      <div class="form-group col-md-2">
+          id="emissor" placeholder="Informe o Emissor">
+      </div>     
+      <div class="form-group col-md-4">
         <label>Data de Entrada</label>
 
           <input type="date" class="form-control" [ngModel]="notaFiscal.dataEntrada | date:'yyyy-MM-dd'" 
@@ -34,54 +22,45 @@
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-4">
         <label>Setor Destino</label>
         <input type="text" [(ngModel)]="notaFiscal.setorDestino" #nome="ngModel" name="setorDestino" id="setorDestino"
-          class="form-control" placeholder="Logística">
+          class="form-control" placeholder="Informe o Setor Destino">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
+        <label>Origem</label>
+        <input type="text" [(ngModel)]="notaFiscal.origem" #nome="ngModel" name="origem" id="origem"
+          class="form-control" placeholder="Informe a Origem">
+      </div>
+      <div class="form-group col-md-4">
+        <label>RT</label>
+        <input type="text" [(ngModel)]="notaFiscal.rt" #nome="ngModel" name="rt" id="rt" class="form-control"
+          placeholder="Informe o Nº da RT">
+      </div>
+    </div>
+    <div class="row">
+      
+      <div class="form-group col-md-4">
         <label>Transportadora</label>
         <input type="text" [(ngModel)]="notaFiscal.transportadora" #nome="ngModel" name="transportadora"
-          id="transportadora" class="form-control" placeholder="VIX">
+          id="transportadora" class="form-control" placeholder="Informe a Transportadora">
       </div>
       <div class="form-group col-md-4">
         <label>Chave NF</label>
         <input type="text" [(ngModel)]="notaFiscal.chaveNf" #nome="ngModel" name="chaveNf" id="chaveNf"
-          class="form-control" placeholder="3124523425342454525">
-      </div>
-      <div class="form-group col-md-3">
-        <label>Contrato</label>
-        <input type="text" [(ngModel)]="notaFiscal.contrato" #nome="ngModel" name="contrato" id="contrato"
-          class="form-control" placeholder="31254525">
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group col-md-3">
-        <label>Número Ordem</label>
-        <input type="text" [(ngModel)]="notaFiscal.numeroOrdem" #nome="ngModel" name="numeroOrdem" id="numeroOrdem"
-          class="form-control" placeholder="Logística">
-      </div>
-      <div class="form-group col-md-3">
-        <label>WBS</label>
-        <input type="text" [(ngModel)]="notaFiscal.wbs" #nome="ngModel" name="wbs"
-          id="wbs" class="form-control" placeholder="1256-254-25">
+          class="form-control" placeholder="Informe a Chave da Nota Fiscal">
       </div>
       <div class="form-group col-md-4">
-        <label>Número Relatorio</label>
-        <input type="text" [(ngModel)]="notaFiscal.numeroRelatorio" #nome="ngModel" name="numeroRelatorio" id="numeroRelatorio"
-          class="form-control" placeholder="1745852">
-      </div> 
-      <div class="form-group col-md-2">
-        <label>Tempo Servico</label>
-        <input type="text" [(ngModel)]="notaFiscal.tempoServico" #nome="ngModel" name="tempoServico" id="tempoServico"
-          class="form-control" placeholder="1,5">
-      </div>     
+        <label>Contrato</label>
+        <input type="text" [(ngModel)]="notaFiscal.contrato" #nome="ngModel" name="contrato" id="contrato"
+          class="form-control" placeholder="Informe o Nº do Contrato">
+      </div>
     </div>
     <div class="row">
       <div class="form-group col-md-12">
         <label>Observação</label>
         <textarea [(ngModel)]="notaFiscal.observacao" #nome="ngModel" name="observacao" id="observacao"
-          class="form-control" rows="3" placeholder="Observação..."></textarea>
+          class="form-control" rows="3" placeholder="Informe Observação..."></textarea>
       </div>
     </div>
     <div class="box box-default">
@@ -99,8 +78,10 @@
             <label>Numero de série</label>
             <input type="text" class="form-control" placeholder="" value="FC-35" [(ngModel)]="equipamento.serialNumber">
             <span class="input-group-btn" style="padding-top: 23px;">
-              <button type="button" data-toggle="modal" data-target="#equipamentoModal" class="btn btn-info btn-flat"
+              <button type="button" data-toggle="modal" #openModal data-target="#equipamentoModal" hidden></button>
+                <button type="button" class="btn btn-info btn-flat"
                 (click)="buscarEquipamento()">Inserir Item</button>
+
             </span>
           </div>
         </div>
