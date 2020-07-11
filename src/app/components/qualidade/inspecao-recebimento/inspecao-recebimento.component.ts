@@ -910,10 +910,14 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
     var valor = 1;
    if(this.laudosFotos.length >= 4){
-     do{
+    //  do{
+    //   this.segundaPagina(technipFmc, cliente);
+    //   }
+    //  while(this.laudosFotos.length >= this.laudosFotosQuantidadeSegundaPagina);    
+   
+     while(this.laudosFotos.length > this.laudosFotosQuantidadeSegundaPagina){
       this.segundaPagina(technipFmc, cliente);
-      }
-     while(this.laudosFotos.length > this.laudosFotosQuantidadeSegundaPagina);    
+     }   
    } 
  
    do{
@@ -1955,15 +1959,16 @@ export class InspecaoRecebimentoComponent implements OnInit {
 
     var posicao = 54;
     var posicaoIndicador=1;
-    for(var x=this.laudosFotosQuantidadeTerceiraPagina; this.laudosFotos.length > x; x++){
+    // for(var x = this.laudosFotosQuantidadeTerceiraPagina; this.laudosFotos.length > x; x++){
+    for(var x = 0; this.laudosFotos.length > x; x++){
       
       if(posicaoIndicador <= 17){
         this.novaTerceiraPagina = false;
         if(x < 9){        
-          var foto = "FOTO 0" + x;
+          var foto = "FOTO 0" + (x+1);
           this.doc.text(foto, 8, posicao);
         } else {
-          var foto = "FOTO " + x;
+          var foto = "FOTO " + (x+1);
           this.doc.text(foto, 8, posicao);
         }    
         

@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from '../storage.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators/map';
+import { ChaveValor } from '../../model/DTO/ChaveValor';
 
 
 @Injectable()
@@ -40,6 +41,10 @@ export class InspecaoService {
     return this.http.get<InspecaoDTO>(`${API_CONFIG.baseUrl}/inspecao/${id}`);
   }
 
+  findByStatus() {
+    return this.http.get<ChaveValor>(`${API_CONFIG.baseUrl}/inspecao/status`);
+  }
+
   findByIdRelatorio(id: string) {
     return this.http.get(`${API_CONFIG.baseUrl}/inspecao/relatorio/${id}`);
   }
@@ -70,6 +75,10 @@ export class InspecaoService {
 
   update(InspecaoDTO : InspecaoDTO) {
     return this.http.put(`${API_CONFIG.baseUrl}/inspecao`, InspecaoDTO);
+  }
+
+  updateStatus(inspecaoId:string, status:number) {
+    return this.http.put(`${API_CONFIG.baseUrl}/inspecao/status/${inspecaoId}/${status}`, null);
   }
 
   delete(id: number) {
